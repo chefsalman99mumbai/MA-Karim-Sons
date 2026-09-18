@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>M.A Karim & Sons — Paint,Hardware and General Merchants, Ponda, Goa. Est. 1976</title>
+<title>M.A Karim &amp; Sons — Paint &amp; Hardware, Ponda, Goa. Est. 1976</title>
 <meta name="description" content="Fifty years of hand-mixed colour in Ponda, Goa. Paint a traditional Goan villa live in your browser.">
 <meta name="theme-color" content="#F7F1E5">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F7F1E5'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23B5462C'/%3E%3C/svg%3E">
@@ -57,18 +56,111 @@ p{margin:0}
   *{animation-duration:.001ms !important;transition-duration:.001ms !important}
 }
 
+/* ============================================================
+   HEADER  +  4-LAYER TYPOGRAPHIC WORDMARK  (scaled up)
+   Layer 1 = M.A cable bridge, 2 = KARIM, 3 = AND, 4 = SONS
+   ============================================================ */
 .header{position:fixed;top:0;left:0;right:0;z-index:90;padding:0 var(--gutter);
   transition:background var(--t-med) var(--ease-ui),backdrop-filter var(--t-med) var(--ease-ui),border-color var(--t-med) var(--ease-ui);
   border-bottom:1px solid transparent}
-.header.is-stuck{background:rgba(247,241,229,.82);
+.header.is-stuck{background:rgba(247,241,229,.85);
   -webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
   border-bottom-color:var(--line-soft)}
-.header__inner{max-width:var(--maxw);margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.brand{display:flex;align-items:baseline;gap:10px;line-height:1}
-.brand__mark{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(15px,1.5vw,19px);letter-spacing:.11em;text-transform:uppercase}
-.brand__dot{width:6px;height:6px;border-radius:50%;background:var(--terracotta);align-self:center;flex:none}
-.brand__sub{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mute);display:none}
-@media(min-width:620px){.brand__sub{display:block}}
+.header__inner{max-width:var(--maxw);margin:0 auto;min-height:104px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+@media(max-width:720px){.header__inner{min-height:84px}}
+
+/* --- The stacked wordmark --- */
+.brand{
+  display:inline-flex;flex-direction:column;align-items:center;
+  padding:10px 0;line-height:1;
+  text-decoration:none;color:var(--ink);
+  transition:transform 400ms var(--ease-out);
+}
+.brand:hover{transform:translateY(-1px)}
+.brand:focus-visible{outline:2px solid var(--terracotta);outline-offset:6px;border-radius:6px}
+
+/* Layer 1 — the M.A cable bridge */
+.brand__bridge{
+  width:122px;height:43px;display:block;
+  color:var(--ink);
+  margin-bottom:8px;
+  transition:color var(--t-med) var(--ease-ui);
+}
+.brand:hover .brand__bridge{color:var(--terracotta)}
+.brand__bridge .b-cable{transition:opacity var(--t-med) var(--ease-ui),stroke var(--t-med) var(--ease-ui)}
+.brand__bridge .b-struct{transition:stroke var(--t-med) var(--ease-ui)}
+.brand__bridge .b-deck{transition:opacity var(--t-med) var(--ease-ui)}
+.brand__bridge .b-dot{transition:fill var(--t-med) var(--ease-ui)}
+.brand:hover .brand__bridge .b-cable{opacity:0.95}
+.brand:hover .brand__bridge .b-deck{opacity:0.55}
+
+/* Layer 2 — refined KARIM & SONS lockup */
+.brand__name{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:.22em;
+  white-space:nowrap;
+  line-height:.9;
+  color:var(--ink);
+}
+.brand__karim,
+.brand__sons{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:500;
+  font-size:25px;
+  letter-spacing:.115em;
+  text-transform:uppercase;
+  color:var(--ink);
+  line-height:.9;
+  padding-left:.115em;
+}
+.brand__amp{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:300;
+  font-size:21px;
+  line-height:1;
+  letter-spacing:0;
+  color:var(--terracotta);
+  margin:0 .02em;
+}
+
+/* Small location signature */
+.brand__location{
+  font-family:'Inter',system-ui,sans-serif;
+  font-size:7.5px;
+  font-weight:500;
+  letter-spacing:.31em;
+  text-transform:uppercase;
+  color:var(--ink-mute);
+  line-height:1;
+  margin-top:7px;
+  padding-left:.31em;
+  white-space:nowrap;
+  transition:color var(--t-med) var(--ease-ui);
+}
+.brand:hover .brand__location{color:var(--terracotta)}
+
+@media(max-width:900px){
+  .brand__bridge{width:106px;height:39px;margin-bottom:6px}
+  .brand__karim,.brand__sons{font-size:21px;letter-spacing:.10em;padding-left:.10em}
+  .brand__amp{font-size:18px}
+  .brand__location{font-size:7px;letter-spacing:.27em;padding-left:.27em;margin-top:6px}
+}
+@media(max-width:720px){
+  .brand__bridge{width:94px;margin-bottom:5px}
+  .brand__karim,.brand__sons{font-size:18px;letter-spacing:.085em;padding-left:.085em}
+  .brand__amp{font-size:16px}
+  .brand__location{font-size:6.5px;letter-spacing:.23em;padding-left:.23em;margin-top:5px}
+}
+@media(max-width:420px){
+  .brand__bridge{width:78px;margin-bottom:4px}
+  .brand__karim,.brand__sons{font-size:15px;letter-spacing:.075em;padding-left:.075em}
+  .brand__amp{font-size:13.5px}
+  .brand__location{font-size:5.8px;letter-spacing:.19em;padding-left:.19em;margin-top:4px}
+}
+
+/* --- Nav --- */
 .nav{display:flex;align-items:center;gap:clamp(14px,2vw,30px)}
 .nav a{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);position:relative;padding:6px 0;transition:color var(--t-fast) var(--ease-ui)}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform var(--t-med) var(--ease-out)}
@@ -82,7 +174,7 @@ p{margin:0}
 .progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent;overflow:hidden}
 .progress__bar{height:100%;width:0%;background:linear-gradient(90deg,var(--mango),var(--terracotta));transform-origin:left;transition:width 90ms linear}
 
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 clamp(40px,7vh,84px);overflow:hidden;
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:150px 0 clamp(40px,7vh,84px);overflow:hidden;
   background:
     radial-gradient(58% 52% at 79% 26%, rgba(233,169,58,.30), transparent 64%),
     radial-gradient(50% 48% at 14% 76%, rgba(181,70,44,.17), transparent 66%),
@@ -194,7 +286,7 @@ p{margin:0}
 .seg button:hover{color:var(--ink)}
 .seg button.is-active{background:var(--ink);color:var(--paper)}
 @media(max-width:520px){.seg button{padding:7px 11px;font-size:10px}}
-.calculator__result{background:#FBF6EC;border-radius:18px;padding:clamp(24px,3vw,34px);box-shadow:0 20px 40px -30px rgba(34,24,18,.5), 0 0 0 1px var(--line-soft);position:sticky;top:80px;}
+.calculator__result{background:#FBF6EC;border-radius:18px;padding:clamp(24px,3vw,34px);box-shadow:0 20px 40px -30px rgba(34,24,18,.5), 0 0 0 1px var(--line-soft);position:sticky;top:120px;}
 @media(max-width:860px){.calculator__result{position:static}}
 .result-label{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;margin-bottom:8px;}
 .result-big{display:flex;align-items:baseline;gap:10px;font-family:'Cormorant Garamond',serif;line-height:1;margin-bottom:10px;}
@@ -371,342 +463,16 @@ body.has-cursor .cursor{display:block}
 .cursor.is-hover .cursor__ring{width:54px;height:54px;border-color:rgba(34,24,18,.28);background:rgba(34,24,18,.05)}
 .cursor.is-paint .cursor__ring{width:44px;height:44px;border-color:var(--terracotta);background:rgba(181,70,44,.12)}
 .cursor.is-paint .cursor__dot{background:var(--terracotta)}
-:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;border-radius:4px
-   /* =========================================================
-   HERO — ANIMATED MULTICOLOUR PAINT SPLASH
-   ========================================================= */
+:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;border-radius:4px}
 
-.hero {
-    position: relative;
-    overflow: hidden;
+/* Final optical tuning for the complete signature */
+.brand{
+  align-items:center;
+}
+.brand__name{
+  transform:translateX(.02em);
 }
 
-.hero-paint-splash {
-    position: absolute;
-    left: -20%;
-    top: 38%;
-    width: 140%;
-    height: 220px;
-    pointer-events: none;
-    z-index: 1;
-    transform: translateX(-75%);
-    animation: paintSweep 7s cubic-bezier(.65, 0, .25, 1) infinite;
-    filter: saturate(1.2);
-}
-
-/* Main flowing paint body */
-.hero-paint-splash::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 48px;
-    width: 52%;
-    height: 105px;
-
-    border-radius:
-        48% 52% 45% 55% /
-        55% 45% 55% 45%;
-
-    background:
-        radial-gradient(
-            circle at 8% 50%,
-            #B5462C 0 13%,
-            transparent 14%
-        ),
-        radial-gradient(
-            circle at 25% 40%,
-            #E9A93A 0 16%,
-            transparent 17%
-        ),
-        radial-gradient(
-            circle at 43% 55%,
-            #4A8C7B 0 18%,
-            transparent 19%
-        ),
-        radial-gradient(
-            circle at 61% 42%,
-            #1D3E8F 0 15%,
-            transparent 16%
-        ),
-        radial-gradient(
-            circle at 78% 54%,
-            #A94B59 0 14%,
-            transparent 15%
-        ),
-        linear-gradient(
-            90deg,
-            #B5462C 0%,
-            #E9A93A 23%,
-            #4A8C7B 45%,
-            #1D3E8F 68%,
-            #A94B59 100%
-        );
-
-    transform: skewX(-8deg);
-    opacity: .90;
-
-    box-shadow:
-        0 20px 45px rgba(29, 62, 143, .12);
-}
-
-/* Soft wet-paint trail */
-.hero-paint-splash::after {
-    content: "";
-    position: absolute;
-    left: 3%;
-    top: 103px;
-    width: 55%;
-    height: 38px;
-
-    border-radius: 50%;
-
-    background:
-        linear-gradient(
-            90deg,
-            #B5462C,
-            #E9A93A,
-            #4A8C7B,
-            #1D3E8F,
-            #A94B59
-        );
-
-    filter: blur(6px);
-    opacity: .60;
-}
-
-/* Individual paint blobs */
-
-.splash-blob {
-    position: absolute;
-    display: block;
-    border-radius: 50%;
-    opacity: .88;
-
-    animation:
-        blobPulse 1.8s ease-in-out infinite alternate;
-}
-
-.blob-1 {
-    width: 72px;
-    height: 48px;
-    left: 9%;
-    top: 30px;
-    background: #B5462C;
-}
-
-.blob-2 {
-    width: 55px;
-    height: 68px;
-    left: 27%;
-    top: 82px;
-    background: #E9A93A;
-    animation-delay: .15s;
-}
-
-.blob-3 {
-    width: 68px;
-    height: 45px;
-    left: 45%;
-    top: 20px;
-    background: #4A8C7B;
-    animation-delay: .3s;
-}
-
-.blob-4 {
-    width: 52px;
-    height: 62px;
-    left: 63%;
-    top: 84px;
-    background: #1D3E8F;
-    animation-delay: .45s;
-}
-
-/* Flying paint droplets */
-
-.splash-drop {
-    position: absolute;
-    display: block;
-
-    width: 12px;
-    height: 12px;
-
-    border-radius: 50%;
-
-    opacity: 0;
-
-    animation:
-        paintDrop 7s ease-out infinite;
-}
-
-.drop-1 {
-    left: 18%;
-    top: 8px;
-    background: #B5462C;
-
-    --dx: 70px;
-    --dy: -70px;
-}
-
-.drop-2 {
-    left: 34%;
-    top: 110px;
-    background: #E9A93A;
-
-    --dx: 80px;
-    --dy: 75px;
-
-    animation-delay: .15s;
-}
-
-.drop-3 {
-    left: 51%;
-    top: 12px;
-    background: #4A8C7B;
-
-    --dx: 100px;
-    --dy: -55px;
-
-    animation-delay: .30s;
-}
-
-.drop-4 {
-    left: 69%;
-    top: 115px;
-    background: #1D3E8F;
-
-    --dx: 90px;
-    --dy: 65px;
-
-    animation-delay: .45s;
-}
-
-.drop-5 {
-    left: 78%;
-    top: 25px;
-    background: #A94B59;
-
-    --dx: 110px;
-    --dy: -65px;
-
-    animation-delay: .60s;
-}
-
-/* Keep the main title above the paint */
-
-.hero h1 {
-    position: relative;
-    z-index: 3;
-}
-
-/* Paint moves from left → right */
-
-@keyframes paintSweep {
-
-    0% {
-        transform:
-            translateX(-75%)
-            scaleX(.65);
-
-        opacity: 0;
-    }
-
-    8% {
-        opacity: 1;
-    }
-
-    45% {
-        transform:
-            translateX(0%)
-            scaleX(1);
-
-        opacity: 1;
-    }
-
-    82% {
-        transform:
-            translateX(70%)
-            scaleX(1.08);
-
-        opacity: .85;
-    }
-
-    100% {
-        transform:
-            translateX(115%)
-            scaleX(1.15);
-
-        opacity: 0;
-    }
-}
-
-/* Organic paint movement */
-
-@keyframes blobPulse {
-
-    from {
-        transform:
-            scale(.88)
-            rotate(-5deg);
-    }
-
-    to {
-        transform:
-            scale(1.12)
-            rotate(7deg);
-    }
-}
-
-/* Droplet flight */
-
-@keyframes paintDrop {
-
-    0%,
-    25% {
-        transform:
-            translate(0, 0)
-            scale(.2);
-
-        opacity: 0;
-    }
-
-    35% {
-        transform:
-            translate(0, 0)
-            scale(1);
-
-        opacity: .95;
-    }
-
-    70% {
-        transform:
-            translate(var(--dx), var(--dy))
-            scale(.65);
-
-        opacity: .65;
-    }
-
-    100% {
-        transform:
-            translate(
-                calc(var(--dx) * 1.5),
-                calc(var(--dy) * 1.5)
-            )
-            scale(.2);
-
-        opacity: 0;
-    }
-}
-
-/* Respect accessibility settings */
-
-@media (prefers-reduced-motion: reduce) {
-
-    .hero-paint-splash,
-    .splash-blob,
-    .splash-drop {
-        animation: none;
-    }
-}           
 </style>
 </head>
 <body>
@@ -719,9 +485,43 @@ body.has-cursor .cursor{display:block}
 <header class="header" id="header">
   <div class="header__inner">
     <a class="brand" href="#top" aria-label="M.A Karim and Sons, home">
-      <span class="brand__mark">M.A&nbsp;Karim&nbsp;&amp;&nbsp;Sons</span>
-      <span class="brand__dot" aria-hidden="true"></span>
-      <span class="brand__sub">Est. 1976 · Ponda</span>
+      <!-- Layer 1: M.A rendered as a cable-stayed bridge -->
+      <svg class="brand__bridge" viewBox="0 0 108 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <line class="b-deck" x1="0" y1="23.2" x2="108" y2="23.2" stroke-width="0.7" opacity="0.32"/>
+
+          <line class="b-cable" x1="10" y1="2" x2="1" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="10" y1="2" x2="4" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="10" y1="2" x2="7" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-cable" x1="34" y1="2" x2="37" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="34" y1="2" x2="40" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="34" y1="2" x2="43" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-cable" x1="78" y1="2" x2="54" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="58" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="98" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="102" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-struct" x1="10" y1="2" x2="10" y2="22" stroke-width="2"/>
+          <line class="b-struct" x1="34" y1="2" x2="34" y2="22" stroke-width="2"/>
+          <path class="b-struct" d="M 10 9 L 22 20 L 34 9" stroke-width="2"/>
+
+          <circle class="b-dot" cx="52" cy="20.1" r="1.9" fill="currentColor" stroke="none"/>
+
+          <path class="b-struct" d="M 78 2 L 62 22" stroke-width="2"/>
+          <path class="b-struct" d="M 78 2 L 94 22" stroke-width="2"/>
+          <line class="b-struct" x1="66" y1="16.6" x2="90" y2="16.6" stroke-width="1.5"/>
+        </g>
+      </svg>
+
+      <!-- Layer 2 -->
+      <span class="brand__name" aria-label="Karim and Sons">
+        <span class="brand__karim">Karim</span>
+        <span class="brand__amp" aria-hidden="true">&amp;</span>
+        <span class="brand__sons">Sons</span>
+      </span>
+      <span class="brand__location">Ponda · Goa</span>
     </a>
     <nav class="nav" aria-label="Primary">
       <a href="#palette">Palette</a>
@@ -746,23 +546,12 @@ body.has-cursor .cursor{display:block}
     </svg>
     <h3>Your browser can't show the 3D colour field.</h3>
     <p>Not a problem — the palette is real, and so is the shop. Give us a ring and we'll mix it for you.</p>
-    <a href="tel:+919637893136">+91 832 231 4476</a>
+    <a href="tel:+918322314476">+91 832 231 4476</a>
   </div>
 
   <div class="hero__content">
     <div class="hero__inner">
-      <div class="reveal"><span class="hero__eyebrow"><i></i>· Premium Paints . Hardware . General Merchants · </span></div>
-      <div class="hero-paint-splash" aria-hidden="true">
-    <span class="splash-blob blob-1"></span>
-    <span class="splash-blob blob-2"></span>
-    <span class="splash-blob blob-3"></span>
-    <span class="splash-blob blob-4"></span>
-    <span class="splash-drop drop-1"></span>
-    <span class="splash-drop drop-2"></span>
-    <span class="splash-drop drop-3"></span>
-    <span class="splash-drop drop-4"></span>
-    <span class="splash-drop drop-5"></span>
-</div>
+      <div class="reveal"><span class="hero__eyebrow"><i></i>Sadar Bazar, Ponda · Goa · Since 1976</span></div>
       <h1 class="reveal" style="--d:80ms">Goa's colour, mixed by hand <em>since 1976.</em></h1>
       <p class="hero__sub reveal" style="--d:160ms">
         Fifty years behind one counter in Ponda. We match lime plaster, azulejo blue and
@@ -947,7 +736,7 @@ body.has-cursor .cursor{display:block}
             Mixed to order. Coverage and price shown are indicative — bring the numbers to the
             counter and we'll confirm before we mix.
           </div>
-          <a class="btn btn--primary result-cta" id="resultCta" href="tel:+919637893136" data-magnetic data-cursor="hover">
+          <a class="btn btn--primary result-cta" id="resultCta" href="tel:+918322314476" data-magnetic data-cursor="hover">
             Reserve this tin
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -999,8 +788,8 @@ body.has-cursor .cursor{display:block}
             <path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/>
           </svg>
           <h3>The 3D studio needs WebGL.</h3>
-          <p>Yours is switched off or unsupported. Come into the shop on Ponda — we'll show you the colours in daylight.</p>
-          <a href="tel:+919637893136">Call +91 832 231 4476</a>
+          <p>Yours is switched off or unsupported. Come into the shop on Sadar Bazar — we'll show you the colours in daylight.</p>
+          <a href="tel:+918322314476">Call +91 832 231 4476</a>
         </div>
       </div>
 
@@ -1073,7 +862,7 @@ body.has-cursor .cursor{display:block}
           <em>The colour they mixed for my balcão is exactly the one my grandmother had.</em>
           I didn't even bring a sample. I just described it.
         </blockquote>
-        <figcaption><strong>Riya</strong><span>Homeowner · Ponda</span></figcaption>
+        <figcaption><strong>Maria Fernandes</strong><span>Homeowner · Ponda</span></figcaption>
       </figure>
       <figure class="voice voice--2 reveal" style="--accent:var(--cobalt)">
         <span class="voice__idx">02</span>
@@ -1081,18 +870,18 @@ body.has-cursor .cursor{display:block}
           I specify finishes across Goa and I still send clients to Karim's. They know what laterite
           does after a monsoon, and what lime needs to breathe.
           <em>That isn't something you learn from a catalogue.</em>
-          It's been over a decade of watching walls fail and remembering why.
+          It's forty years of watching walls fail and remembering why.
         </blockquote>
-        <figcaption><strong>Adish</strong><span>Home Owner · Margao</span></figcaption>
+        <figcaption><strong>Ar. Rohan Naik</strong><span>Architect · Naik &amp; Associates, Panjim</span></figcaption>
       </figure>
       <figure class="voice voice--3 reveal" style="--accent:var(--verditer)">
         <span class="voice__idx">03</span>
         <blockquote>
-          We were restoring an 1890s Villa in Aldona and the original azulejo had gone completely.
+          We were restoring an 1890s house in Chandor and the original azulejo had gone completely.
           They matched the blue from a chip no bigger than my thumbnail, and then matched the
           <em>lime underneath it</em> so the whole wall read as one thing. Extraordinary.
         </blockquote>
-        <figcaption><strong>Savio D'Souza</strong><span>Heritage Restorer · Margao</span></figcaption>
+        <figcaption><strong>Savio D'Souza</strong><span>Heritage Restorer · Chandor</span></figcaption>
       </figure>
     </div>
   </div>
@@ -1111,7 +900,7 @@ body.has-cursor .cursor{display:block}
           and walk out with a tin that matches. That's been the whole business for fifty years.
         </p>
         <div class="footer__cta">
-          <a class="btn btn--light" href="tel:+919637893136" data-magnetic data-cursor="hover">
+          <a class="btn btn--light" href="tel:+918322314476" data-magnetic data-cursor="hover">
             Call the counter
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
@@ -1122,12 +911,12 @@ body.has-cursor .cursor{display:block}
         <div class="fitem">
           <h4>The Shop</h4>
           <p class="big">M.A Karim &amp; Sons<br>Paint &amp; Hardware</p>
-          <p style="margin-top:10px">Municipal Building, Shop NO. 11, Dada Vaidya Chowk <br>Ponda, Goa 403401<br>India</p>
+          <p style="margin-top:10px">Sadar Bazar, near the Municipal Market<br>Ponda, Goa 403401<br>India</p>
         </div>
         <div class="fitem">
           <h4>Reach Us</h4>
-          <a href="tel:+919637893136">+91 963 789 3136</a>
-          <a href="tel:+919822144760">+91 869 843 7178</a>
+          <a href="tel:+918322314476">+91 832 231 4476</a>
+          <a href="tel:+919822144760">+91 98221 44760</a>
           <a href="mailto:hello@makarimandsons.in">hello@makarimandsons.in</a>
         </div>
         <div class="fitem">
@@ -1547,7 +1336,7 @@ function initHero(){
 }
 
 /* ============================================================
-   9 · STUDIO STATE + UI  (exterior only)
+   9 · STUDIO STATE + UI
    ============================================================ */
 const ZONE_LABELS = { walls:'Walls', trim:'Trim', columns:'Columns', roof:'Roof', door:'Door', plinth:'Plinth' };
 const ZONE_DEFAULTS = {
@@ -2014,7 +1803,6 @@ function initVilla(){
     return g;
   }
 
-  /* --- Coconut palm --- */
   function makeCoconutFrond(length){
     const g = new THREE.Group();
     const ribSegments = 5;
@@ -2102,7 +1890,6 @@ function initVilla(){
     return g;
   }
 
-  /* --- 280 SL --- */
   function makeMercedesSL(){
     const car = new THREE.Group();
     const PAINT = new THREE.MeshPhysicalMaterial({ color: 0xEDE6CE, roughness: 0.28, metalness: 0.08, clearcoat: 1.0, clearcoatRoughness: 0.05, envMapIntensity: 2.0 });
@@ -2280,7 +2067,6 @@ function initVilla(){
     return car;
   }
 
-  /* --- Exterior build --- */
   const PLINTH_TOP = 0.5, GROUND_TOP = 4.0, STRING_TOP = 4.2, FIRST_TOP = 7.4, CORNICE_TOP = 7.6;
   const CEN_W = 10, CEN_D = 6.5, WING_W = 5, WING_D = 6.0, WING_TOP = 4.5;
   const HALF_CEN_W = CEN_W / 2, HALF_CEN_D = CEN_D / 2;
@@ -2789,5 +2575,25 @@ if(HAS_WEBGL){
   document.body.classList.add('no-webgl');
 }
 </script>
+
+<script>
+/* Fine-art wordmark: make the M.A bridge exactly as wide as "Karim & Sons",
+   while giving the bridge a slightly taller, more architectural proportion. */
+(function(){
+  function syncBridgeWidth(){
+    const bridge = document.querySelector('.brand__bridge');
+    const name = document.querySelector('.brand__name');
+    if(!bridge || !name) return;
+    const w = name.getBoundingClientRect().width;
+    if(w > 0) bridge.style.width = w + 'px';
+  }
+  window.addEventListener('load', syncBridgeWidth);
+  window.addEventListener('resize', syncBridgeWidth);
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(syncBridgeWidth);
+  }
+})();
+</script>
+
 </body>
 </html>
