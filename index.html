@@ -1,1 +1,2447 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>M.A Karim &amp; Sons — Paint &amp; Hardware, Ponda, Goa. Est. 1976</title>
+<meta name="description" content="Fifty years of hand-mixed colour in Ponda, Goa. Paint a traditional Goan villa live in your browser.">
+<meta name="theme-color" content="#F7F1E5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23F7F1E5'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23B5462C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#221812; --ink-soft:#584737; --ink-mute:#8A7A69;
+  --paper:#F7F1E5; --paper-2:#EFE6D5; --paper-3:#E6DAC5;
+  --line:rgba(34,24,18,.14); --line-soft:rgba(34,24,18,.08);
+  --terracotta:#B5462C; --cobalt:#1D3E8F; --cream:#EFE3CE;
+  --laterite:#7B3B24; --mango:#E9A93A; --verditer:#4A8C7B;
+  --ochre:#C08434; --rosewood:#6A2E39;
+  --ease-out:cubic-bezier(.16,1,.3,1); --ease-ui:cubic-bezier(.4,0,.2,1);
+  --t-fast:250ms; --t-med:500ms; --t-slow:900ms;
+  --gutter:clamp(20px,4.4vw,72px); --maxw:1440px; --radius:20px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:16px;line-height:1.6;font-weight:400;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden}
+body.has-cursor,body.has-cursor *{cursor:none !important}
+img,svg,canvas{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0}
+input,select{font:inherit;color:inherit}
+::selection{background:var(--terracotta);color:var(--paper)}
+
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.section{padding:clamp(72px,10vw,150px) 0;position:relative}
+.eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;font-weight:500;color:var(--ink-mute);margin-bottom:26px}
+.eyebrow::after{content:"";flex:1;height:1px;background:var(--line);max-width:180px}
+h1,h2,h3,h4,h5{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;letter-spacing:-.015em;margin:0;line-height:1.02}
+h2{font-size:clamp(38px,6vw,80px);line-height:.98}
+h3{font-size:clamp(24px,3vw,36px);line-height:1.1}
+p{margin:0}
+.lede{font-size:clamp(16px,1.35vw,19px);line-height:1.62;color:var(--ink-soft);max-width:56ch;font-weight:300}
+
+.reveal{opacity:0;transform:translateY(26px);
+  transition:opacity var(--t-slow) var(--ease-out),transform var(--t-slow) var(--ease-out);
+  transition-delay:var(--d,0ms);will-change:opacity,transform}
+.reveal.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1 !important;transform:none !important;transition:none !important}
+  *{animation-duration:.001ms !important;transition-duration:.001ms !important}
+}
+
+.header{position:fixed;top:0;left:0;right:0;z-index:90;padding:0 var(--gutter);
+  transition:background var(--t-med) var(--ease-ui),backdrop-filter var(--t-med) var(--ease-ui),border-color var(--t-med) var(--ease-ui);
+  border-bottom:1px solid transparent}
+.header.is-stuck{background:rgba(247,241,229,.82);
+  -webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
+  border-bottom-color:var(--line-soft)}
+.header__inner{max-width:var(--maxw);margin:0 auto;height:64px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:baseline;gap:10px;line-height:1}
+.brand__mark{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(15px,1.5vw,19px);letter-spacing:.11em;text-transform:uppercase}
+.brand__dot{width:6px;height:6px;border-radius:50%;background:var(--terracotta);align-self:center;flex:none}
+.brand__sub{font-size:9.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-mute);display:none}
+@media(min-width:620px){.brand__sub{display:block}}
+.nav{display:flex;align-items:center;gap:clamp(14px,2vw,30px)}
+.nav a{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);position:relative;padding:6px 0;transition:color var(--t-fast) var(--ease-ui)}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--terracotta);transform:scaleX(0);transform-origin:left;transition:transform var(--t-med) var(--ease-out)}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after{transform:scaleX(1)}
+.nav .nav__cta{border:1px solid var(--line);border-radius:100px;padding:8px 16px;color:var(--ink);
+  transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui)}
+.nav .nav__cta::after{display:none}
+.nav .nav__cta:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+@media(max-width:720px){.nav a:not(.nav__cta){display:none}}
+.progress{position:absolute;left:0;bottom:-1px;height:2px;width:100%;background:transparent;overflow:hidden}
+.progress__bar{height:100%;width:0%;background:linear-gradient(90deg,var(--mango),var(--terracotta));transform-origin:left;transition:width 90ms linear}
+
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 clamp(40px,7vh,84px);overflow:hidden;
+  background:
+    radial-gradient(58% 52% at 79% 26%, rgba(233,169,58,.30), transparent 64%),
+    radial-gradient(50% 48% at 14% 76%, rgba(181,70,44,.17), transparent 66%),
+    radial-gradient(46% 46% at 92% 86%, rgba(29,62,143,.15), transparent 66%),
+    radial-gradient(40% 40% at 46% 8%, rgba(74,140,123,.13), transparent 70%),
+    linear-gradient(180deg,#F9F3E8 0%,#F2E9D9 58%,#EBDFC7 100%)}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.hero__grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(34,24,18,.055) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:multiply}
+.hero__content{position:relative;z-index:3;width:100%}
+.hero__inner{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.hero__eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);
+  border:1px solid var(--line);border-radius:100px;padding:7px 15px;background:rgba(247,241,229,.6);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);margin-bottom:clamp(20px,3vh,34px)}
+.hero__eyebrow i{width:5px;height:5px;border-radius:50%;background:var(--verditer);display:block}
+.hero h1{font-size:clamp(46px,8.4vw,124px);line-height:.92;letter-spacing:-.03em;max-width:15ch;margin-bottom:clamp(20px,3vh,32px)}
+.hero h1 em{font-style:italic;color:var(--terracotta)}
+.hero__sub{max-width:52ch;font-size:clamp(15px,1.3vw,18px);line-height:1.6;color:var(--ink-soft);font-weight:300;margin-bottom:clamp(26px,4vh,40px)}
+.hero__actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:clamp(36px,6vh,64px)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:100px;
+  font-size:12.5px;letter-spacing:.11em;text-transform:uppercase;font-weight:500;
+  transition:transform 350ms var(--ease-out),background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui),box-shadow var(--t-med) var(--ease-out);will-change:transform}
+.btn--primary{background:var(--ink);color:var(--paper);box-shadow:0 18px 34px -22px rgba(34,24,18,.85)}
+.btn--primary:hover{background:var(--terracotta);box-shadow:0 22px 40px -20px rgba(181,70,44,.75)}
+.btn--ghost{border:1px solid var(--line);color:var(--ink);background:rgba(247,241,229,.45)}
+.btn--ghost:hover{border-color:var(--ink);background:rgba(247,241,229,.9)}
+.btn svg{width:13px;height:13px;flex:none;transition:transform var(--t-med) var(--ease-out)}
+.btn:hover svg{transform:translateX(3px)}
+.hero__stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,2.4vw,40px);border-top:1px solid var(--line);padding-top:clamp(18px,2.4vh,28px);max-width:900px}
+.stat__n{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3.4vw,44px);line-height:1;letter-spacing:-.02em;display:block;margin-bottom:6px}
+.stat__l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute)}
+@media(max-width:560px){.hero__stats{grid-template-columns:repeat(2,1fr);gap:20px 16px}}
+.scrollhint{position:absolute;right:var(--gutter);bottom:clamp(40px,7vh,84px);z-index:3;display:flex;align-items:center;gap:10px;
+  font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);writing-mode:vertical-rl}
+.scrollhint span{width:1px;height:52px;background:linear-gradient(180deg,var(--ink-mute),transparent);display:block}
+@media(max-width:900px){.scrollhint{display:none}}
+
+.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper-2)}
+.marquee__track{display:flex;width:max-content;animation:marquee 46s linear infinite}
+.marquee__track span{padding:0 26px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.8vw,21px);letter-spacing:.03em;color:var(--ink-soft);white-space:nowrap;display:flex;align-items:center;gap:26px}
+.marquee__track span::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--terracotta);opacity:.55}
+@keyframes marquee{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee__track{animation:none}}
+
+.palette-head{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,80px);align-items:end;margin-bottom:clamp(40px,6vw,72px)}
+@media(max-width:860px){.palette-head{grid-template-columns:1fr;align-items:start;gap:22px}}
+.palette-head h2{max-width:14ch}
+.palette-head .lede{margin-top:6px}
+.palette-feature{display:grid;grid-template-columns:1.55fr 1fr;gap:clamp(16px,2vw,26px);align-items:start;}
+@media(max-width:960px){.palette-feature{grid-template-columns:1fr;gap:22px}}
+.feature-card{--feature-ink:#F7F1E5;--feature-ink-soft:rgba(247,241,229,.62);
+  position:relative;border-radius:22px;overflow:hidden;background:var(--c, #7B3B24);
+  display:grid;grid-template-columns:1.15fr 1fr;min-height:520px;
+  box-shadow:0 50px 100px -60px rgba(34,24,18,.75), 0 0 0 1px rgba(34,24,18,.06);
+  transition:background 700ms var(--ease-out);}
+@media(max-width:720px){.feature-card{grid-template-columns:1fr;min-height:0}}
+.feature-card__left{position:relative;padding:clamp(28px,3.6vw,48px);display:flex;flex-direction:column;justify-content:space-between;color:var(--feature-ink);min-height:340px;overflow:hidden;}
+.feature-card__left::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(rgba(255,255,255,.11) 1px, transparent 1px);background-size:3px 3px;mix-blend-mode:overlay;opacity:.7;}
+.feature-card__left::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(165deg, rgba(255,255,255,.14), transparent 45%, rgba(0,0,0,.10));}
+.feature-card__idx{position:relative;z-index:1;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--feature-ink-soft);font-weight:500;}
+.feature-card__name{position:relative;z-index:1;font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5.4vw,72px);line-height:.96;letter-spacing:-.02em;margin:auto 0;max-width:10ch;}
+.feature-card__name em{font-style:italic;opacity:.72}
+.feature-card__meta{position:relative;z-index:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.feature-card__hex{font-size:11px;letter-spacing:.16em;font-weight:500;padding:5px 10px;border-radius:100px;border:1px solid var(--feature-ink-soft);color:var(--feature-ink);font-variant-numeric:tabular-nums;}
+.feature-card__right{padding:clamp(24px,3vw,44px);background:rgba(250,244,232,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:column;gap:22px;border-left:1px solid rgba(34,24,18,.06);}
+@media(max-width:720px){.feature-card__right{border-left:0;border-top:1px solid rgba(34,24,18,.06)}}
+.feature-card__story{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.35vw,20px);line-height:1.45;color:var(--ink);font-weight:400;}
+.feature-block{display:flex;flex-direction:column;gap:11px}
+.feature-block__title{font-family:'Inter',sans-serif;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;}
+.mix-list{display:flex;flex-direction:column;gap:9px}
+.mix-row{display:grid;grid-template-columns:1fr 68px 26px;gap:12px;align-items:center;font-size:12px;}
+.mix-row__name{color:var(--ink);letter-spacing:.01em}
+.mix-row__bar{height:4px;border-radius:100px;background:rgba(34,24,18,.08);position:relative;overflow:hidden;}
+.mix-row__bar > i{display:block;height:100%;border-radius:100px;background:var(--c, var(--ink));transition:width 600ms var(--ease-out);}
+.mix-row__parts{font-size:10.5px;letter-spacing:.06em;color:var(--ink-mute);text-align:right;font-variant-numeric:tabular-nums;}
+.goes-with{display:flex;gap:8px;flex-wrap:wrap}
+.goes-chip{display:inline-flex;align-items:center;gap:9px;padding:7px 13px 7px 8px;border-radius:100px;border:1px solid var(--line);background:rgba(255,255,255,.5);font-size:11px;letter-spacing:.02em;color:var(--ink);transition:border-color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out),background var(--t-fast) var(--ease-ui);will-change:transform;}
+.goes-chip:hover{border-color:var(--ink);transform:translateY(-2px);background:#fff}
+.goes-chip__swatch{width:16px;height:16px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(34,24,18,.15);flex:none}
+.goes-chip__name{white-space:nowrap}
+.feature-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto;padding-top:6px}
+.feature-actions .btn{padding:12px 20px;font-size:11.5px}
+.colour-list{display:flex;flex-direction:column;gap:3px;max-height:520px;overflow-y:auto;padding:6px 6px 6px 0;scrollbar-width:thin;scrollbar-color:rgba(34,24,18,.2) transparent;}
+.colour-list::-webkit-scrollbar{width:5px}
+.colour-list::-webkit-scrollbar-thumb{background:rgba(34,24,18,.16);border-radius:100px}
+.colour-list::-webkit-scrollbar-track{background:transparent}
+@media(max-width:960px){.colour-list{max-height:none;overflow-x:auto;overflow-y:hidden;flex-direction:row;padding:6px 0 6px 0;scrollbar-width:none;}.colour-list::-webkit-scrollbar{display:none}}
+.colour-row{--c:#7B3B24;display:grid;grid-template-columns:38px 1fr auto;gap:14px;align-items:center;padding:11px 16px 11px 10px;border-radius:12px;border-left:3px solid transparent;text-align:left;flex:none;transition:background var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out);will-change:transform;position:relative;}
+.colour-row:hover{background:rgba(34,24,18,.04)}
+.colour-row.is-active{background:rgba(34,24,18,.055);border-left-color:var(--c);}
+.colour-row__chip{width:34px;height:34px;border-radius:9px;flex:none;background:var(--c);box-shadow:inset 0 0 0 1px rgba(34,24,18,.12), 0 2px 4px -2px rgba(34,24,18,.35);}
+.colour-row__name{font-family:'Cormorant Garamond',serif;font-size:16px;line-height:1.15;letter-spacing:-.005em;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.colour-row__hex{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);font-variant-numeric:tabular-nums;white-space:nowrap;}
+@media(max-width:960px){.colour-row{display:flex;flex-direction:column;gap:6px;padding:8px;min-width:88px;text-align:center;border-left:0;border-bottom:3px solid transparent;}.colour-row.is-active{border-bottom-color:var(--c);border-left:0}.colour-row__chip{width:48px;height:48px;border-radius:10px;margin:0 auto}.colour-row__name{font-size:14px;white-space:normal;text-align:center;line-height:1.1}.colour-row__hex{display:none}}
+
+.calculator-wrap{background:linear-gradient(180deg,#F3E9D5 0%,#E8DBC0 100%);border-radius:var(--radius);padding:clamp(26px,4vw,52px);box-shadow:0 50px 100px -70px rgba(34,24,18,.65), 0 0 0 1px var(--line-soft);}
+.calculator{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:start;}
+@media(max-width:860px){.calculator{grid-template-columns:1fr;gap:30px}}
+.calculator__inputs h3{font-size:clamp(26px,3vw,38px);line-height:1.05;margin-bottom:12px;max-width:16ch;}
+.calculator__inputs > p{font-size:14.5px;line-height:1.6;color:var(--ink-soft);max-width:48ch;margin-bottom:28px;}
+.calc-field{display:flex;flex-direction:column;gap:9px;margin-bottom:20px}
+.calc-field__label{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;}
+.calc-input{width:100%;padding:12px 16px;border-radius:14px;border:1px solid var(--line);background:#FBF6EC;font-size:15px;font-family:'Inter',sans-serif;font-weight:500;color:var(--ink);outline:0;transition:border-color var(--t-fast) var(--ease-ui),box-shadow var(--t-fast) var(--ease-ui),background var(--t-fast) var(--ease-ui);font-variant-numeric:tabular-nums;}
+.calc-input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(34,24,18,.06);background:#fff}
+.calc-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.calc-row .calc-field{margin-bottom:0}
+.seg{display:inline-flex;flex-wrap:wrap;background:rgba(34,24,18,.055);border-radius:100px;padding:3px;gap:2px;}
+.seg button{padding:8px 14px;border-radius:100px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);white-space:nowrap;transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui);}
+.seg button:hover{color:var(--ink)}
+.seg button.is-active{background:var(--ink);color:var(--paper)}
+@media(max-width:520px){.seg button{padding:7px 11px;font-size:10px}}
+.calculator__result{background:#FBF6EC;border-radius:18px;padding:clamp(24px,3vw,34px);box-shadow:0 20px 40px -30px rgba(34,24,18,.5), 0 0 0 1px var(--line-soft);position:sticky;top:80px;}
+@media(max-width:860px){.calculator__result{position:static}}
+.result-label{font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;margin-bottom:8px;}
+.result-big{display:flex;align-items:baseline;gap:10px;font-family:'Cormorant Garamond',serif;line-height:1;margin-bottom:10px;}
+.result-big > span:first-child{font-size:clamp(56px,7vw,84px);letter-spacing:-.03em;color:var(--ink);font-variant-numeric:tabular-nums;transition:color 300ms var(--ease-out);}
+.result-unit{font-size:22px;color:var(--ink-soft);letter-spacing:.01em;}
+.result-tins{font-size:13px;color:var(--ink-soft);letter-spacing:.02em;margin-bottom:22px;min-height:20px;}
+.result-tins strong{font-weight:500;color:var(--ink)}
+.result-divider{height:1px;background:var(--line-soft);margin:18px 0}
+.result-colour{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.result-colour__swatch{width:44px;height:44px;border-radius:12px;flex:none;background:var(--c,#EFE3CE);box-shadow:inset 0 0 0 1px rgba(34,24,18,.14), 0 3px 6px -3px rgba(34,24,18,.35);transition:background 300ms var(--ease-out);}
+.result-colour__name{font-family:'Cormorant Garamond',serif;font-size:19px;line-height:1.1;color:var(--ink);}
+.result-colour__hex{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);margin-top:2px;font-variant-numeric:tabular-nums;}
+.result-colour-picker{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:4px;}
+.result-colour-picker .cpip{width:20px;height:20px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(34,24,18,.15);transition:transform 300ms var(--ease-out),box-shadow var(--t-med) var(--ease-out);}
+.result-colour-picker .cpip:hover{transform:scale(1.15)}
+.result-colour-picker .cpip.is-active{box-shadow:inset 0 0 0 1px rgba(34,24,18,.15),0 0 0 2px #FBF6EC, 0 0 0 3.5px var(--ink);}
+.result-price{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;}
+.result-price > span:first-child{font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);}
+.result-price__amount{font-family:'Cormorant Garamond',serif;font-size:30px;line-height:1;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
+.result-note{font-size:11.5px;line-height:1.55;color:var(--ink-soft);margin-bottom:18px;}
+.result-cta{width:100%;justify-content:center}
+.result-disclaimer{margin-top:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute);text-align:center;}
+
+.studio-head{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,72px);align-items:end;margin-bottom:clamp(32px,4.5vw,56px)}
+@media(max-width:860px){.studio-head{grid-template-columns:1fr;align-items:start;gap:20px}}
+.studio{position:relative;border-radius:var(--radius);overflow:hidden;background:linear-gradient(180deg,#F1E7D5 0%,#E5D8C0 100%);box-shadow:0 60px 100px -70px rgba(34,24,18,.75), 0 0 0 1px var(--line-soft)}
+.studio__stage{position:relative;width:100%;aspect-ratio:16/9;min-height:340px;background:linear-gradient(180deg,#EFE5D2,#DFD0B4);touch-action:none;overflow:hidden}
+@media(max-width:820px){.studio__stage{aspect-ratio:4/5;min-height:0}}
+@media(max-width:520px){.studio__stage{aspect-ratio:3/4}}
+#villa-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
+
+.hud{position:absolute;left:14px;top:14px;z-index:5;display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:100px;
+  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  box-shadow:0 12px 28px -20px rgba(34,24,18,.7), 0 0 0 1px rgba(34,24,18,.07);font-size:11px;letter-spacing:.05em;max-width:calc(100% - 28px);pointer-events:none}
+.hud__zone{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:10px}
+.hud__sep{width:1px;height:14px;background:var(--line);flex:none}
+.hud__chip{width:14px;height:14px;border-radius:50%;flex:none;background:#EFE3CE;box-shadow:inset 0 0 0 1px rgba(34,24,18,.18);transition:background 420ms var(--ease-out)}
+.hud__name{font-family:'Cormorant Garamond',serif;font-size:15px;line-height:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hud__hex{font-size:9.5px;letter-spacing:.12em;color:var(--ink-mute);text-transform:uppercase;white-space:nowrap}
+@media(max-width:520px){.hud__hex{display:none}}
+
+.studio__hint{position:absolute;left:14px;bottom:14px;z-index:5;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);
+  background:rgba(247,241,229,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  padding:8px 13px;border-radius:100px;box-shadow:0 0 0 1px rgba(34,24,18,.06);transition:opacity var(--t-med) var(--ease-out);pointer-events:none}
+.studio__hint.is-hidden{opacity:0}
+.studio__badge{position:absolute;right:14px;top:14px;z-index:5;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);
+  background:rgba(247,241,229,.7);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  padding:7px 12px;border-radius:100px;box-shadow:0 0 0 1px rgba(34,24,18,.06);pointer-events:none}
+@media(max-width:520px){.studio__badge{display:none}}
+.studio__stage.is-paintable #villa-canvas{cursor:crosshair}
+
+.lighting{position:absolute;right:14px;bottom:14px;z-index:5;display:flex;align-items:center;gap:9px;padding:7px 10px 7px 13px;border-radius:100px;
+  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  box-shadow:0 12px 28px -20px rgba(34,24,18,.75), 0 0 0 1px rgba(34,24,18,.07);max-width:calc(100% - 28px);}
+.lighting__label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);flex:none;font-weight:500;display:flex;align-items:center;gap:7px;}
+.lighting__label::before{content:"";display:block;width:8px;height:8px;border-radius:50%;background:#FFE0B0;box-shadow:0 0 8px #FFE0B0;transition:background var(--t-slow) var(--ease-out),box-shadow var(--t-slow) var(--ease-out);}
+.lighting__pills{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;padding-right:2px}
+.lighting__pills::-webkit-scrollbar{display:none}
+.light-pill{padding:6px 11px;border-radius:100px;font-size:10px;letter-spacing:.09em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);white-space:nowrap;flex:none;transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out);will-change:transform;}
+.light-pill:hover{color:var(--ink);background:rgba(34,24,18,.05)}
+.light-pill.is-active{background:var(--ink);color:var(--paper)}
+@media(max-width:640px){.lighting{left:14px;right:14px;bottom:14px;padding:6px 8px 6px 12px}.lighting__label span{display:none}.lighting__label{font-size:8.5px;letter-spacing:.18em}.light-pill{padding:5px 9px;font-size:9.5px}.studio__hint{display:none}}
+
+.paint-ping{position:absolute;border-radius:50%;pointer-events:none;z-index:9;transform:translate(-50%,-50%);animation:pingAnim 800ms cubic-bezier(.16,1,.3,1) forwards}
+@keyframes pingAnim{0%{opacity:.95;transform:translate(-50%,-50%) scale(.35)}55%{opacity:.6;transform:translate(-50%,-50%) scale(2.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
+
+.studio__bar{position:relative;z-index:4;display:flex;flex-direction:column;gap:12px;padding:16px clamp(14px,2vw,24px) 18px;background:rgba(247,241,229,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line-soft);}
+.bar-row{display:flex;align-items:center;gap:12px 22px;flex-wrap:wrap}
+.bar-row--top{justify-content:space-between}
+.bar-row--colour{align-items:center}
+.ctrl-group{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.ctrl-label{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);margin-right:3px;flex:none}
+
+.zone{padding:8px 15px;border-radius:100px;border:1px solid var(--line);font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);
+  transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out);will-change:transform}
+.zone:hover{border-color:var(--ink);color:var(--ink)}
+.zone.is-active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+.colour-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{padding:6px 12px;border-radius:100px;border:1px solid var(--line);font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:500;color:var(--ink-mute);cursor:pointer;white-space:nowrap;transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out);display:inline-flex;align-items:center;gap:6px;will-change:transform}
+.tab:hover{color:var(--ink);border-color:var(--ink)}
+.tab.is-active{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.tab__count{font-size:8.5px;letter-spacing:.06em;opacity:.55;font-variant-numeric:tabular-nums}
+
+.rail{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pip{position:relative;width:30px;height:30px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 1px rgba(34,24,18,.14);
+  transition:transform 350ms var(--ease-out),box-shadow var(--t-med) var(--ease-out);will-change:transform;flex:0 0 auto}
+.pip::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--ink);opacity:0;transition:opacity var(--t-fast) var(--ease-ui),transform var(--t-med) var(--ease-out);transform:scale(.82)}
+.pip:hover{transform:translateY(-3px) scale(1.08)}
+.pip.is-active::after{opacity:1;transform:scale(1)}
+.pip.is-active{box-shadow:inset 0 0 0 1px rgba(34,24,18,.2), 0 8px 18px -10px rgba(34,24,18,.8)}
+.pip__tip{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);background:var(--ink);color:var(--paper);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity var(--t-fast) var(--ease-ui),transform var(--t-med) var(--ease-out);font-weight:500;}
+.pip:hover .pip__tip{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.hex-input-wrap{display:flex;align-items:center;gap:0;padding:0 12px;height:34px;border:1px solid var(--line);border-radius:100px;background:#FBF6EC;
+  transition:border-color var(--t-fast) var(--ease-ui),box-shadow var(--t-fast) var(--ease-ui),background var(--t-fast) var(--ease-ui);min-width:158px;flex:none}
+.hex-input-wrap:focus-within{border-color:var(--ink);box-shadow:0 0 0 3px rgba(34,24,18,.06);background:#fff}
+.hex-input-wrap.is-valid{border-color:var(--verditer)}
+.hex-input-wrap.is-invalid{border-color:var(--terracotta)}
+.hex-swatch{width:16px;height:16px;border-radius:50%;flex:none;margin-right:9px;box-shadow:inset 0 0 0 1px rgba(34,24,18,.18);background:#EFE3CE;transition:background 220ms var(--ease-out)}
+.hex-hash{font-size:12px;color:var(--ink-mute);font-weight:500;margin-right:1px}
+.hex-input{border:0;outline:0;background:transparent;font-family:'Inter',sans-serif;font-size:12px;letter-spacing:.1em;font-weight:500;color:var(--ink);width:80px;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.hex-input::placeholder{color:var(--ink-mute);opacity:.5;text-transform:uppercase}
+.hex-status{font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-mute);margin-left:6px;flex:none}
+.hex-input-wrap.is-valid .hex-status{color:var(--verditer)}
+.hex-input-wrap.is-invalid .hex-status{color:var(--terracotta)}
+
+.studio__actions{display:flex;align-items:center;gap:9px;margin-left:auto;flex:none}
+.tool{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border-radius:100px;border:1px solid var(--line);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
+  transition:background var(--t-fast) var(--ease-ui),color var(--t-fast) var(--ease-ui),border-color var(--t-fast) var(--ease-ui),transform 350ms var(--ease-out);will-change:transform}
+.tool:hover{border-color:var(--ink);color:var(--ink)}
+.tool.is-on{background:var(--verditer);border-color:var(--verditer);color:#fff}
+.tool svg{width:12px;height:12px}
+
+@media(max-width:720px){
+  .bar-row--top{gap:10px}
+  .studio__actions{margin-left:0;width:100%;justify-content:flex-end}
+  .colour-tabs,.rail{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;margin-right:-14px;padding-right:14px}
+  .colour-tabs::-webkit-scrollbar,.rail::-webkit-scrollbar{display:none}
+  .pip{width:27px;height:27px}
+  .hex-input-wrap{flex:1 1 auto;min-width:0}
+}
+
+.voices{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(20px,3vw,44px);margin-top:clamp(36px,5vw,64px)}
+.voice{margin:0;position:relative;padding-top:26px}
+.voice::before{content:"";position:absolute;top:0;left:0;width:38px;height:3px;background:var(--accent);border-radius:2px}
+.voice blockquote{margin:0 0 22px;font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.15vw,30px);line-height:1.28;letter-spacing:-.005em;font-weight:400;color:var(--ink)}
+.voice blockquote em{font-style:italic;color:var(--accent)}
+.voice figcaption{display:flex;flex-direction:column;gap:3px}
+.voice figcaption strong{font-weight:500;font-size:13px;letter-spacing:.02em}
+.voice figcaption span{font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-mute)}
+.voice__idx{position:absolute;top:22px;right:0;font-size:10px;letter-spacing:.2em;color:var(--ink-mute)}
+.voice--1{grid-column:1 / span 6}
+.voice--2{grid-column:7 / span 6;margin-top:clamp(0px,7vw,96px)}
+.voice--3{grid-column:3 / span 6;margin-top:clamp(0px,4vw,44px)}
+@media(max-width:900px){.voices{grid-template-columns:1fr;gap:44px}.voice--1,.voice--2,.voice--3{grid-column:1 / -1;margin-top:0}}
+
+.footer{background:var(--ink);color:var(--paper);padding:clamp(64px,9vw,120px) 0 30px;position:relative;overflow:hidden}
+.footer::before{content:"";position:absolute;right:-140px;top:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,169,58,.20),transparent 68%);pointer-events:none}
+.footer .eyebrow{color:rgba(247,241,229,.5)}
+.footer .eyebrow::after{background:rgba(247,241,229,.18)}
+.footer h2{color:var(--paper);max-width:16ch;margin-bottom:clamp(24px,3.6vw,40px)}
+.footer h2 em{font-style:italic;color:var(--mango)}
+.footer__top{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px);align-items:start;padding-bottom:clamp(44px,6vw,80px);border-bottom:1px solid rgba(247,241,229,.14)}
+@media(max-width:860px){.footer__top{grid-template-columns:1fr;gap:36px}}
+.footer__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,36px)}
+@media(max-width:520px){.footer__grid{grid-template-columns:1fr}}
+.fitem h4{font-family:'Inter',sans-serif;font-size:9.5px;letter-spacing:.22em;text-transform:uppercase;color:rgba(247,241,229,.46);font-weight:500;margin:0 0 12px}
+.fitem p,.fitem a{font-size:14px;line-height:1.75;color:rgba(247,241,229,.9);font-weight:300;display:block}
+.fitem a{transition:color var(--t-fast) var(--ease-ui)}
+.fitem a:hover{color:var(--mango)}
+.fitem .big{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.2vw,26px);line-height:1.25;color:var(--paper)}
+.footer__cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn--light{background:var(--paper);color:var(--ink)}
+.btn--light:hover{background:var(--mango);color:var(--ink)}
+.btn--outline-light{border:1px solid rgba(247,241,229,.28);color:var(--paper)}
+.btn--outline-light:hover{border-color:var(--paper);background:rgba(247,241,229,.08)}
+.footer__bottom{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:space-between;align-items:center;padding-top:26px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,241,229,.42)}
+.footer__bottom a:hover{color:var(--paper)}
+
+.fallback{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:32px;background:linear-gradient(160deg,#EFE5D2,#DFD0B4)}
+body.no-webgl .fallback{display:flex}
+body.no-webgl #hero-canvas,body.no-webgl #villa-canvas{display:none}
+.fallback__icon{width:44px;height:44px;opacity:.6}
+.fallback h3{font-size:clamp(22px,3vw,32px);max-width:20ch}
+.fallback p{font-size:13.5px;color:var(--ink-soft);max-width:40ch;line-height:1.6}
+.fallback a{margin-top:6px;display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;background:var(--ink);color:var(--paper);font-size:12px;letter-spacing:.11em;text-transform:uppercase}
+
+.cursor{position:fixed;top:0;left:0;z-index:9999;pointer-events:none;display:none}
+body.has-cursor .cursor{display:block}
+.cursor__dot,.cursor__ring{position:absolute;border-radius:50%;transform:translate(-50%,-50%)}
+.cursor__dot{width:5px;height:5px;background:var(--ink)}
+.cursor__ring{width:34px;height:34px;border:1px solid rgba(34,24,18,.42);transition:width 300ms var(--ease-out),height 300ms var(--ease-out),background-color 300ms var(--ease-out),border-color 300ms var(--ease-out)}
+.cursor.is-hover .cursor__ring{width:54px;height:54px;border-color:rgba(34,24,18,.28);background:rgba(34,24,18,.05)}
+.cursor.is-paint .cursor__ring{width:44px;height:44px;border-color:var(--terracotta);background:rgba(181,70,44,.12)}
+.cursor.is-paint .cursor__dot{background:var(--terracotta)}
+:focus-visible{outline:2px solid var(--terracotta);outline-offset:3px;border-radius:4px}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor" aria-hidden="true">
+  <div class="cursor__ring" id="cursorRing"></div>
+  <div class="cursor__dot" id="cursorDot"></div>
+</div>
+
+<header class="header" id="header">
+  <div class="header__inner">
+    <a class="brand" href="#top" aria-label="M.A Karim and Sons, home">
+      <span class="brand__mark">M.A&nbsp;Karim&nbsp;&amp;&nbsp;Sons</span>
+      <span class="brand__dot" aria-hidden="true"></span>
+      <span class="brand__sub">Est. 1976 · Ponda</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#palette">Palette</a>
+      <a href="#calculator">Calculator</a>
+      <a href="#studio">Villa Studio</a>
+      <a href="#voices">Voices</a>
+      <a class="nav__cta" href="#visit">Visit us</a>
+    </nav>
+  </div>
+  <div class="progress" aria-hidden="true"><div class="progress__bar" id="progressBar"></div></div>
+</header>
+
+<main id="top">
+
+<section class="hero" id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
+  <div class="hero__grain" aria-hidden="true"></div>
+
+  <div class="fallback" role="status">
+    <svg class="fallback__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+      <rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 15l5-5 4 4 3-3 6 6"/>
+    </svg>
+    <h3>Your browser can't show the 3D colour field.</h3>
+    <p>Not a problem — the palette is real, and so is the shop. Give us a ring and we'll mix it for you.</p>
+    <a href="tel:+918322314476">+91 832 231 4476</a>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__inner">
+      <div class="reveal"><span class="hero__eyebrow"><i></i>Sadar Bazar, Ponda · Goa · Since 1976</span></div>
+      <h1 class="reveal" style="--d:80ms">Goa's colour, mixed by hand <em>since 1976.</em></h1>
+      <p class="hero__sub reveal" style="--d:160ms">
+        Fifty years behind one counter in Ponda. We match lime plaster, azulejo blue and
+        monsoon-worn terracotta for the homes, chapels and villas of Goa.
+        Bring us a chip — we'll bring it back to life.
+      </p>
+      <div class="hero__actions reveal" style="--d:240ms">
+        <a class="btn btn--primary" href="#studio" data-magnetic data-cursor="hover">
+          Open the Villa Studio
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#calculator" data-magnetic data-cursor="hover">Estimate your paint</a>
+      </div>
+
+      <div class="hero__stats reveal" style="--d:320ms">
+        <div><span class="stat__n">1976</span><span class="stat__l">Established</span></div>
+        <div><span class="stat__n">50</span><span class="stat__l">Years unbroken</span></div>
+        <div><span class="stat__n">3</span><span class="stat__l">Generations</span></div>
+        <div><span class="stat__n">1,400+</span><span class="stat__l">Colours mixed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scrollhint" aria-hidden="true"><span></span>Scroll</div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Lime Plaster</span><span>Azulejo Cobalt</span><span>Laterite Earth</span><span>Mango Season</span>
+    <span>Verditer Verandah</span><span>Ochre</span><span>Rosewood Shutter</span><span>Est. 1976</span>
+    <span>Ponda · Goa</span><span>Lime Plaster</span><span>Azulejo Cobalt</span><span>Laterite Earth</span>
+    <span>Mango Season</span><span>Verditer Verandah</span><span>Ochre</span><span>Rosewood Shutter</span>
+    <span>Est. 1976</span><span>Ponda · Goa</span>
+  </div>
+</div>
+
+<section class="section" id="palette">
+  <div class="wrap">
+    <div class="palette-head">
+      <div class="reveal">
+        <div class="eyebrow">01 — The Goan Palette</div>
+        <h2>Twelve colours we didn't invent.</h2>
+      </div>
+      <div class="reveal" style="--d:120ms">
+        <p class="lede">
+          Read off the buildings around us — the cobalt of a chapel skirting, the oxide of a roof
+          tile after three monsoons, the green a copper gutter turns at year forty. Each one has
+          a story, a recipe, and a family of colours it goes with. Explore them below.
+        </p>
+      </div>
+    </div>
+
+    <div class="palette-feature reveal" style="--d:120ms">
+      <div class="feature-card" id="featureCard" style="--c:#7B3B24">
+        <div class="feature-card__left">
+          <div class="feature-card__idx" id="featureIdx">No. 01 · Goan Family</div>
+          <div class="feature-card__name" id="featureName">Laterite Earth</div>
+          <div class="feature-card__meta">
+            <span class="feature-card__hex" id="featureHex">#7B3B24</span>
+          </div>
+        </div>
+        <div class="feature-card__right">
+          <p class="feature-card__story" id="featureStory">
+            Read off the cliff behind Farmagudi at the end of a dry March. Every wall in the
+            old quarter carries a streak of it somewhere — a plinth, a threshold, a garden wall.
+          </p>
+          <div class="feature-block">
+            <h5 class="feature-block__title">The Mix</h5>
+            <div class="mix-list" id="featureMix"></div>
+          </div>
+          <div class="feature-block">
+            <h5 class="feature-block__title">Goes With</h5>
+            <div class="goes-with" id="featureGoes"></div>
+          </div>
+          <div class="feature-actions">
+            <button class="btn btn--primary" id="tryOnVilla" data-magnetic data-cursor="hover">
+              Try on villa
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <button class="btn btn--ghost" id="calcThis" data-magnetic data-cursor="hover">Calculate paint</button>
+          </div>
+        </div>
+      </div>
+      <div class="colour-list" id="colourList" role="tablist" aria-label="Goan palette colours"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="calculator" style="padding-top:0">
+  <div class="wrap">
+    <div class="studio-head" style="margin-bottom:clamp(32px,4.5vw,56px)">
+      <div class="reveal">
+        <div class="eyebrow">02 — Paint Calculator</div>
+        <h2>How much paint will this take?</h2>
+      </div>
+      <div class="reveal" style="--d:120ms">
+        <p class="lede">
+          The question every customer asks at the counter, now answered before you walk in.
+          Give us the size of the job — we'll tell you the litres, the tins, and a working
+          estimate. Bring the code with you and we'll have it ready.
+        </p>
+      </div>
+    </div>
+
+    <div class="calculator-wrap reveal" style="--d:160ms">
+      <div class="calculator" id="calculator">
+        <div class="calculator__inputs">
+          <h3>A working estimate, not a guess.</h3>
+          <p>
+            We adjust for surface porosity, coats, and the coverage of the finish you choose —
+            the same maths the shop has been doing on a paper pad for fifty years.
+          </p>
+          <div class="calc-field">
+            <label class="calc-field__label">Measure by</label>
+            <div class="seg" id="calcMode">
+              <button type="button" data-value="wall" class="is-active">Wall area</button>
+              <button type="button" data-value="room">Room size</button>
+            </div>
+          </div>
+          <div class="calc-field" id="calcWallFields">
+            <label class="calc-field__label">Wall area (m²)</label>
+            <input type="number" class="calc-input" id="calcWallArea" value="40" min="1" max="3000" inputmode="numeric">
+          </div>
+          <div class="calc-field" id="calcRoomFields" style="display:none">
+            <label class="calc-field__label">Room dimensions (m)</label>
+            <div class="calc-row">
+              <input type="number" class="calc-input" id="calcRoomL" value="5" min="0.5" max="50" step="0.1" aria-label="Room length in metres">
+              <input type="number" class="calc-input" id="calcRoomW" value="4" min="0.5" max="50" step="0.1" aria-label="Room width in metres">
+              <input type="number" class="calc-input" id="calcRoomH" value="3" min="1.5" max="10" step="0.1" aria-label="Ceiling height in metres">
+            </div>
+          </div>
+          <div class="calc-field">
+            <label class="calc-field__label">Coats</label>
+            <div class="seg" id="calcCoats">
+              <button type="button" data-value="1">1</button>
+              <button type="button" data-value="2" class="is-active">2</button>
+              <button type="button" data-value="3">3</button>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label class="calc-field__label">Surface</label>
+            <div class="seg" id="calcSurface">
+              <button type="button" data-value="lime">Lime plaster</button>
+              <button type="button" data-value="cement" class="is-active">Cement</button>
+              <button type="button" data-value="laterite">Laterite</button>
+              <button type="button" data-value="painted">Repaint</button>
+              <button type="button" data-value="wood">Wood</button>
+            </div>
+          </div>
+          <div class="calc-field">
+            <label class="calc-field__label">Finish</label>
+            <div class="seg" id="calcQuality">
+              <button type="button" data-value="standard">Standard</button>
+              <button type="button" data-value="premium" class="is-active">Premium</button>
+              <button type="button" data-value="artisan">Artisan Mix</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="calculator__result" id="calculatorResult">
+          <div class="result-label">You'll need</div>
+          <div class="result-big">
+            <span id="resultLitres">4.5</span>
+            <span class="result-unit">litres</span>
+          </div>
+          <div class="result-tins" id="resultTins"></div>
+          <div class="result-divider"></div>
+          <div class="result-colour">
+            <div class="result-colour__swatch" id="resultSwatch"></div>
+            <div>
+              <div class="result-colour__name" id="resultColourName">Lime Plaster</div>
+              <div class="result-colour__hex" id="resultColourHex">#EFE3CE</div>
+            </div>
+          </div>
+          <div class="result-colour-picker" id="resultColourPicker"></div>
+          <div class="result-divider"></div>
+          <div class="result-price">
+            <span>Working estimate</span>
+            <span class="result-price__amount" id="resultPrice">₹2,790</span>
+          </div>
+          <div class="result-note">
+            Mixed to order. Coverage and price shown are indicative — bring the numbers to the
+            counter and we'll confirm before we mix.
+          </div>
+          <a class="btn btn--primary result-cta" id="resultCta" href="tel:+918322314476" data-magnetic data-cursor="hover">
+            Reserve this tin
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <div class="result-disclaimer">No payment · no account · just a confirmation</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="studio" style="padding-top:0">
+  <div class="wrap">
+    <div class="studio-head">
+      <div class="reveal">
+        <div class="eyebrow">03 — Villa Studio</div>
+        <h2>Paint the house before you paint the house.</h2>
+      </div>
+      <div class="reveal" style="--d:120ms">
+        <p class="lede">
+          A two-storey Goan-Portuguese villa, built live in your browser. Pick a zone,
+          choose from eighty curated colours — or type any hex code you like.
+          Then move the light: see how it reads at dawn, at noon, at golden hour.
+        </p>
+      </div>
+    </div>
+
+    <div class="studio reveal" style="--d:180ms">
+      <div class="studio__stage" id="studioStage">
+        <canvas id="villa-canvas"></canvas>
+
+        <div class="hud" id="hud">
+          <span class="hud__zone" id="hudZone">Walls</span>
+          <span class="hud__sep"></span>
+          <span class="hud__chip" id="hudChip"></span>
+          <span class="hud__name" id="hudName">Lime Plaster</span>
+          <span class="hud__hex" id="hudHex">#EFE3CE</span>
+        </div>
+
+        <div class="studio__badge">Live 3D · WebGL</div>
+        <div class="studio__hint" id="studioHint">Drag to orbit · Scroll to zoom · Click a surface to paint</div>
+
+        <div class="lighting" id="lighting">
+          <span class="lighting__label"><span>Light</span></span>
+          <div class="lighting__pills" id="lightingPills"></div>
+        </div>
+
+        <div class="fallback" role="status">
+          <svg class="fallback__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M3 10.5 12 4l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-6h6v6"/>
+          </svg>
+          <h3>The 3D studio needs WebGL.</h3>
+          <p>Yours is switched off or unsupported. Come into the shop on Sadar Bazar — we'll show you the colours in daylight.</p>
+          <a href="tel:+918322314476">Call +91 832 231 4476</a>
+        </div>
+      </div>
+
+      <div class="studio__bar">
+        <div class="bar-row bar-row--top">
+          <div class="ctrl-group">
+            <span class="ctrl-label">Zone</span>
+            <div id="zoneChips" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+          </div>
+          <div class="studio__actions">
+            <button class="tool" id="autoOrbitBtn" type="button" aria-pressed="false" data-magnetic data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M12 4a8 8 0 1 0 8 8"/><path d="M12 1v6M12 1 9 4M12 1l3 3"/>
+              </svg>
+              Auto-orbit
+            </button>
+            <button class="tool" id="resetBtn" type="button" data-magnetic data-cursor="hover">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M4 12a8 8 0 1 1 2.4 5.7"/><path d="M4 19v-5h5"/>
+              </svg>
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="bar-row bar-row--colour">
+          <div class="ctrl-group" style="flex:1 1 auto;min-width:0">
+            <span class="ctrl-label">Colour</span>
+            <div class="colour-tabs" id="colourTabs"></div>
+          </div>
+
+          <div class="hex-input-wrap" id="hexWrap">
+            <span class="hex-swatch" id="hexSwatch"></span>
+            <span class="hex-hash">#</span>
+            <input
+              type="text"
+              class="hex-input"
+              id="hexInput"
+              maxlength="6"
+              placeholder="EFE3CE"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="characters"
+              aria-label="Type any hex colour code"
+            >
+            <span class="hex-status" id="hexStatus">Custom</span>
+          </div>
+        </div>
+
+        <div class="bar-row bar-row--rail">
+          <div class="rail" id="colourRail"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="voices">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow">04 — Voices</div>
+      <h2 style="max-width:18ch">Three generations behind one counter.</h2>
+    </div>
+    <div class="voices">
+      <figure class="voice voice--1 reveal" style="--accent:var(--terracotta)">
+        <span class="voice__idx">01</span>
+        <blockquote>
+          My grandfather bought his first tin of paint from this shop. Last monsoon I repainted the
+          whole house — same counter, same advice, third generation behind it.
+          <em>The colour they mixed for my balcão is exactly the one my grandmother had.</em>
+          I didn't even bring a sample. I just described it.
+        </blockquote>
+        <figcaption><strong>Maria Fernandes</strong><span>Homeowner · Ponda</span></figcaption>
+      </figure>
+      <figure class="voice voice--2 reveal" style="--accent:var(--cobalt)">
+        <span class="voice__idx">02</span>
+        <blockquote>
+          I specify finishes across Goa and I still send clients to Karim's. They know what laterite
+          does after a monsoon, and what lime needs to breathe.
+          <em>That isn't something you learn from a catalogue.</em>
+          It's forty years of watching walls fail and remembering why.
+        </blockquote>
+        <figcaption><strong>Ar. Rohan Naik</strong><span>Architect · Naik &amp; Associates, Panjim</span></figcaption>
+      </figure>
+      <figure class="voice voice--3 reveal" style="--accent:var(--verditer)">
+        <span class="voice__idx">03</span>
+        <blockquote>
+          We were restoring an 1890s house in Chandor and the original azulejo had gone completely.
+          They matched the blue from a chip no bigger than my thumbnail, and then matched the
+          <em>lime underneath it</em> so the whole wall read as one thing. Extraordinary.
+        </blockquote>
+        <figcaption><strong>Savio D'Souza</strong><span>Heritage Restorer · Chandor</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" id="visit">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="reveal">
+        <div class="eyebrow">05 — Visit</div>
+        <h2>Bring us a chip. <em>We'll match it.</em></h2>
+        <p class="lede" style="color:rgba(247,241,229,.68);max-width:46ch">
+          A flake of old plaster, a photograph, a shutter hinge, a memory. Walk in with any of it
+          and walk out with a tin that matches. That's been the whole business for fifty years.
+        </p>
+        <div class="footer__cta">
+          <a class="btn btn--light" href="tel:+918322314476" data-magnetic data-cursor="hover">
+            Call the counter
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--outline-light" href="mailto:hello@makarimandsons.in" data-magnetic data-cursor="hover">hello@makarimandsons.in</a>
+        </div>
+      </div>
+      <div class="footer__grid reveal" style="--d:140ms">
+        <div class="fitem">
+          <h4>The Shop</h4>
+          <p class="big">M.A Karim &amp; Sons<br>Paint &amp; Hardware</p>
+          <p style="margin-top:10px">Sadar Bazar, near the Municipal Market<br>Ponda, Goa 403401<br>India</p>
+        </div>
+        <div class="fitem">
+          <h4>Reach Us</h4>
+          <a href="tel:+918322314476">+91 832 231 4476</a>
+          <a href="tel:+919822144760">+91 98221 44760</a>
+          <a href="mailto:hello@makarimandsons.in">hello@makarimandsons.in</a>
+        </div>
+        <div class="fitem">
+          <h4>Opening Hours</h4>
+          <p>Monday – Saturday<br>9:00 am – 7:30 pm</p>
+          <p style="margin-top:10px">Sunday<br>9:30 am – 1:00 pm</p>
+        </div>
+        <div class="fitem">
+          <h4>We Mix For</h4>
+          <p>Homes &amp; villas</p>
+          <p>Architects &amp; contractors</p>
+          <p>Heritage restoration</p>
+          <p>Chapels &amp; institutions</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> M.A Karim &amp; Sons · Ponda, Goa</span>
+      <span>Est. 1976 · Three generations · One counter</span>
+    </div>
+  </div>
+</footer>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/"
+  }
+}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+
+/* ============================================================
+   0 · ENVIRONMENT
+   ============================================================ */
+const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const FINE   = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const DPR_CAP = 2;
+
+function webglAvailable(){
+  try{
+    const c = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+  }catch(e){ return false; }
+}
+const HAS_WEBGL = webglAvailable();
+if(!HAS_WEBGL) document.body.classList.add('no-webgl');
+
+/* ============================================================
+   1 · PALETTE DATA
+   ============================================================ */
+const PALETTE_GROUPS = {
+  goan: { label: 'Goan', colours: [
+    { name:'Laterite Earth',hex:'#7B3B24' },{ name:'Ponda Terracotta',hex:'#B5462C' },
+    { name:'Mango Season',hex:'#E9A93A' },{ name:'Ochre Verandah',hex:'#C08434' },
+    { name:'Lime Plaster',hex:'#EFE3CE' },{ name:'Cashew Cream',hex:'#E2D2AE' },
+    { name:'Azulejo Cobalt',hex:'#1D3E8F' },{ name:'Monsoon Indigo',hex:'#2A3A6B' },
+    { name:'Verditer Verandah',hex:'#4A8C7B' },{ name:'Aged Copper',hex:'#2F6B5F' },
+    { name:'Rosewood Shutter',hex:'#6A2E39' },{ name:'Balcão Rose',hex:'#C0857A' } ] },
+  whites: { label: 'Whites', colours: [
+    { name:'Chalk White',hex:'#F7F5F0' },{ name:'Coconut Milk',hex:'#F3EADB' },
+    { name:'Ivory Verandah',hex:'#F0E4CE' },{ name:'Warm Cotton',hex:'#EBE0CC' },
+    { name:'Sea Salt',hex:'#EDE7DD' },{ name:'Pearl Grout',hex:'#E8E2D5' },
+    { name:'Bone',hex:'#DFD6C2' },{ name:'Rice Paper',hex:'#F5EFE3' },
+    { name:'Linen Sheet',hex:'#E5DBC5' },{ name:'Antique Lime',hex:'#DDD1B8' } ] },
+  earths: { label: 'Earths', colours: [
+    { name:'Laterite Deep',hex:'#5E2A18' },{ name:'Wet Laterite',hex:'#6B3A22' },
+    { name:'Dried Clay',hex:'#A05838' },{ name:'Chitrakoot Ochre',hex:'#A56B2F' },
+    { name:'Madras Earth',hex:'#8B5A3C' },{ name:'Tandoor',hex:'#A0522D' },
+    { name:'Cinnamon Bark',hex:'#7A4A2E' },{ name:'Baked Brick',hex:'#A64F35' },
+    { name:'Sun-Baked Tile',hex:'#C4683E' },{ name:'Red Sand',hex:'#BB6B4A' } ] },
+  blues: { label: 'Blues', colours: [
+    { name:'Deep Azulejo',hex:'#162C5E' },{ name:'Portuguese Blue',hex:'#2A4B7C' },
+    { name:'Monsoon Sky',hex:'#4A6FA5' },{ name:'Arabi Blue',hex:'#38548C' },
+    { name:'Porcelain',hex:'#7B96BF' },{ name:'Cornflower',hex:'#6B87B8' },
+    { name:'Inkwell',hex:'#1E2E56' },{ name:'Faded Indigo',hex:'#586F94' },
+    { name:'Sky Over Panjim',hex:'#8FA8C9' },{ name:'Hydrangea Mist',hex:'#A7B9CE' } ] },
+  greens: { label: 'Greens', colours: [
+    { name:'Palm Shadow',hex:'#3C5F4A' },{ name:'Coconut Leaf',hex:'#5E7E58' },
+    { name:'Sage Verandah',hex:'#8CA68C' },{ name:'Verdigris',hex:'#5B8570' },
+    { name:'Moss on Walls',hex:'#4F6B47' },{ name:'Fern Green',hex:'#3A5E42' },
+    { name:'Betel Leaf',hex:'#4E7A52' },{ name:'Mint Grout',hex:'#9EB8A4' },
+    { name:'Chilli Green',hex:'#6D8B4F' },{ name:'Cypress',hex:'#2E5240' } ] },
+  yellows: { label: 'Yellows', colours: [
+    { name:'Turmeric Gold',hex:'#D4A017' },{ name:'Sun on Lime',hex:'#F0C556' },
+    { name:'Corn Husk',hex:'#DDB85C' },{ name:'Amber Verandah',hex:'#D69A2D' },
+    { name:'Mustard Seed',hex:'#B88824' },{ name:'Saffron Wall',hex:'#E0B04A' },
+    { name:'Warm Brass',hex:'#C99A3E' },{ name:'Honey Comb',hex:'#D9A93A' },
+    { name:'Golden Hour',hex:'#E8B94A' },{ name:'Pale Butter',hex:'#EDD89A' } ] },
+  reds: { label: 'Reds', colours: [
+    { name:'Bengal Red',hex:'#A63A2A' },{ name:'Paprika',hex:'#B83E2F' },
+    { name:'Coral Verandah',hex:'#D97152' },{ name:'Faded Rose',hex:'#C99B92' },
+    { name:'Old Mahogany',hex:'#7B3B2F' },{ name:'Kashmiri Chilli',hex:'#9C2D1F' },
+    { name:'Blush Wall',hex:'#DBA99C' },{ name:'Sunset Brick',hex:'#C55B44' },
+    { name:'Rust Oxide',hex:'#8E3E2B' },{ name:'Damask Rose',hex:'#B85E6B' } ] },
+  neutrals: { label: 'Neutrals', colours: [
+    { name:'Charcoal Slate',hex:'#3A3A38' },{ name:'Warm Graphite',hex:'#4A4744' },
+    { name:'Goan Stone',hex:'#8C8071' },{ name:'Riverbed Grey',hex:'#A8A196' },
+    { name:'Shadow',hex:'#6B6660' },{ name:'Cool Cement',hex:'#B5B0A6' },
+    { name:'Ash Verandah',hex:'#9C9488' },{ name:'Ancient Stone',hex:'#75706A' } ] }
+};
+const ALL_COLOURS = Object.values(PALETTE_GROUPS).flatMap(g => g.colours);
+const FEATURED = PALETTE_GROUPS.goan.colours;
+const COLOUR_BY_HEX = new Map();
+ALL_COLOURS.forEach(c => COLOUR_BY_HEX.set(c.hex.toUpperCase(), c));
+
+/* ============================================================
+   2 · COLOUR STORIES
+   ============================================================ */
+const COLOUR_STORIES = {
+  '#7B3B24': { story:"Read off the cliff behind Farmagudi at the end of a dry March. Every wall in the old quarter carries a streak of it somewhere — a plinth, a threshold, a garden wall.", mix:[{name:'Red sand',parts:5},{name:'Cinnamon bark',parts:2},{name:'Charcoal slate',parts:1}], goesWith:['#B5462C','#E2D2AE','#4A8C7B'] },
+  '#B5462C': { story:"The colour of the roof tiles stacked at the kilns in Marcel. Three monsoons in, they soften to exactly this.", mix:[{name:'Baked brick',parts:4},{name:'Sun-baked tile',parts:2},{name:'Turmeric gold',parts:1}], goesWith:['#EFE3CE','#4A8C7B','#C08434'] },
+  '#E9A93A': { story:"A Malcorado mango split open at the height of April. We mixed it for the Rodrigues house in Curti in 2019; it's been asked for every year since.", mix:[{name:'Turmeric gold',parts:3},{name:'Golden hour',parts:1},{name:'Blush wall',parts:0.25}], goesWith:['#7B3B24','#162C5E','#F7F5F0'] },
+  '#C08434': { story:"A Goan verandah floor after twenty years of bare feet and monsoon damp — that specific soft amber it turns before it starts to grey.", mix:[{name:'Chitrakoot ochre',parts:4},{name:'Madras earth',parts:2},{name:'Warm brass',parts:1}], goesWith:['#162C5E','#B5462C','#EFE3CE'] },
+  '#EFE3CE': { story:"Fresh lime, slaked on site. Sand from the Zuari riverbed. Warm, forgiving, and — most important — still breathing after fifty years.", mix:[{name:'Bone',parts:8},{name:'Antique lime',parts:2},{name:'Turmeric gold',parts:0.5}], goesWith:['#7B3B24','#6A2E39','#4A8C7B'] },
+  '#E2D2AE': { story:"The inside of a dried cashew shell, cracked open on the doorstep the morning after the harvest.", mix:[{name:'Antique lime',parts:6},{name:'Warm cotton',parts:2},{name:'Corn husk',parts:1}], goesWith:['#5E2A18','#1D3E8F','#3C5F4A'] },
+  '#1D3E8F': { story:"The blue on the oldest chapel skirting in Old Goa. Pigment that arrived on a Portuguese caravel and decided to stay.", mix:[{name:'Portuguese blue',parts:5},{name:'Deep azulejo',parts:2},{name:'Inkwell',parts:0.25}], goesWith:['#EFE3CE','#F7F5F0','#D4A017'] },
+  '#2A3A6B': { story:"The sky over Ponda in the last hour before the June rain. You know the one.", mix:[{name:'Arabi blue',parts:4},{name:'Inkwell',parts:2},{name:'Shadow',parts:1}], goesWith:['#EFE3CE','#D97152','#D9A93A'] },
+  '#4A8C7B': { story:"The green a copper gutter turns at year forty, when the salt air has finally finished with it.", mix:[{name:'Verdigris',parts:4},{name:'Sage verandah',parts:2},{name:'Deep azulejo',parts:0.5}], goesWith:['#B5462C','#EFE3CE','#C99B92'] },
+  '#2F6B5F': { story:"The colour of the old copper vessel at the back of the shop — the one we've been using to test-match since 1976.", mix:[{name:'Cypress',parts:5},{name:'Verdigris',parts:2},{name:'Shadow',parts:1}], goesWith:['#F7F5F0','#E9A93A','#7B3B24'] },
+  '#6A2E39': { story:"The old rosewood shutters on the Fernandes house in Velha Goa — before the 1990s varnish, when the wood was still breathing.", mix:[{name:'Old mahogany',parts:4},{name:'Damask rose',parts:2},{name:'Kashmiri chilli',parts:0.5}], goesWith:['#EFE3CE','#4A8C7B','#F7F5F0'] },
+  '#C0857A': { story:"The blush on the underside of a monsoon cloud at sunset, over the Mandovi. We mixed it for a bride's bedroom in 2016.", mix:[{name:'Blush wall',parts:5},{name:'Coral verandah',parts:2},{name:'Bone',parts:1}], goesWith:['#162C5E','#586F94','#F3EADB'] }
+};
+
+/* ============================================================
+   3 · REVEALS
+   ============================================================ */
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('is-in'); revealIO.unobserve(e.target); } });
+}, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealIO.observe(el));
+
+/* ============================================================
+   4 · HEADER + PROGRESS
+   ============================================================ */
+const header = document.getElementById('header');
+const progressBar = document.getElementById('progressBar');
+let scrollTicking = false;
+function onScroll(){
+  const y = window.scrollY;
+  header.classList.toggle('is-stuck', y > 24);
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  progressBar.style.width = (h > 0 ? Math.min(1, y / h) * 100 : 0) + '%';
+  scrollTicking = false;
+}
+window.addEventListener('scroll', () => {
+  if(!scrollTicking){ scrollTicking = true; requestAnimationFrame(onScroll); }
+}, { passive: true });
+onScroll();
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ============================================================
+   5 · CURSOR + MAGNETIC
+   ============================================================ */
+if(FINE && !REDUCE){
+  document.body.classList.add('has-cursor');
+  const cursor = document.getElementById('cursor');
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let mx = innerWidth/2, my = innerHeight/2, rx = mx, ry = my;
+  window.addEventListener('pointermove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+  }, { passive: true });
+  (function cursorLoop(){
+    rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
+    ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+    requestAnimationFrame(cursorLoop);
+  })();
+  document.addEventListener('pointerover', e => {
+    const t = e.target.closest('a, button, [data-cursor]');
+    cursor.classList.toggle('is-hover', !!t);
+  });
+  document.addEventListener('pointerout', e => {
+    if(!e.relatedTarget) cursor.classList.remove('is-hover');
+  });
+  document.querySelectorAll('[data-magnetic]').forEach(el => {
+    el.style.transition = 'transform 380ms cubic-bezier(.16,1,.3,1)';
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width/2)) / (r.width/2);
+      const dy = (e.clientY - (r.top + r.height/2)) / (r.height/2);
+      el.style.transform = `translate(${dx*6}px, ${dy*5}px)`;
+    });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
+}
+
+/* ============================================================
+   6 · SHARED ENV
+   ============================================================ */
+let sharedEnvTexture = null;
+function makeEnvironment(renderer){
+  if(sharedEnvTexture) return sharedEnvTexture;
+  const pmrem = new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  const rt = pmrem.fromScene(new RoomEnvironment(), 0.045);
+  sharedEnvTexture = rt.texture;
+  pmrem.dispose();
+  return sharedEnvTexture;
+}
+
+/* ============================================================
+   7 · FEATURED COLOUR CARD
+   ============================================================ */
+const featureCard  = document.getElementById('featureCard');
+const featureIdx   = document.getElementById('featureIdx');
+const featureName  = document.getElementById('featureName');
+const featureHex   = document.getElementById('featureHex');
+const featureStory = document.getElementById('featureStory');
+const featureMix   = document.getElementById('featureMix');
+const featureGoes  = document.getElementById('featureGoes');
+const colourList   = document.getElementById('colourList');
+
+let activeFeatureHex = '#7B3B24';
+
+function sRGBLuminance(hex){
+  const h = hex.replace('#','');
+  const r = parseInt(h.substr(0,2),16) / 255;
+  const g = parseInt(h.substr(2,2),16) / 255;
+  const b = parseInt(h.substr(4,2),16) / 255;
+  const f = v => v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+}
+function wireMagnetic(el){
+  if(!FINE || REDUCE) return;
+  el.style.transition = 'transform 380ms cubic-bezier(.16,1,.3,1)';
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width/2)) / (r.width/2);
+    const dy = (e.clientY - (r.top + r.height/2)) / (r.height/2);
+    el.style.transform = `translate(${dx*6}px, ${dy*5}px)`;
+  });
+  el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+}
+
+function renderFeature(hex){
+  const info = COLOUR_BY_HEX.get(hex.toUpperCase());
+  const story = COLOUR_STORIES[hex.toUpperCase()];
+  if(!info) return;
+  activeFeatureHex = hex.toUpperCase();
+  featureCard.style.setProperty('--c', info.hex);
+  const lum = sRGBLuminance(info.hex);
+  const isLight = lum > 0.55;
+  featureCard.style.setProperty('--feature-ink', isLight ? '#221812' : '#F7F1E5');
+  featureCard.style.setProperty('--feature-ink-soft', isLight ? 'rgba(34,24,18,.55)' : 'rgba(247,241,229,.65)');
+  const idx = FEATURED.findIndex(c => c.hex.toUpperCase() === info.hex.toUpperCase());
+  featureIdx.textContent = `No. ${String(idx + 1).padStart(2,'0')} · Goan Family`;
+  featureName.textContent = info.name;
+  featureHex.textContent = info.hex;
+  featureStory.textContent = story ? story.story : 'One of our family of colours — mixed to order, matched to any chip you bring us.';
+  featureMix.innerHTML = '';
+  if(story && story.mix){
+    const maxParts = Math.max(...story.mix.map(m => m.parts));
+    story.mix.forEach(m => {
+      const row = document.createElement('div');
+      row.className = 'mix-row';
+      const pct = (m.parts / maxParts) * 100;
+      row.innerHTML = `<span class="mix-row__name">${m.name}</span><span class="mix-row__bar"><i style="width:${pct}%"></i></span><span class="mix-row__parts">${m.parts >= 1 ? m.parts : m.parts.toFixed(2).replace(/0$/,'')}</span>`;
+      row.style.setProperty('--c', info.hex);
+      featureMix.appendChild(row);
+    });
+  }
+  featureGoes.innerHTML = '';
+  const goes = (story && story.goesWith) ? story.goesWith : [];
+  goes.forEach(gHex => {
+    const gInfo = COLOUR_BY_HEX.get(gHex.toUpperCase());
+    if(!gInfo) return;
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'goes-chip';
+    b.style.setProperty('--c', gInfo.hex);
+    b.setAttribute('data-magnetic',''); b.setAttribute('data-cursor','hover');
+    b.innerHTML = `<span class="goes-chip__swatch"></span><span class="goes-chip__name">${gInfo.name}</span>`;
+    b.addEventListener('click', () => {
+      renderFeature(gInfo.hex);
+      colourList.querySelectorAll('.colour-row').forEach(el => {
+        el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === gInfo.hex.toUpperCase());
+      });
+    });
+    featureGoes.appendChild(b); wireMagnetic(b);
+  });
+  colourList.querySelectorAll('.colour-row').forEach(el => {
+    el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === info.hex.toUpperCase());
+  });
+}
+function buildColourList(){
+  colourList.innerHTML = '';
+  FEATURED.forEach((c) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'colour-row';
+    b.dataset.hex = c.hex; b.dataset.name = c.name;
+    b.style.setProperty('--c', c.hex);
+    b.setAttribute('role','tab');
+    b.setAttribute('aria-label', `${c.name}, ${c.hex}`);
+    b.setAttribute('data-cursor','hover');
+    b.innerHTML = `<span class="colour-row__chip"></span><span class="colour-row__name">${c.name}</span><span class="colour-row__hex">${c.hex}</span>`;
+    b.addEventListener('click', () => {
+      renderFeature(c.hex);
+      colourList.querySelectorAll('.colour-row').forEach(el => {
+        el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === c.hex.toUpperCase());
+      });
+    });
+    b.addEventListener('pointerenter', () => { if(FINE) renderFeature(c.hex); });
+    colourList.appendChild(b);
+  });
+  colourList.querySelectorAll('.colour-row').forEach(el => {
+    el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === activeFeatureHex);
+  });
+}
+buildColourList();
+renderFeature(activeFeatureHex);
+
+/* ============================================================
+   8 · HERO COLOUR FIELD
+   ============================================================ */
+let heroVisible = true, heroRAF = null, heroInited = false;
+function initHero(){
+  if(!HAS_WEBGL || heroInited) return;
+  heroInited = true;
+  const canvas = document.getElementById('hero-canvas');
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, DPR_CAP));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.02;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  const scene = new THREE.Scene();
+  scene.environment = makeEnvironment(renderer);
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 120);
+  camera.position.set(0, 0, 12);
+  const key = new THREE.DirectionalLight(0xFFF0D8, 2.4); key.position.set(6,9,7); scene.add(key);
+  const rim = new THREE.DirectionalLight(0x9CC6D6, 1.0); rim.position.set(-8,-3,-6); scene.add(rim);
+  const field = new THREE.Group();
+  scene.add(field);
+  function blobGeometry(radius, seed){
+    const g = new THREE.IcosahedronGeometry(radius, 3);
+    const pos = g.attributes.position;
+    const v = new THREE.Vector3();
+    for(let i = 0; i < pos.count; i++){
+      v.fromBufferAttribute(pos, i);
+      const n = v.clone().normalize();
+      const d = 1 + 0.17 * Math.sin(n.x * 3.1 + seed) * Math.cos(n.y * 2.7 + seed * 1.3) * Math.sin(n.z * 3.6 + seed * 0.7)
+              + 0.07 * Math.sin(n.y * 6.4 + seed * 2.1)
+              + 0.04 * Math.cos(n.x * 8.1 - seed);
+      v.multiplyScalar(d);
+      pos.setXYZ(i, v.x, v.y, v.z);
+    }
+    g.computeVertexNormals();
+    return g;
+  }
+  const heroColors = ['#B5462C','#E9A93A','#1D3E8F','#4A8C7B','#C08434','#6A2E39','#7B3B24','#E2D2AE','#C0857A','#2F6B5F','#EFE3CE','#2A3A6B'];
+  const pebbles = [];
+  const COUNT = 17;
+  for(let i = 0; i < COUNT; i++){
+    const r = 0.30 + Math.random() * 0.78;
+    const geo = blobGeometry(r, i * 1.77);
+    const mat = new THREE.MeshStandardMaterial({ color: heroColors[i % heroColors.length], roughness: 0.26, metalness: 0.02, envMapIntensity: 1.15 });
+    const m = new THREE.Mesh(geo, mat);
+    const angle = (i / COUNT) * Math.PI * 2 + Math.random() * 0.6;
+    const rad = 2.4 + Math.random() * 4.6;
+    m.position.set(1.6 + Math.cos(angle) * rad * 0.9, Math.sin(angle * 1.3) * 2.5 + (Math.random() - 0.5) * 1.2, -2.2 + Math.random() * 4.4);
+    m.userData = { baseY: m.position.y, phase: Math.random() * Math.PI * 2, speed: 0.16 + Math.random() * 0.24 };
+    field.add(m); pebbles.push(m);
+  }
+  const pointer = { x: 0, y: 0, tx: 0, ty: 0 };
+  const onPointerMove = (e) => {
+    pointer.tx = (e.clientX / innerWidth) * 2 - 1;
+    pointer.ty = (e.clientY / innerHeight) * 2 - 1;
+  };
+  const host = canvas.parentElement;
+  function resize(){
+    const w = host.clientWidth, h = host.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    canvas.style.width = '100%'; canvas.style.height = '100%';
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(host);
+  resize();
+  function loop(now){
+    heroRAF = null;
+    if(!heroVisible || document.hidden) return;
+    const t = now * 0.001;
+    pointer.x += (pointer.tx - pointer.x) * 0.05;
+    pointer.y += (pointer.ty - pointer.y) * 0.05;
+    for(const m of pebbles){
+      m.position.y = m.userData.baseY + Math.sin(t * m.userData.speed + m.userData.phase) * 0.22;
+      m.rotation.x += 0.0016; m.rotation.y += 0.0012;
+    }
+    field.rotation.y = pointer.x * 0.20;
+    field.rotation.x = pointer.y * 0.13;
+    field.position.x = -pointer.x * 0.5;
+    field.position.y = pointer.y * 0.32;
+    camera.position.x += (pointer.x * 0.9 - camera.position.x) * 0.04;
+    camera.position.y += (-pointer.y * 0.7 - camera.position.y) * 0.04;
+    camera.lookAt(1.2, 0, 0);
+    renderer.render(scene, camera);
+    heroRAF = requestAnimationFrame(loop);
+  }
+  const io = new IntersectionObserver(([e]) => {
+    heroVisible = e.isIntersecting;
+    if(heroVisible){
+      window.addEventListener('pointermove', onPointerMove, { passive: true });
+      if(!heroRAF) heroRAF = requestAnimationFrame(loop);
+    } else {
+      window.removeEventListener('pointermove', onPointerMove);
+    }
+  }, { threshold: 0.01 });
+  io.observe(host);
+  window.addEventListener('pointermove', onPointerMove, { passive: true });
+  heroRAF = requestAnimationFrame(loop);
+}
+
+/* ============================================================
+   9 · STUDIO STATE + UI  (exterior only)
+   ============================================================ */
+const ZONE_LABELS = { walls:'Walls', trim:'Trim', columns:'Columns', roof:'Roof', door:'Door', plinth:'Plinth' };
+const ZONE_DEFAULTS = {
+  walls:   { hex:'#EFE3CE', name:'Lime Plaster' },
+  trim:    { hex:'#FBF6EC', name:'Trim White' },
+  columns: { hex:'#F3EADB', name:'Column Cream' },
+  roof:    { hex:'#B5462C', name:'Ponda Terracotta' },
+  door:    { hex:'#6A2E39', name:'Rosewood Shutter' },
+  plinth:  { hex:'#7B3B24', name:'Laterite Earth' }
+};
+
+const studio = {
+  activeZone: 'walls',
+  activeGroup: 'goan',
+  colour: { hex:'#EFE3CE', name:'Lime Plaster' },
+  autoOrbit: false,
+  lightingKey: 'noon',
+  mat: null,
+  lights: null,
+  ready: false,
+  renderer: null, scene: null, camera: null, controls: null
+};
+
+let hexDebounce = null;
+
+const zoneChips = document.getElementById('zoneChips');
+Object.keys(ZONE_LABELS).forEach(z => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'zone'; b.dataset.zone = z;
+  b.textContent = ZONE_LABELS[z];
+  b.setAttribute('data-magnetic', ''); b.setAttribute('data-cursor', 'hover');
+  b.addEventListener('click', () => selectZone(z));
+  zoneChips.appendChild(b);
+});
+zoneChips.querySelectorAll('.zone').forEach(el => el.classList.toggle('is-active', el.dataset.zone === studio.activeZone));
+if(FINE && !REDUCE) zoneChips.querySelectorAll('[data-magnetic]').forEach(wireMagnetic);
+
+const colourTabs = document.getElementById('colourTabs');
+Object.entries(PALETTE_GROUPS).forEach(([key, g]) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'tab'; b.dataset.group = key;
+  b.innerHTML = `${g.label} <span class="tab__count">${g.colours.length}</span>`;
+  b.setAttribute('data-magnetic', ''); b.setAttribute('data-cursor', 'hover');
+  b.addEventListener('click', () => setGroup(key));
+  colourTabs.appendChild(b);
+});
+
+const colourRail = document.getElementById('colourRail');
+function renderRail(){
+  colourRail.innerHTML = '';
+  const group = PALETTE_GROUPS[studio.activeGroup];
+  if(!group) return;
+  group.colours.forEach(c => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pip';
+    b.style.setProperty('--c', c.hex);
+    b.dataset.hex = c.hex; b.dataset.name = c.name;
+    b.setAttribute('aria-label', `${c.name}, ${c.hex}`);
+    b.setAttribute('data-magnetic', '');
+    b.setAttribute('data-cursor', 'hover');
+    b.innerHTML = `<span class="pip__tip">${c.name}</span>`;
+    b.addEventListener('click', () => applyColour(studio.activeZone, c.hex, c.name));
+    colourRail.appendChild(b);
+  });
+  colourRail.querySelectorAll('.pip').forEach(el => {
+    el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === studio.colour.hex.toUpperCase());
+  });
+}
+function setGroup(key){
+  studio.activeGroup = key;
+  colourTabs.querySelectorAll('.tab').forEach(el => el.classList.toggle('is-active', el.dataset.group === key));
+  renderRail();
+}
+
+const LIGHTING_PRESETS = {
+  dawn:    { label:'Dawn',    sunColor:0xFFB888, sunIntensity:1.9, sunPos:[24,5,6],    hemiSky:0x9AA8C8, hemiGround:0x5A3D2E, hemiIntensity:0.50, fillColor:0x7BA4C4, fillIntensity:0.70, bg:'#C8B8AC', fogNear:55, fogFar:120 },
+  morning: { label:'Morning', sunColor:0xFFE8C8, sunIntensity:2.7, sunPos:[20,16,12],  hemiSky:0xB8D0E4, hemiGround:0x6B4A33, hemiIntensity:0.60, fillColor:0x8FC0CE, fillIntensity:0.90, bg:'#E0D2BA', fogNear:58, fogFar:125 },
+  noon:    { label:'Noon',    sunColor:0xFFE0B0, sunIntensity:3.1, sunPos:[18,26,16],  hemiSky:0xC4D8E6, hemiGround:0x6B4A33, hemiIntensity:0.55, fillColor:0x8FC0CE, fillIntensity:1.00, bg:'#E6D9C0', fogNear:60, fogFar:130 },
+  golden:  { label:'Golden',  sunColor:0xFFB060, sunIntensity:3.3, sunPos:[-20,7,14],  hemiSky:0xF0C898, hemiGround:0x5A3520, hemiIntensity:0.50, fillColor:0xD8A880, fillIntensity:0.65, bg:'#E8C69C', fogNear:65, fogFar:140 },
+  dusk:    { label:'Dusk',    sunColor:0xB090A8, sunIntensity:1.1, sunPos:[-22,5,-10], hemiSky:0x5A6A8C, hemiGround:0x3A2830, hemiIntensity:0.50, fillColor:0x6A8CA0, fillIntensity:0.65, bg:'#8892A8', fogNear:55, fogFar:120 }
+};
+
+const lightingPills = document.getElementById('lightingPills');
+Object.entries(LIGHTING_PRESETS).forEach(([key, p]) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.className = 'light-pill'; b.dataset.light = key;
+  b.textContent = p.label;
+  b.setAttribute('data-magnetic', ''); b.setAttribute('data-cursor', 'hover');
+  b.addEventListener('click', () => setLighting(key));
+  lightingPills.appendChild(b);
+});
+function setLighting(key){
+  if(!LIGHTING_PRESETS[key]) return;
+  studio.lightingKey = key;
+  lightingPills.querySelectorAll('.light-pill').forEach(el => el.classList.toggle('is-active', el.dataset.light === key));
+  applyLighting(key);
+}
+
+let lightingTween = null;
+function applyLighting(key){
+  const preset = LIGHTING_PRESETS[key];
+  if(!preset || !studio.lights || !studio.scene) return;
+  if(lightingTween){ cancelAnimationFrame(lightingTween); lightingTween = null; }
+  const L = studio.lights;
+  const S = studio.scene;
+  const bgFrom = (S.background && S.background.isColor) ? S.background.clone() : new THREE.Color(preset.bg);
+  const fogColorFrom = (S.fog && S.fog.color && S.fog.color.isColor) ? S.fog.color.clone() : new THREE.Color(preset.bg);
+  const from = {
+    sunColor: L.sun.color.clone(), sunIntensity: L.sun.intensity, sunPos: L.sun.position.clone(),
+    hemiSky: L.hemi.color.clone(), hemiGround: L.hemi.groundColor.clone(), hemiIntensity: L.hemi.intensity,
+    fillColor: L.fill.color.clone(), fillIntensity: L.fill.intensity,
+    bg: bgFrom, fogColor: fogColorFrom,
+    fogNear: S.fog ? S.fog.near : preset.fogNear,
+    fogFar:  S.fog ? S.fog.far  : preset.fogFar
+  };
+  const to = {
+    sunColor: new THREE.Color(preset.sunColor), sunIntensity: preset.sunIntensity, sunPos: new THREE.Vector3(...preset.sunPos),
+    hemiSky: new THREE.Color(preset.hemiSky), hemiGround: new THREE.Color(preset.hemiGround), hemiIntensity: preset.hemiIntensity,
+    fillColor: new THREE.Color(preset.fillColor), fillIntensity: preset.fillIntensity,
+    bg: new THREE.Color(preset.bg), fogColor: new THREE.Color(preset.bg), fogNear: preset.fogNear, fogFar: preset.fogFar
+  };
+  const t0 = performance.now();
+  const dur = REDUCE ? 0 : 900;
+  function step(t){
+    const u = dur === 0 ? 1 : Math.min(1, (t - t0) / dur);
+    const e = 1 - Math.pow(1 - u, 3);
+    L.sun.color.copy(from.sunColor).lerp(to.sunColor, e);
+    L.sun.intensity = from.sunIntensity + (to.sunIntensity - from.sunIntensity) * e;
+    L.sun.position.copy(from.sunPos).lerp(to.sunPos, e);
+    L.hemi.color.copy(from.hemiSky).lerp(to.hemiSky, e);
+    L.hemi.groundColor.copy(from.hemiGround).lerp(to.hemiGround, e);
+    L.hemi.intensity = from.hemiIntensity + (to.hemiIntensity - from.hemiIntensity) * e;
+    L.fill.color.copy(from.fillColor).lerp(to.fillColor, e);
+    L.fill.intensity = from.fillIntensity + (to.fillIntensity - from.fillIntensity) * e;
+    if(S.background && S.background.isColor){ S.background.copy(from.bg).lerp(to.bg, e); }
+    if(S.fog){
+      S.fog.color.copy(from.fogColor).lerp(to.fogColor, e);
+      S.fog.near = from.fogNear + (to.fogNear - from.fogNear) * e;
+      S.fog.far  = from.fogFar  + (to.fogFar  - from.fogFar ) * e;
+    }
+    if(u < 1){ lightingTween = requestAnimationFrame(step); }
+    else { lightingTween = null; }
+  }
+  if(dur === 0) step(performance.now() + 1);
+  else lightingTween = requestAnimationFrame(step);
+}
+
+const hudZone = document.getElementById('hudZone');
+const hudChip = document.getElementById('hudChip');
+const hudName = document.getElementById('hudName');
+const hudHex  = document.getElementById('hudHex');
+const hexWrap = document.getElementById('hexWrap');
+const hexInput = document.getElementById('hexInput');
+const hexSwatch = document.getElementById('hexSwatch');
+const hexStatus = document.getElementById('hexStatus');
+
+function refreshHUD(){
+  const z = studio.activeZone;
+  hudZone.textContent = ZONE_LABELS[z];
+  hudChip.style.background = studio.colour.hex;
+  hudName.textContent = studio.colour.name;
+  hudHex.textContent = studio.colour.hex.toUpperCase();
+  hexSwatch.style.background = studio.colour.hex;
+  zoneChips.querySelectorAll('.zone').forEach(el => el.classList.toggle('is-active', el.dataset.zone === z));
+  if(document.activeElement !== hexInput){
+    hexInput.value = studio.colour.hex.replace('#','').toUpperCase();
+    hexWrap.classList.remove('is-valid','is-invalid');
+    hexStatus.textContent = COLOUR_BY_HEX.has(studio.colour.hex.toUpperCase()) ? 'Named' : 'Custom';
+  }
+  colourRail.querySelectorAll('.pip').forEach(el => {
+    el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === studio.colour.hex.toUpperCase());
+  });
+}
+
+const activeTweens = {};
+function applyColour(zone, hex, name){
+  if(!studio.mat || !studio.mat[zone]) return;
+  if(!/^#[0-9A-Fa-f]{6}$/.test(hex)) return;
+  if(hexDebounce){ clearTimeout(hexDebounce); hexDebounce = null; }
+  studio.activeZone = zone;
+  studio.colour = { hex: hex.toUpperCase(), name: name || hex.toUpperCase() };
+  if(activeTweens[zone]){ cancelAnimationFrame(activeTweens[zone]); activeTweens[zone] = null; }
+  const mat = studio.mat[zone];
+  const from = mat.color.clone();
+  const to = new THREE.Color(hex);
+  const t0 = performance.now();
+  const dur = REDUCE ? 0 : 380;
+  if(dur === 0 || document.hidden){
+    mat.color.copy(to);
+  } else {
+    const step = (t) => {
+      const u = Math.min(1, (t - t0) / dur);
+      const e = 1 - Math.pow(1 - u, 3);
+      mat.color.copy(from).lerp(to, e);
+      if(u < 1) activeTweens[zone] = requestAnimationFrame(step);
+      else { mat.color.copy(to); activeTweens[zone] = null; }
+    };
+    activeTweens[zone] = requestAnimationFrame(step);
+  }
+  refreshHUD();
+}
+function selectZone(zone){ studio.activeZone = zone; refreshHUD(); applyColour(zone, studio.colour.hex, studio.colour.name); }
+
+const autoOrbitBtn = document.getElementById('autoOrbitBtn');
+autoOrbitBtn.addEventListener('click', () => {
+  studio.autoOrbit = !studio.autoOrbit;
+  autoOrbitBtn.classList.toggle('is-on', studio.autoOrbit);
+  autoOrbitBtn.setAttribute('aria-pressed', String(studio.autoOrbit));
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  Object.keys(ZONE_DEFAULTS).forEach(z => {
+    const d = ZONE_DEFAULTS[z];
+    applyColour(z, d.hex, d.name);
+  });
+  studio.activeZone = 'walls';
+  studio.colour = { ...ZONE_DEFAULTS.walls };
+  studio.autoOrbit = false;
+  autoOrbitBtn.classList.remove('is-on');
+  autoOrbitBtn.setAttribute('aria-pressed', 'false');
+  setLighting('noon');
+  refreshHUD();
+});
+
+function parseHex(str){
+  let v = String(str).trim().replace(/^#/, '').toUpperCase();
+  if(!/^([0-9A-F]{3}|[0-9A-F]{6})$/.test(v)) return null;
+  if(v.length === 3) v = v.split('').map(c => c + c).join('');
+  return '#' + v;
+}
+function commitHex(){
+  const hex = parseHex(hexInput.value);
+  if(!hex){
+    hexWrap.classList.remove('is-valid'); hexWrap.classList.add('is-invalid');
+    hexStatus.textContent = 'Invalid';
+    return false;
+  }
+  hexWrap.classList.remove('is-invalid'); hexWrap.classList.add('is-valid');
+  hexStatus.textContent = 'Applied';
+  const known = COLOUR_BY_HEX.get(hex.toUpperCase());
+  applyColour(studio.activeZone, hex, known ? known.name : hex.toUpperCase());
+  return true;
+}
+hexInput.addEventListener('input', () => {
+  const hex = parseHex(hexInput.value);
+  if(!hex){
+    const raw = hexInput.value.trim().replace(/^#/,'');
+    if(raw.length === 0){ hexWrap.classList.remove('is-valid','is-invalid'); hexStatus.textContent = 'Custom'; }
+    else if(raw.length < 3 || (raw.length < 6 && raw.length > 3)){ hexWrap.classList.remove('is-valid','is-invalid'); hexStatus.textContent = 'Typing…'; }
+    else { hexWrap.classList.remove('is-valid'); hexWrap.classList.add('is-invalid'); hexStatus.textContent = 'Invalid'; }
+    if(hexDebounce){ clearTimeout(hexDebounce); hexDebounce = null; }
+    return;
+  }
+  hexWrap.classList.remove('is-invalid'); hexWrap.classList.add('is-valid'); hexStatus.textContent = 'Ready';
+  if(hexDebounce) clearTimeout(hexDebounce);
+  hexDebounce = setTimeout(() => {
+    hexDebounce = null;
+    const known = COLOUR_BY_HEX.get(hex.toUpperCase());
+    applyColour(studio.activeZone, hex, known ? known.name : hex.toUpperCase());
+    hexStatus.textContent = 'Applied';
+  }, 320);
+});
+hexInput.addEventListener('keydown', e => {
+  if(e.key === 'Enter'){ e.preventDefault(); hexInput.blur(); commitHex(); }
+  if(e.key === 'Escape'){ hexInput.blur(); }
+});
+hexInput.addEventListener('blur', () => {
+  if(hexInput.value.trim() === ''){
+    hexInput.value = studio.colour.hex.replace('#','').toUpperCase();
+    hexWrap.classList.remove('is-valid','is-invalid');
+    hexStatus.textContent = COLOUR_BY_HEX.has(studio.colour.hex.toUpperCase()) ? 'Named' : 'Custom';
+    return;
+  }
+  commitHex();
+  if(!parseHex(hexInput.value)){
+    hexInput.value = studio.colour.hex.replace('#','').toUpperCase();
+    hexWrap.classList.remove('is-invalid');
+    hexStatus.textContent = COLOUR_BY_HEX.has(studio.colour.hex.toUpperCase()) ? 'Named' : 'Custom';
+  }
+});
+
+setGroup('goan');
+setLighting('noon');
+refreshHUD();
+
+/* ============================================================
+   10 · VILLA — 3D exterior (with 280 SL + palms)
+   ============================================================ */
+function initVilla(){
+  if(!HAS_WEBGL) return;
+
+  const canvas = document.getElementById('villa-canvas');
+  const stage  = document.getElementById('studioStage');
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, powerPreference:'high-performance' });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, DPR_CAP));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.05;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#E6D9C0');
+  scene.fog = new THREE.Fog('#E6D9C0', 60, 130);
+  scene.environment = makeEnvironment(renderer);
+
+  const camera = new THREE.PerspectiveCamera(36, 16/9, 0.1, 400);
+  camera.position.set(20, 11, 23);
+
+  const hemi = new THREE.HemisphereLight(0xC4D8E6, 0x6B4A33, 0.55);
+  scene.add(hemi);
+  const sun = new THREE.DirectionalLight(0xFFE0B0, 3.1);
+  sun.position.set(18, 26, 16);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -30; sun.shadow.camera.right = 30;
+  sun.shadow.camera.top = 30;  sun.shadow.camera.bottom = -30;
+  sun.shadow.camera.near = 1;  sun.shadow.camera.far = 120;
+  sun.shadow.bias = -0.0006;
+  sun.shadow.normalBias = 0.024;
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0x8FC0CE, 1.0);
+  fill.position.set(-18, 9, -15);
+  scene.add(fill);
+
+  const MAT = {
+    walls:   new THREE.MeshStandardMaterial({ color:'#EFE3CE', roughness:0.92, metalness:0.0, envMapIntensity:0.55 }),
+    trim:    new THREE.MeshStandardMaterial({ color:'#FBF6EC', roughness:0.60, metalness:0.0, envMapIntensity:0.90 }),
+    columns: new THREE.MeshStandardMaterial({ color:'#F3EADB', roughness:0.72, metalness:0.0, envMapIntensity:0.75 }),
+    roof:    new THREE.MeshStandardMaterial({ color:'#B5462C', roughness:0.88, metalness:0.0, envMapIntensity:0.50 }),
+    door:    new THREE.MeshStandardMaterial({ color:'#6A2E39', roughness:0.48, metalness:0.0, envMapIntensity:1.10 }),
+    plinth:  new THREE.MeshStandardMaterial({ color:'#7B3B24', roughness:0.96, metalness:0.0, envMapIntensity:0.40 })
+  };
+  studio.mat = MAT;
+
+  const GLASS_MAT   = new THREE.MeshStandardMaterial({ color:'#2B3A44', roughness:0.10, metalness:0.40, envMapIntensity:1.7 });
+  const FOLIAGE_MAT = new THREE.MeshStandardMaterial({ color:'#3E6B49', roughness:0.94, metalness:0.0, side:THREE.DoubleSide, envMapIntensity:0.5 });
+  const BRASS_MAT   = new THREE.MeshStandardMaterial({ color:'#8A6B3A', roughness:0.42, metalness:0.55, envMapIntensity:1.2 });
+
+  const trunkTexture = (function(){
+    const c = document.createElement('canvas');
+    c.width = 64; c.height = 256;
+    const x = c.getContext('2d');
+    x.fillStyle = '#6B5540'; x.fillRect(0, 0, 64, 256);
+    for(let i = 0; i < 40; i++){
+      const y = i * 6.4 + Math.random() * 2;
+      x.fillStyle = `rgba(30, 22, 15, ${0.35 + Math.random() * 0.35})`; x.fillRect(0, y, 64, 1.6);
+      x.fillStyle = `rgba(160, 130, 100, ${0.15 + Math.random() * 0.2})`; x.fillRect(0, y + 2.2, 64, 0.9);
+    }
+    for(let i = 0; i < 300; i++){
+      x.fillStyle = `rgba(20, 15, 10, ${Math.random() * 0.18})`;
+      x.fillRect(Math.random() * 64, Math.random() * 256, 1, 3);
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = THREE.RepeatWrapping; tex.wrapT = THREE.RepeatWrapping; tex.repeat.set(2, 3);
+    return tex;
+  })();
+  const TRUNK_MAT   = new THREE.MeshStandardMaterial({ map: trunkTexture, color: 0xFFFFFF, roughness: 0.95, metalness: 0.0, envMapIntensity: 0.4 });
+  const FROND_RIB   = new THREE.MeshStandardMaterial({ color:'#4E6A3A', roughness:0.85, metalness:0.0, envMapIntensity:0.5 });
+  const FROND_LEAF  = new THREE.MeshStandardMaterial({ color:'#3E6B49', roughness:0.88, metalness:0.0, side:THREE.DoubleSide, envMapIntensity:0.4 });
+  const COCONUT_MAT = new THREE.MeshStandardMaterial({ color:'#5A3E24', roughness:0.85, metalness:0.0, envMapIntensity:0.5 });
+
+  const root = new THREE.Group();
+  scene.add(root);
+
+  function rb(w, h, d, r){
+    const radius = Math.min(r === undefined ? 0.04 : r, Math.min(w, h, d) / 2 - 0.002);
+    return new RoundedBoxGeometry(w, h, d, 2, Math.max(0.004, radius));
+  }
+  function put(geo, zone, x, y, z, parent){
+    const m = new THREE.Mesh(geo, MAT[zone]);
+    m.position.set(x, y, z);
+    m.castShadow = true; m.receiveShadow = true;
+    m.userData.zone = zone;
+    (parent || root).add(m);
+    return m;
+  }
+  function prop(geo, mat, x, y, z, parent){
+    const m = new THREE.Mesh(geo, mat);
+    m.position.set(x, y, z);
+    m.castShadow = true; m.receiveShadow = true;
+    (parent || root).add(m);
+    return m;
+  }
+
+  const azulejoCanvas = (function(){
+    const c = document.createElement('canvas');
+    c.width = c.height = 128;
+    const x = c.getContext('2d');
+    x.fillStyle = '#EFE3CE'; x.fillRect(0, 0, 128, 128);
+    x.strokeStyle = '#1D3E8F'; x.lineWidth = 5; x.strokeRect(7, 7, 114, 114);
+    x.fillStyle = '#1D3E8F';
+    x.beginPath(); x.moveTo(64, 24); x.lineTo(104, 64); x.lineTo(64, 104); x.lineTo(24, 64); x.closePath(); x.fill();
+    x.fillStyle = '#EFE3CE';
+    x.beginPath(); x.moveTo(64, 44); x.lineTo(84, 64); x.lineTo(64, 84); x.lineTo(44, 64); x.closePath(); x.fill();
+    x.fillStyle = '#1D3E8F';
+    [[20,20],[108,20],[20,108],[108,108]].forEach(([px, py]) => {
+      x.beginPath(); x.arc(px, py, 7, 0, Math.PI * 2); x.fill();
+    });
+    return c;
+  })();
+  const azulejoMat = (function(){
+    const tex = new THREE.CanvasTexture(azulejoCanvas);
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    return new THREE.MeshStandardMaterial({ map:tex, roughness:0.28, metalness:0.0, envMapIntensity:1.0 });
+  })();
+  function azulejoStrip(width, height){
+    const mat = azulejoMat.clone();
+    mat.map = azulejoMat.map.clone(); mat.map.needsUpdate = true;
+    mat.map.wrapS = mat.map.wrapT = THREE.RepeatWrapping;
+    mat.map.repeat.set(Math.max(1, Math.round(width / height)), 1);
+    return new THREE.Mesh(new THREE.PlaneGeometry(width, height), mat);
+  }
+
+  function archShape(w, h, pad){
+    const r = w / 2 + pad;
+    const rh = h - w / 2;
+    const s = new THREE.Shape();
+    s.moveTo(-r, 0); s.lineTo(-r, rh);
+    s.absarc(0, rh, r, Math.PI, 0, true);
+    s.lineTo(r, 0); s.lineTo(-r, 0);
+    return s;
+  }
+  function makeWindow(w, h){
+    const g = new THREE.Group();
+    const r = w / 2 - 0.02;
+    const rh = h - w / 2;
+    const outer = new THREE.Mesh(new THREE.ShapeGeometry(archShape(w, h, 0.10), 22), MAT.trim);
+    outer.userData.zone = 'trim'; outer.castShadow = true;
+    g.add(outer);
+    const inner = new THREE.Mesh(new THREE.ShapeGeometry(archShape(w, h, -0.02), 22), GLASS_MAT);
+    inner.position.z = 0.025; g.add(inner);
+    const v = new THREE.Mesh(new THREE.BoxGeometry(0.045, rh, 0.05), MAT.trim);
+    v.position.set(0, rh / 2, 0.04); v.userData.zone = 'trim'; g.add(v);
+    const hbar = new THREE.Mesh(new THREE.BoxGeometry(w - 0.07, 0.045, 0.05), MAT.trim);
+    hbar.position.set(0, rh, 0.04); hbar.userData.zone = 'trim'; g.add(hbar);
+    for(let i = -1; i <= 1; i++){
+      const a = Math.PI / 2 + i * (Math.PI / 5);
+      const sp = new THREE.Mesh(new THREE.BoxGeometry(0.038, r - 0.02, 0.05), MAT.trim);
+      sp.position.set(Math.cos(a) * (r / 2), rh + Math.sin(a) * (r / 2), 0.04);
+      sp.rotation.z = a - Math.PI / 2; sp.userData.zone = 'trim'; g.add(sp);
+    }
+    const sill = new THREE.Mesh(rb(w + 0.28, 0.09, 0.17, 0.02), MAT.trim);
+    sill.position.set(0, -0.065, 0.055); sill.userData.zone = 'trim'; g.add(sill);
+    return g;
+  }
+  function makeShutteredWindow(w, h){
+    const g = new THREE.Group();
+    g.add(makeWindow(w, h));
+    const shW = w * 0.55, shH = h * 0.98;
+    [-1, 1].forEach(s => {
+      const sh = new THREE.Mesh(rb(shW, shH, 0.05, 0.02), MAT.door);
+      sh.position.set(s * (w/2 + shW/2 + 0.12), h/2 - 0.05, 0.06);
+      sh.rotation.y = s * -0.22; sh.userData.zone = 'door';
+      sh.castShadow = true; sh.receiveShadow = true; g.add(sh);
+      const groove = new THREE.Mesh(rb(shW * 0.72, shH * 0.72, 0.012, 0.008), MAT.trim);
+      groove.position.set(s * (w/2 + shW/2 + 0.12), h/2 - 0.05, 0.095);
+      groove.rotation.y = s * -0.22; groove.userData.zone = 'trim'; g.add(groove);
+    });
+    return g;
+  }
+
+  /* --- Coconut palm --- */
+  function makeCoconutFrond(length){
+    const g = new THREE.Group();
+    const ribSegments = 5;
+    const ribPoints = [];
+    for(let i = 0; i <= ribSegments; i++){
+      const t = i / ribSegments;
+      const x = t * length;
+      const y = -Math.pow(t, 2.1) * length * 0.55 + Math.sin(t * Math.PI * 0.55) * length * 0.10;
+      ribPoints.push({ x, y, t });
+    }
+    for(let i = 0; i < ribSegments; i++){
+      const p0 = ribPoints[i], p1 = ribPoints[i + 1];
+      const dx = p1.x - p0.x, dy = p1.y - p0.y;
+      const segLen = Math.sqrt(dx*dx + dy*dy) + 0.02;
+      const angle = Math.atan2(dy, dx);
+      const r0 = 0.035 * (1 - p0.t * 0.7);
+      const r1 = 0.035 * (1 - p1.t * 0.7);
+      const seg = new THREE.Mesh(new THREE.CylinderGeometry(r1 * 0.85, r0, segLen, 5), FROND_RIB);
+      seg.position.set((p0.x + p1.x) / 2, (p0.y + p1.y) / 2, 0);
+      seg.rotation.z = angle - Math.PI / 2;
+      seg.castShadow = true; g.add(seg);
+    }
+    const pairs = 8;
+    for(let i = 1; i <= pairs; i++){
+      const t = i / (pairs + 1);
+      const x = t * length;
+      const y = -Math.pow(t, 2.1) * length * 0.55 + Math.sin(t * Math.PI * 0.55) * length * 0.10;
+      const scale = 1 - t * 0.5;
+      const leafLen = 0.55 * scale * (length / 3);
+      [-1, 1].forEach(s => {
+        const leaf = new THREE.Mesh(new THREE.PlaneGeometry(0.09, leafLen), FROND_LEAF);
+        leaf.rotation.x = Math.PI / 2 - 0.45;
+        leaf.position.set(x + 0.02, y - 0.05, s * (leafLen / 2 + 0.03));
+        leaf.castShadow = true; g.add(leaf);
+      });
+    }
+    return g;
+  }
+  function makeCoconutPalm(x, z, height, seed){
+    const g = new THREE.Group();
+    const leanX = (Math.sin(seed * 3.7) * 0.6);
+    const leanZ = (Math.cos(seed * 2.3) * 0.5);
+    const segments = 14;
+    const R_BASE = 0.28, R_TOP = 0.16;
+    for(let i = 0; i < segments; i++){
+      const t0 = i / segments, t1 = (i + 1) / segments;
+      const y0 = t0 * height, y1 = t1 * height;
+      const p0x = leanX * Math.pow(t0, 2.2), p0z = leanZ * Math.pow(t0, 2.2);
+      const p1x = leanX * Math.pow(t1, 2.2), p1z = leanZ * Math.pow(t1, 2.2);
+      const midX = (p0x + p1x) / 2, midY = (y0 + y1) / 2, midZ = (p0z + p1z) / 2;
+      const dx = p1x - p0x, dy = y1 - y0, dz = p1z - p0z;
+      const segLen = Math.sqrt(dx*dx + dy*dy + dz*dz) + 0.03;
+      const r0 = R_BASE + (R_TOP - R_BASE) * t0;
+      const r1 = R_BASE + (R_TOP - R_BASE) * t1;
+      const seg = new THREE.Mesh(new THREE.CylinderGeometry(r1, r0, segLen, 10), TRUNK_MAT);
+      seg.position.set(midX, midY, midZ);
+      seg.rotation.z = -Math.atan2(dx, dy);
+      seg.rotation.x = Math.atan2(dz, dy);
+      seg.castShadow = true; seg.receiveShadow = true; g.add(seg);
+    }
+    const crown = new THREE.Group();
+    crown.position.set(leanX, height, leanZ);
+    g.add(crown);
+    for(let i = 0; i < 5; i++){
+      const a = (i / 5) * Math.PI * 2 + seed;
+      const cd = new THREE.Mesh(new THREE.SphereGeometry(0.15, 10, 8), COCONUT_MAT);
+      cd.position.set(Math.cos(a) * 0.24, -0.15, Math.sin(a) * 0.24);
+      cd.castShadow = true; crown.add(cd);
+    }
+    for(let i = 0; i < 12; i++){
+      const frondLen = height * 0.55 + (Math.sin(seed + i * 1.7) * 0.4);
+      const frond = makeCoconutFrond(frondLen);
+      const a = (i / 12) * Math.PI * 2 + seed * 0.7;
+      const layer = i % 3;
+      const yaw = new THREE.Group();
+      yaw.rotation.y = a;
+      yaw.position.y = 0.05 + (layer === 1 ? 0.15 : layer === 2 ? 0.30 : 0);
+      const droop = new THREE.Group();
+      droop.rotation.z = -0.20 - layer * 0.14;
+      droop.add(frond);
+      yaw.add(droop);
+      yaw.castShadow = true; crown.add(yaw);
+    }
+    g.position.set(x, 0, z);
+    return g;
+  }
+
+  /* --- 280 SL --- */
+  function makeMercedesSL(){
+    const car = new THREE.Group();
+    const PAINT = new THREE.MeshPhysicalMaterial({ color: 0xEDE6CE, roughness: 0.28, metalness: 0.08, clearcoat: 1.0, clearcoatRoughness: 0.05, envMapIntensity: 2.0 });
+    const CHROME = new THREE.MeshStandardMaterial({ color: 0xEDEDF0, roughness: 0.06, metalness: 1.0, envMapIntensity: 2.4 });
+    const CHROME_DARK = new THREE.MeshStandardMaterial({ color: 0x8A8A92, roughness: 0.28, metalness: 0.92, envMapIntensity: 1.6 });
+    const GLASS = new THREE.MeshPhysicalMaterial({ color: 0x1C2530, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.72, clearcoat: 1.0, clearcoatRoughness: 0.02, envMapIntensity: 2.6 });
+    const RUBBER = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.94, metalness: 0.0 });
+    const LEATHER = new THREE.MeshStandardMaterial({ color: 0x8B6039, roughness: 0.72, metalness: 0.0, envMapIntensity: 0.6 });
+    const DASH = new THREE.MeshStandardMaterial({ color: 0x1F1510, roughness: 0.85, metalness: 0.0 });
+    const LENS = new THREE.MeshPhysicalMaterial({ color: 0xF8F4E6, roughness: 0.05, metalness: 0.05, transparent: true, opacity: 0.85, clearcoat: 1.0, envMapIntensity: 2.0 });
+    const REFLECTOR = new THREE.MeshStandardMaterial({ color: 0xD8D4C8, roughness: 0.15, metalness: 0.95, envMapIntensity: 1.9 });
+    const TAILLIGHT = new THREE.MeshPhysicalMaterial({ color: 0x9E1010, roughness: 0.15, metalness: 0.1, clearcoat: 1.0, emissive: 0x3A0505, emissiveIntensity: 0.3 });
+    const AMBER = new THREE.MeshStandardMaterial({ color: 0xE0A040, roughness: 0.2, metalness: 0.1, emissive: 0x2A1808, emissiveIntensity: 0.3 });
+    const GRILLE_DARK = new THREE.MeshStandardMaterial({ color: 0x181818, roughness: 0.7, metalness: 0.2 });
+
+    const BODY_BOTTOM_Y = 0.42, COCKPIT_FLOOR_Y = 0.70, BELT_Y = 0.98;
+    const FRONT_X = 2.15, REAR_X = -2.15;
+    const WHEEL_FX = 1.23, WHEEL_RX = -1.23;
+    const ARCH_R = 0.40, WHEEL_R = 0.35, WHEEL_Y = 0.35, WHEEL_W = 0.22, WHEEL_Z = 0.78;
+    const BODY_DEPTH = 1.62, BEVEL_T = 0.09, BEVEL_S = 0.05;
+
+    function bx(w, h, d, mat, x, y, z, parent){
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
+      (parent || car).add(m); return m;
+    }
+    function cyl(rt, rb, h, seg, mat, x, y, z, rot, parent){
+      const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
+      m.position.set(x, y, z);
+      if(rot) m.rotation.set(rot.x || 0, rot.y || 0, rot.z || 0);
+      m.castShadow = true; m.receiveShadow = true;
+      (parent || car).add(m); return m;
+    }
+
+    const bodyShape = new THREE.Shape();
+    bodyShape.moveTo(FRONT_X, BODY_BOTTOM_Y);
+    bodyShape.lineTo(FRONT_X, 0.58); bodyShape.lineTo(FRONT_X - 0.05, 0.78); bodyShape.lineTo(1.10, 0.90);
+    bodyShape.lineTo(0.72, 0.96); bodyShape.lineTo(0.58, 0.96); bodyShape.lineTo(0.50, COCKPIT_FLOOR_Y);
+    bodyShape.lineTo(-0.85, COCKPIT_FLOOR_Y); bodyShape.lineTo(-0.92, 0.94); bodyShape.lineTo(-1.05, 0.98);
+    bodyShape.lineTo(-1.20, 0.90); bodyShape.lineTo(-1.90, 0.86); bodyShape.lineTo(-2.08, 0.74);
+    bodyShape.lineTo(REAR_X, 0.58); bodyShape.lineTo(REAR_X, BODY_BOTTOM_Y);
+    bodyShape.lineTo(WHEEL_RX - ARCH_R, BODY_BOTTOM_Y);
+    bodyShape.absarc(WHEEL_RX, BODY_BOTTOM_Y, ARCH_R, Math.PI, 0, true);
+    bodyShape.lineTo(WHEEL_FX - ARCH_R, BODY_BOTTOM_Y);
+    bodyShape.absarc(WHEEL_FX, BODY_BOTTOM_Y, ARCH_R, Math.PI, 0, true);
+    bodyShape.lineTo(FRONT_X, BODY_BOTTOM_Y);
+    const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, { depth: BODY_DEPTH, bevelEnabled: true, bevelThickness: BEVEL_T, bevelSize: BEVEL_S, bevelSegments: 3, curveSegments: 20 });
+    bodyGeo.translate(0, 0, -BODY_DEPTH / 2);
+    const bodyMesh = new THREE.Mesh(bodyGeo, PAINT);
+    bodyMesh.castShadow = true; bodyMesh.receiveShadow = true;
+    car.add(bodyMesh);
+    const BODY_HALF_W = (BODY_DEPTH + 2 * BEVEL_T) / 2;
+
+    [-1, 1].forEach(side => bx(1.36, 0.30, 0.09, PAINT, -0.175, (COCKPIT_FLOOR_Y + BELT_Y) / 2, side * (BODY_HALF_W - 0.06)));
+    [WHEEL_FX, WHEEL_RX].forEach(wx => {
+      const well = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.40, 1.52),
+        new THREE.MeshStandardMaterial({ color: 0x0A0A0A, roughness: 0.95 }));
+      well.position.set(wx, 0.62, 0); car.add(well);
+    });
+
+    bx(1.35, 0.02, 1.36, DASH, -0.175, COCKPIT_FLOOR_Y + 0.01, 0);
+    [-0.36, 0.36].forEach(z => {
+      bx(0.44, 0.10, 0.42, LEATHER, -0.15, COCKPIT_FLOOR_Y + 0.07, z);
+      const back = bx(0.12, 0.50, 0.42, LEATHER, -0.35, COCKPIT_FLOOR_Y + 0.37, z);
+      back.rotation.z = -0.10;
+      bx(0.11, 0.16, 0.24, LEATHER, -0.40, COCKPIT_FLOOR_Y + 0.72, z);
+    });
+    bx(0.28, 0.22, 1.40, DASH, 0.42, COCKPIT_FLOOR_Y + 0.22, 0);
+    bx(0.24, 0.04, 1.38, DASH, 0.42, COCKPIT_FLOOR_Y + 0.34, 0);
+
+    const sw = new THREE.Group();
+    sw.position.set(0.24, COCKPIT_FLOOR_Y + 0.36, 0.36);
+    sw.rotation.z = 0.35; sw.rotation.y = 0.05;
+    const swRim = new THREE.Mesh(new THREE.TorusGeometry(0.135, 0.014, 10, 28), DASH);
+    swRim.castShadow = true; sw.add(swRim);
+    for(let i = 0; i < 3; i++){
+      const sp = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.012, 0.012), CHROME_DARK);
+      sp.position.x = 0.0675;
+      const piv = new THREE.Group(); piv.rotation.z = (i / 3) * Math.PI * 2;
+      piv.add(sp); sw.add(piv);
+    }
+    car.add(sw);
+    cyl(0.02, 0.02, 0.20, 10, DASH, 0.32, COCKPIT_FLOOR_Y + 0.32, 0.36, { z: Math.PI / 2 - 0.35 });
+
+    const wsBaseX = 0.62, wsBaseY = 0.96, wsTopX = 0.18, wsTopY = 1.34;
+    const wsMidX = (wsBaseX + wsTopX) / 2;
+    const wsMidY = (wsBaseY + wsTopY) / 2;
+    const wsLen = Math.hypot(wsTopX - wsBaseX, wsTopY - wsBaseY);
+    const wsAng = Math.atan2(wsTopX - wsBaseX, wsTopY - wsBaseY);
+    const wsW = BODY_HALF_W * 2 - 0.32;
+    const wsGlass = bx(0.025, wsLen, wsW, GLASS, wsMidX, wsMidY, 0);
+    wsGlass.rotation.z = wsAng; wsGlass.castShadow = false;
+    bx(0.05, 0.05, wsW + 0.06, CHROME, wsTopX, wsTopY, 0);
+    bx(0.09, 0.05, wsW + 0.10, CHROME, wsBaseX, wsBaseY, 0);
+    [-1, 1].forEach(s => {
+      const side = bx(0.045, wsLen + 0.03, 0.05, CHROME, wsMidX, wsMidY, s * (wsW / 2 + 0.035));
+      side.rotation.z = wsAng;
+    });
+
+    bx(0.10, 0.24, 1.20, CHROME, 2.10, 0.82, 0);
+    bx(0.06, 0.20, 1.14, GRILLE_DARK, 2.13, 0.82, 0);
+    for(let i = 0; i < 24; i++){
+      const z = -0.55 + i * (1.10 / 23);
+      bx(0.045, 0.18, 0.008, CHROME_DARK, 2.16, 0.82, z);
+    }
+    bx(0.075, 0.045, 1.16, CHROME, 2.18, 0.82, 0);
+    cyl(0.028, 0.028, 0.02, 16, CHROME, 2.21, 0.82, 0, { z: Math.PI / 2 });
+    for(let i = 0; i < 3; i++){
+      const a = (i / 3) * Math.PI * 2 + Math.PI / 2;
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.115, 0.012), CHROME);
+      arm.position.set(2.21, 0.82 + Math.cos(a) * 0.0575, Math.sin(a) * 0.0575);
+      arm.rotation.x = -a; arm.castShadow = true; car.add(arm);
+    }
+    [-0.72, 0.72].forEach(z => {
+      const bez = new THREE.Mesh(new THREE.TorusGeometry(0.125, 0.018, 10, 26), CHROME);
+      bez.position.set(2.10, 0.78, z); bez.rotation.y = Math.PI / 2; car.add(bez);
+      cyl(0.115, 0.095, 0.06, 24, REFLECTOR, 2.09, 0.78, z, { z: Math.PI / 2 });
+      const lens = new THREE.Mesh(new THREE.SphereGeometry(0.125, 22, 14, 0, Math.PI * 2, 0, Math.PI * 0.42), LENS);
+      lens.position.set(2.13, 0.78, z); lens.rotation.z = -Math.PI / 2; lens.castShadow = false;
+      car.add(lens);
+    });
+    [-0.86, 0.86].forEach(z => bx(0.04, 0.05, 0.14, AMBER, 2.12, 0.55, z));
+    bx(0.18, 0.17, BODY_HALF_W * 2 + 0.06, CHROME, 2.16, 0.53, 0);
+    bx(0.20, 0.04, BODY_HALF_W * 2 + 0.08, RUBBER, 2.16, 0.53, 0);
+    [-0.56, 0.56].forEach(z => bx(0.10, 0.24, 0.09, CHROME, 2.20, 0.58, z));
+    [-0.72, 0.72].forEach(z => {
+      bx(0.05, 0.22, 0.15, TAILLIGHT, -2.12, 0.82, z);
+      bx(0.03, 0.25, 0.18, CHROME_DARK, -2.14, 0.82, z);
+      for(let i = 0; i < 3; i++) bx(0.02, 0.008, 0.13, CHROME, -2.155, 0.76 + i * 0.055, z);
+    });
+    bx(0.18, 0.17, BODY_HALF_W * 2 + 0.06, CHROME, -2.16, 0.53, 0);
+    bx(0.20, 0.04, BODY_HALF_W * 2 + 0.08, RUBBER, -2.16, 0.53, 0);
+    [-0.56, 0.56].forEach(z => bx(0.10, 0.24, 0.09, CHROME, -2.20, 0.58, z));
+    cyl(0.025, 0.025, 0.015, 16, CHROME, -2.13, 0.90, 0, { z: Math.PI / 2 });
+    cyl(0.038, 0.038, 0.10, 12, CHROME_DARK, -2.20, 0.32, 0.62, { z: Math.PI / 2 });
+    [-1, 1].forEach(s => bx(3.60, 0.018, 0.016, CHROME, 0.05, 0.94, s * (BODY_HALF_W - 0.02)));
+    [[0.55, 1], [0.55, -1]].forEach(([x, s]) => bx(0.12, 0.025, 0.018, CHROME, x, 0.86, s * (BODY_HALF_W - 0.005)));
+    cyl(0.018, 0.018, 0.10, 8, CHROME, 0.72, 1.06, 0.88, { z: -Math.PI / 6 });
+    const mirrorHead = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.09, 0.11), CHROME);
+    mirrorHead.position.set(0.76, 1.12, 0.92); mirrorHead.castShadow = true; car.add(mirrorHead);
+
+    const tireProfile = [
+      new THREE.Vector2(0.215, -0.11), new THREE.Vector2(0.290, -0.11),
+      new THREE.Vector2(0.320, -0.095), new THREE.Vector2(0.350, -0.050),
+      new THREE.Vector2(0.350,  0.050), new THREE.Vector2(0.320,  0.095),
+      new THREE.Vector2(0.290,  0.11), new THREE.Vector2(0.215,  0.11)
+    ];
+    const tireGeo = new THREE.LatheGeometry(tireProfile, 32); tireGeo.rotateX(Math.PI / 2);
+    const rimProfile = [
+      new THREE.Vector2(0.000, -0.055), new THREE.Vector2(0.190, -0.055),
+      new THREE.Vector2(0.215, -0.040), new THREE.Vector2(0.215,  0.040),
+      new THREE.Vector2(0.190,  0.055), new THREE.Vector2(0.000,  0.055)
+    ];
+    const rimGeo = new THREE.LatheGeometry(rimProfile, 28); rimGeo.rotateX(Math.PI / 2);
+    const hubGeo = new THREE.CylinderGeometry(0.19, 0.19, 0.02, 28); hubGeo.rotateX(Math.PI / 2);
+    function makeWheel(){
+      const g = new THREE.Group();
+      const t = new THREE.Mesh(tireGeo, RUBBER); t.castShadow = true; t.receiveShadow = true; g.add(t);
+      g.add(new THREE.Mesh(rimGeo, CHROME_DARK));
+      const h = new THREE.Mesh(hubGeo, CHROME); h.position.z = 0.058; g.add(h);
+      const star = new THREE.Group(); star.position.z = 0.070;
+      for(let i = 0; i < 3; i++){
+        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.115, 0.006), CHROME_DARK);
+        arm.position.y = 0.0575;
+        const piv = new THREE.Group(); piv.rotation.z = (i / 3) * Math.PI * 2 + Math.PI / 2;
+        piv.add(arm); star.add(piv);
+      }
+      g.add(star);
+      return g;
+    }
+    const wFL = makeWheel(); wFL.position.set(WHEEL_FX, WHEEL_Y,  WHEEL_Z); car.add(wFL);
+    const wFR = makeWheel(); wFR.position.set(WHEEL_FX, WHEEL_Y, -WHEEL_Z); wFR.rotation.y = Math.PI; car.add(wFR);
+    const wRL = makeWheel(); wRL.position.set(WHEEL_RX, WHEEL_Y,  WHEEL_Z); car.add(wRL);
+    const wRR = makeWheel(); wRR.position.set(WHEEL_RX, WHEEL_Y, -WHEEL_Z); wRR.rotation.y = Math.PI; car.add(wRR);
+    return car;
+  }
+
+  /* --- Exterior build --- */
+  const PLINTH_TOP = 0.5, GROUND_TOP = 4.0, STRING_TOP = 4.2, FIRST_TOP = 7.4, CORNICE_TOP = 7.6;
+  const CEN_W = 10, CEN_D = 6.5, WING_W = 5, WING_D = 6.0, WING_TOP = 4.5;
+  const HALF_CEN_W = CEN_W / 2, HALF_CEN_D = CEN_D / 2;
+  const WING_CX = HALF_CEN_W + WING_W / 2;
+
+  put(rb(20.2, 0.5, 10.2, 0.03), 'plinth', 0, 0.25, 0.6);
+  put(rb(3.8, 0.15, 0.5, 0.02), 'plinth', 0, 0.425, 6.05);
+  put(rb(4.2, 0.15, 0.5, 0.02), 'plinth', 0, 0.275, 6.55);
+  put(rb(4.6, 0.15, 0.5, 0.02), 'plinth', 0, 0.125, 7.05);
+  put(rb(CEN_W, GROUND_TOP - PLINTH_TOP, CEN_D, 0.06), 'walls', 0, (PLINTH_TOP + GROUND_TOP)/2, 0);
+  put(rb(CEN_W + 0.3, STRING_TOP - GROUND_TOP, CEN_D + 0.3, 0.03), 'trim', 0, (GROUND_TOP + STRING_TOP)/2, 0);
+  put(rb(CEN_W, FIRST_TOP - STRING_TOP, CEN_D, 0.06), 'walls', 0, (STRING_TOP + FIRST_TOP)/2, 0);
+  put(rb(CEN_W + 0.55, CORNICE_TOP - FIRST_TOP, CEN_D + 0.55, 0.03), 'trim', 0, (FIRST_TOP + CORNICE_TOP)/2, 0);
+
+  function addQuoin(cx, cz){
+    for(let i = 0; i < 14; i++){
+      const y = PLINTH_TOP + i * 0.5;
+      const wide = i % 2 === 0;
+      const size = wide ? 0.72 : 0.46;
+      put(rb(size, 0.5, 0.13, 0.02), 'trim', cx + (cx > 0 ? -1 : 1) * (size/2 - 0.06), y + 0.25, cz);
+      put(rb(0.13, 0.5, size, 0.02), 'trim', cx, y + 0.25, cz + (cz > 0 ? -1 : 1) * (size/2 - 0.06));
+    }
+  }
+  addQuoin(-HALF_CEN_W,  HALF_CEN_D); addQuoin( HALF_CEN_W,  HALF_CEN_D);
+  addQuoin(-HALF_CEN_W, -HALF_CEN_D); addQuoin( HALF_CEN_W, -HALF_CEN_D);
+
+  [-1, 1].forEach(s => {
+    put(rb(WING_W, WING_TOP - PLINTH_TOP, WING_D, 0.06), 'walls', s * WING_CX, (PLINTH_TOP + WING_TOP)/2, 0);
+    put(rb(WING_W + 0.22, 0.18, WING_D + 0.22, 0.03), 'trim', s * WING_CX, WING_TOP + 0.09, 0);
+  });
+  const wAng = Math.atan2(0.9, 5.3), wLen = Math.hypot(5.3, 0.9);
+  [-1, 1].forEach(s => {
+    const r = put(rb(wLen, 0.15, WING_D + 0.6, 0.03), 'roof', s * (WING_CX + 0.15), 4.95, 0);
+    r.rotation.z = -s * wAng;
+  });
+  const mainAng = Math.atan2(2.2, 3.7), mainLen = Math.hypot(2.2, 3.7);
+  const rF = put(rb(CEN_W + 1.1, 0.19, mainLen, 0.03), 'roof', 0, 8.7, 1.85); rF.rotation.x = -mainAng;
+  const rB = put(rb(CEN_W + 1.1, 0.19, mainLen, 0.03), 'roof', 0, 8.7, -1.85); rB.rotation.x = mainAng;
+  put(rb(CEN_W + 1.2, 0.24, 0.3, 0.04), 'roof', 0, 9.78, 0);
+
+  const gableShape = new THREE.Shape();
+  gableShape.moveTo(-3.65, 0); gableShape.lineTo(3.65, 0);
+  gableShape.lineTo(0, 2.25); gableShape.lineTo(-3.65, 0);
+  const gableGeo = new THREE.ExtrudeGeometry(gableShape, { depth: 0.14, bevelEnabled: false });
+  [-1, 1].forEach(s => {
+    const g = new THREE.Mesh(gableGeo, MAT.trim);
+    g.rotation.y = Math.PI / 2;
+    g.position.set(s * (HALF_CEN_W + 0.34), CORNICE_TOP, 0);
+    g.castShadow = true; g.receiveShadow = true; g.userData.zone = 'trim'; root.add(g);
+    const oc = new THREE.Mesh(new THREE.CylinderGeometry(0.42, 0.42, 0.16, 24), MAT.trim);
+    oc.rotation.z = Math.PI / 2;
+    oc.position.set(s * (HALF_CEN_W + 0.42), CORNICE_TOP + 0.95, 0);
+    oc.userData.zone = 'trim'; root.add(oc);
+    const ocRing = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.06, 8, 24), MAT.trim);
+    ocRing.rotation.y = Math.PI / 2;
+    ocRing.position.set(s * (HALF_CEN_W + 0.50), CORNICE_TOP + 0.95, 0);
+    ocRing.userData.zone = 'trim'; root.add(ocRing);
+  });
+  [-3.0, 3.0].forEach(x => {
+    put(rb(1.5, 1.35, 1.0, 0.04), 'walls', x, 8.55, 2.15);
+    const pedShape = new THREE.Shape();
+    pedShape.moveTo(-0.85, 0); pedShape.lineTo(0.85, 0);
+    pedShape.lineTo(0, 0.7); pedShape.lineTo(-0.85, 0);
+    const pedGeo = new THREE.ExtrudeGeometry(pedShape, { depth: 1.05, bevelEnabled: false });
+    pedGeo.translate(0, 0, -0.525);
+    const ped = new THREE.Mesh(pedGeo, MAT.roof);
+    ped.position.set(x, 9.2, 2.15);
+    ped.castShadow = true; ped.receiveShadow = true; ped.userData.zone = 'roof'; root.add(ped);
+    const dw = makeWindow(0.65, 0.85); dw.position.set(x, 8.35, 2.66); root.add(dw);
+    put(rb(0.12, 1.35, 1.0, 0.02), 'trim', x - 0.7, 8.55, 2.15);
+    put(rb(0.12, 1.35, 1.0, 0.02), 'trim', x + 0.7, 8.55, 2.15);
+  });
+  [-4.2, 4.2].forEach(x => {
+    put(rb(0.7, 1.7, 0.7, 0.04), 'walls', x, 10.45, 0);
+    put(rb(0.95, 0.16, 0.95, 0.03), 'trim', x, 11.34, 0);
+    put(rb(0.5, 0.14, 0.5, 0.03), 'plinth', x, 11.48, 0);
+  });
+  const az1 = azulejoStrip(CEN_W - 0.1, 0.36); az1.position.set(0, FIRST_TOP + 0.18, HALF_CEN_D + 0.011); root.add(az1);
+  const az2 = azulejoStrip(CEN_W - 0.1, 0.36); az2.position.set(0, FIRST_TOP + 0.18, -HALF_CEN_D - 0.011); az2.rotation.y = Math.PI; root.add(az2);
+  const az3 = azulejoStrip(CEN_D - 0.1, 0.36); az3.position.set(HALF_CEN_W + 0.011, FIRST_TOP + 0.18, 0); az3.rotation.y = Math.PI/2; root.add(az3);
+  const az4 = azulejoStrip(CEN_D - 0.1, 0.36); az4.position.set(-HALF_CEN_W - 0.011, FIRST_TOP + 0.18, 0); az4.rotation.y = -Math.PI/2; root.add(az4);
+  const azW1 = azulejoStrip(WING_W - 0.1, 0.28); azW1.position.set(-WING_CX, WING_TOP + 0.14, WING_D/2 + 0.011); root.add(azW1);
+  const azW2 = azulejoStrip(WING_W - 0.1, 0.28); azW2.position.set( WING_CX, WING_TOP + 0.14, WING_D/2 + 0.011); root.add(azW2);
+
+  put(rb(0.28, 3.7, 0.22, 0.03), 'trim', -1.55, 2.35, HALF_CEN_D + 0.02);
+  put(rb(0.28, 3.7, 0.22, 0.03), 'trim',  1.55, 2.35, HALF_CEN_D + 0.02);
+  put(rb(3.4, 0.28, 0.22, 0.03), 'trim',  0,    4.34, HALF_CEN_D + 0.02);
+  put(rb(0.55, 0.42, 0.28, 0.05), 'trim', 0, 4.55, HALF_CEN_D + 0.05);
+  put(rb(0.72, 2.75, 0.10, 0.025), 'door', -0.38, 1.875, HALF_CEN_D + 0.055);
+  put(rb(0.72, 2.75, 0.10, 0.025), 'door',  0.38, 1.875, HALF_CEN_D + 0.055);
+  [[-0.38, 1.15], [0.38, 1.15], [-0.38, 2.20], [0.38, 2.20]].forEach(([px, py]) => {
+    put(rb(0.5, 0.78, 0.02, 0.008), 'trim', px, py, HALF_CEN_D + 0.115);
+  });
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(0.075, 0.014, 8, 24), BRASS_MAT);
+  ring.position.set(-0.08, 1.85, HALF_CEN_D + 0.12); root.add(ring);
+
+  [-1.15, 1.15].forEach(x => {
+    const sl = new THREE.Mesh(rb(0.36, 2.75, 0.06, 0.02), GLASS_MAT);
+    sl.position.set(x, 1.875, HALF_CEN_D + 0.05); root.add(sl);
+    const slFrame = new THREE.Mesh(rb(0.46, 2.9, 0.09, 0.02), MAT.trim);
+    slFrame.position.set(x, 1.9, HALF_CEN_D + 0.02); slFrame.userData.zone = 'trim'; root.add(slFrame);
+    const m1 = new THREE.Mesh(rb(0.03, 2.75, 0.04, 0.006), MAT.trim);
+    m1.position.set(x, 1.875, HALF_CEN_D + 0.085); m1.userData.zone = 'trim'; root.add(m1);
+    const m2 = new THREE.Mesh(rb(0.36, 0.03, 0.04, 0.006), MAT.trim);
+    m2.position.set(x, 1.875, HALF_CEN_D + 0.085); m2.userData.zone = 'trim'; root.add(m2);
+  });
+  const fan = makeWindow(2.6, 0.95); fan.position.set(0, 3.35, HALF_CEN_D + 0.04); root.add(fan);
+
+  const winGF_L = makeShutteredWindow(1.05, 2.3); winGF_L.position.set(-3.5, 1.4, HALF_CEN_D + 0.03); root.add(winGF_L);
+  const winGF_R = makeShutteredWindow(1.05, 2.3); winGF_R.position.set( 3.5, 1.4, HALF_CEN_D + 0.03); root.add(winGF_R);
+  const winGS_L = makeShutteredWindow(0.95, 2.1); winGS_L.rotation.y = Math.PI / 2; winGS_L.position.set(-HALF_CEN_W - 0.03, 1.5, 0); root.add(winGS_L);
+  const winGS_R = makeShutteredWindow(0.95, 2.1); winGS_R.rotation.y = -Math.PI / 2; winGS_R.position.set( HALF_CEN_W + 0.03, 1.5, 0); root.add(winGS_R);
+
+  [-3.0, 3.0].forEach(x => {
+    const w = makeShutteredWindow(1.0, 2.2); w.rotation.y = Math.PI;
+    w.position.set(x, 1.45, -HALF_CEN_D - 0.03); root.add(w);
+  });
+  [-1, 1].forEach(s => {
+    [-1.3, 1.3].forEach(off => {
+      const w = makeShutteredWindow(0.95, 2.1);
+      w.position.set(s * WING_CX + off, 1.5, WING_D/2 + 0.03); root.add(w);
+    });
+  });
+  [-1, 1].forEach(s => {
+    const w = makeShutteredWindow(0.95, 2.0);
+    w.rotation.y = s * Math.PI / 2;
+    w.position.set(s * (WING_CX + WING_W/2 + 0.03), 1.55, 0); root.add(w);
+  });
+  put(rb(1.4, 2.4, 0.10, 0.025), 'door', 0, 5.7, HALF_CEN_D + 0.05);
+  [[-0.36, 5.7], [0.36, 5.7]].forEach(([px, py]) => {
+    put(rb(0.55, 1.0, 0.02, 0.008), 'trim', px, py, HALF_CEN_D + 0.105);
+  });
+  [-1.0, 1.0].forEach(x => {
+    const sl = new THREE.Mesh(rb(0.36, 2.4, 0.06, 0.02), GLASS_MAT);
+    sl.position.set(x, 5.7, HALF_CEN_D + 0.05); root.add(sl);
+    const fr = new THREE.Mesh(rb(0.46, 2.55, 0.09, 0.02), MAT.trim);
+    fr.position.set(x, 5.72, HALF_CEN_D + 0.02); fr.userData.zone = 'trim'; root.add(fr);
+  });
+  const fan2 = makeWindow(2.4, 0.7); fan2.position.set(0, 6.9, HALF_CEN_D + 0.04); root.add(fan2);
+  [-3.3, 3.3].forEach(x => {
+    const w = makeShutteredWindow(0.95, 2.0);
+    w.position.set(x, 5.55, HALF_CEN_D + 0.03); root.add(w);
+  });
+  [-1, 1].forEach(s => {
+    const w = makeShutteredWindow(0.9, 1.9);
+    w.rotation.y = s * Math.PI / 2;
+    w.position.set(s * (HALF_CEN_W + 0.03), 5.85, 0); root.add(w);
+  });
+  put(rb(CEN_W + 0.5, 0.24, 2.7, 0.03), 'trim', 0, 4.10, HALF_CEN_D + 1.35);
+  [-4.0, -2.6, -1.3, 0, 1.3, 2.6, 4.0].forEach(x => {
+    const br = put(rb(0.4, 0.4, 0.9, 0.03), 'trim', x, 3.85, HALF_CEN_D + 0.55);
+    br.rotation.x = -0.35;
+  });
+  const colXs = [-4.4, -3.0, -1.6, 1.6, 3.0, 4.4];
+  const COL_Z = HALF_CEN_D + 2.15, COL_BASE_Y = 4.22, COL_HEIGHT = 2.45;
+  colXs.forEach(x => {
+    put(rb(0.36, 0.14, 0.36, 0.03), 'columns', x, COL_BASE_Y + 0.07, COL_Z);
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.138, COL_HEIGHT - 0.30, 20, 1), MAT.columns);
+    shaft.position.set(x, COL_BASE_Y + COL_HEIGHT / 2, COL_Z);
+    shaft.castShadow = true; shaft.receiveShadow = true; shaft.userData.zone = 'columns'; root.add(shaft);
+    put(rb(0.36, 0.16, 0.36, 0.03), 'columns', x, COL_BASE_Y + COL_HEIGHT - 0.08, COL_Z);
+  });
+  const balusterProfile = [
+    [0.000, 0.00], [0.055, 0.00], [0.062, 0.03], [0.036, 0.085],
+    [0.034, 0.150], [0.062, 0.205], [0.070, 0.265], [0.046, 0.325],
+    [0.034, 0.385], [0.050, 0.445], [0.050, 0.500], [0.000, 0.500]
+  ].map(([x, y]) => new THREE.Vector2(x, y));
+  const balusterGeo = new THREE.LatheGeometry(balusterProfile, 10);
+  const railSegments = [[-4.4, -3.0], [-3.0, -1.6], [1.6, 3.0], [3.0, 4.4]];
+  const RAIL_TOP_Y = COL_BASE_Y + 1.05, RAIL_BOT_Y = COL_BASE_Y + 0.32;
+  railSegments.forEach(([a, b]) => {
+    const cx = (a + b) / 2, span = b - a - 0.34;
+    put(rb(span, 0.09, 0.20, 0.02), 'columns', cx, RAIL_TOP_Y, COL_Z);
+    put(rb(span, 0.08, 0.18, 0.02), 'columns', cx, RAIL_BOT_Y, COL_Z);
+    for(let i = 0; i < 4; i++){
+      const t = (i + 0.5) / 4;
+      const bxx = a + 0.17 + t * span;
+      const bal = new THREE.Mesh(balusterGeo, MAT.columns);
+      bal.position.set(bxx, RAIL_BOT_Y + 0.28, COL_Z);
+      bal.castShadow = true; bal.receiveShadow = true; bal.userData.zone = 'columns'; root.add(bal);
+    }
+  });
+  const balAng = Math.atan2(1.1, 2.75), balLen = Math.hypot(2.75, 1.1);
+  const balRoof = put(rb(CEN_W + 0.6, 0.15, balLen, 0.03), 'roof', 0, 6.95, HALF_CEN_D + 1.25);
+  balRoof.rotation.x = -balAng;
+  put(rb(CEN_W + 0.5, 0.24, 0.26, 0.04), 'trim', 0, COL_BASE_Y + COL_HEIGHT + 0.08, COL_Z);
+
+  const wallZ = 7.6;
+  put(rb(6.6, 0.95, 0.36, 0.03), 'plinth', -6.9, 0.475, wallZ);
+  put(rb(6.6, 0.95, 0.36, 0.03), 'plinth',  6.9, 0.475, wallZ);
+  put(rb(6.72, 0.10, 0.46, 0.02), 'trim', -6.9, 1.00, wallZ);
+  put(rb(6.72, 0.10, 0.46, 0.02), 'trim',  6.9, 1.00, wallZ);
+  [-10.4, -3.6, 3.6, 10.4].forEach(x => {
+    put(rb(0.72, 1.45, 0.72, 0.04), 'plinth', x, 0.725, wallZ);
+    put(rb(0.92, 0.16, 0.92, 0.03), 'trim', x, 1.53, wallZ);
+    const ball = new THREE.Mesh(new THREE.SphereGeometry(0.20, 16, 12), MAT.trim);
+    ball.position.set(x, 1.71, wallZ);
+    ball.castShadow = true; ball.userData.zone = 'trim'; root.add(ball);
+  });
+  put(rb(7.2, 0.18, 0.6, 0.02), 'plinth', 0, 0.09, wallZ);
+
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(70, 64),
+    new THREE.MeshStandardMaterial({ color:'#C9BC9E', roughness:1.0, metalness:0.0, envMapIntensity:0.4 }));
+  ground.rotation.x = -Math.PI / 2;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  for(let i = 0; i < 6; i++){
+    const pz = 6.5 + i * 0.55, pw = 2.2 - i * 0.12;
+    const p = prop(rb(pw, 0.05, 0.45, 0.015),
+      new THREE.MeshStandardMaterial({ color:'#B8A98C', roughness:0.95 }), 0, 0.03, pz);
+    p.receiveShadow = true;
+  }
+  scene.add(makeCoconutPalm(-12.5, 5.5, 7.4, 0.7));
+  scene.add(makeCoconutPalm( 13.5, 7.8, 6.6, 2.1));
+  scene.add(makeCoconutPalm(-14.2, -2.0, 6.0, 3.4));
+
+  const CAR_X = 6.5, CAR_Z = 10.5, CAR_ROT = 0.2, CAR_Y = 0.02;
+  const pad = new THREE.Mesh(rb(5.4, 0.06, 2.6, 0.03),
+    new THREE.MeshStandardMaterial({ color: 0x7A7365, roughness: 0.96, metalness: 0.0 }));
+  pad.position.set(CAR_X, 0.03, CAR_Z); pad.rotation.y = CAR_ROT; pad.receiveShadow = true;
+  scene.add(pad);
+  const apron = new THREE.Mesh(rb(5.7, 0.055, 0.20, 0.02),
+    new THREE.MeshStandardMaterial({ color: 0xA39C8E, roughness: 0.98, metalness: 0.0 }));
+  apron.position.set(CAR_X, 0.03, CAR_Z + 1.42); apron.rotation.y = CAR_ROT; apron.receiveShadow = true;
+  scene.add(apron);
+  const mercedes = makeMercedesSL();
+  mercedes.position.set(CAR_X, CAR_Y, CAR_Z); mercedes.rotation.y = CAR_ROT;
+  scene.add(mercedes);
+
+  const shrubGeo = new THREE.IcosahedronGeometry(0.55, 1);
+  [[-8.2, 7.3, 1.05], [-4.9, 7.4, 0.85], [4.9, 7.4, 0.90],
+   [-11.5, 6.8, 0.80], [-13.0, 6.2, 0.70], [11.5, 6.8, 0.82]
+  ].forEach(([x, z, s]) => {
+    const m = prop(shrubGeo, FOLIAGE_MAT, x, s * 0.48, z);
+    m.scale.set(s * 1.15, s * 0.85, s * 1.15);
+    m.rotation.y = x * 1.3;
+  });
+
+  studio.lights = { sun, hemi, fill };
+  studio.renderer = renderer;
+  studio.scene = scene;
+  studio.camera = camera;
+
+  const controls = new OrbitControls(camera, canvas);
+  controls.target.set(0, 3.2, 0);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.075;
+  controls.enablePan = false;
+  controls.minDistance = 11;
+  controls.maxDistance = 55;
+  controls.minPolarAngle = 0.30;
+  controls.maxPolarAngle = 1.48;
+  controls.rotateSpeed = 0.72;
+  controls.zoomSpeed = 0.85;
+  controls.autoRotateSpeed = 0.55;
+  controls.update();
+  studio.controls = controls;
+
+  const raycaster = new THREE.Raycaster();
+  const pointerNDC = new THREE.Vector2();
+
+  function findZone(obj){
+    let o = obj;
+    while(o){
+      if(o.userData && o.userData.zone) return o.userData.zone;
+      o = o.parent;
+    }
+    return null;
+  }
+  function pickAt(clientX, clientY){
+    const r = canvas.getBoundingClientRect();
+    pointerNDC.x = ((clientX - r.left) / r.width) * 2 - 1;
+    pointerNDC.y = -((clientY - r.top) / r.height) * 2 + 1;
+    raycaster.setFromCamera(pointerNDC, camera);
+    const hits = raycaster.intersectObjects(root.children, true);
+    for(const h of hits){
+      const z = findZone(h.object);
+      if(z && studio.mat[z]) return z;
+    }
+    return null;
+  }
+
+  const studioHint = document.getElementById('studioHint');
+  let hintHidden = false;
+
+  function showPing(clientX, clientY, hex){
+    const rect = stage.getBoundingClientRect();
+    const ping = document.createElement('div');
+    ping.className = 'paint-ping';
+    const size = 28;
+    ping.style.left = (clientX - rect.left) + 'px';
+    ping.style.top  = (clientY - rect.top)  + 'px';
+    ping.style.width  = size + 'px';
+    ping.style.height = size + 'px';
+    ping.style.background = hex;
+    ping.style.boxShadow = `0 0 0 3px ${hex}55, 0 0 24px 6px ${hex}66`;
+    stage.appendChild(ping);
+    setTimeout(() => { if(ping.parentNode) ping.parentNode.removeChild(ping); }, 850);
+  }
+
+  function tryPaint(clientX, clientY){
+    const zone = pickAt(clientX, clientY);
+    if(!zone) return false;
+    studio.activeZone = zone;
+    applyColour(zone, studio.colour.hex, studio.colour.name);
+    if(!hintHidden){ hintHidden = true; studioHint.classList.add('is-hidden'); }
+    showPing(clientX, clientY, studio.colour.hex);
+    return true;
+  }
+
+  let downInfo = null;
+  stage.addEventListener('pointerdown', e => {
+    if(e.button !== undefined && e.button !== 0){ downInfo = null; return; }
+    downInfo = { x:e.clientX, y:e.clientY, t:performance.now(), id:e.pointerId };
+  }, true);
+  stage.addEventListener('pointerup', e => {
+    if(!downInfo) return;
+    if(downInfo.id !== undefined && e.pointerId !== undefined && e.pointerId !== downInfo.id){ downInfo = null; return; }
+    const moved = Math.hypot(e.clientX - downInfo.x, e.clientY - downInfo.y);
+    const elapsed = performance.now() - downInfo.t;
+    downInfo = null;
+    if(moved > 16 || elapsed > 1200) return;
+    if(tryPaint(e.clientX, e.clientY)) e.preventDefault();
+  }, true);
+  stage.addEventListener('click', e => {
+    if(e.detail !== 0) return;
+    const r = stage.getBoundingClientRect();
+    tryPaint(r.left + r.width / 2, r.top + r.height / 2);
+  });
+  stage.addEventListener('pointermove', e => {
+    const zone = pickAt(e.clientX, e.clientY);
+    stage.classList.toggle('is-paintable', !!zone);
+    const cur = document.getElementById('cursor');
+    if(cur) cur.classList.toggle('is-paint', !!zone);
+  }, { passive: true });
+  stage.addEventListener('pointerleave', () => {
+    stage.classList.remove('is-paintable');
+    const cur = document.getElementById('cursor');
+    if(cur) cur.classList.remove('is-paint');
+  });
+  canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+  function resize(){
+    const w = stage.clientWidth, h = stage.clientHeight;
+    if(!w || !h) return;
+    renderer.setSize(w, h, false);
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(stage);
+  resize();
+
+  function loop(){
+    requestAnimationFrame(loop);
+    if(document.hidden) return;
+    controls.autoRotate = studio.autoOrbit && !REDUCE;
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  requestAnimationFrame(loop);
+
+  studio.ready = true;
+}
+
+/* ============================================================
+   11 · PAINT CALCULATOR
+   ============================================================ */
+const CALC = {
+  mode: 'wall', wallArea: 40, roomL: 5, roomW: 4, roomH: 3,
+  coats: 2, surface: 'cement', quality: 'premium',
+  colour: { hex:'#EFE3CE', name:'Lime Plaster' },
+  litres: 0, tinsSummary: ''
+};
+const SURFACE_FACTORS = { lime: 1.15, cement: 1.00, laterite: 1.25, painted: 0.95, wood: 1.00 };
+const QUALITY = {
+  standard: { coverage: 10, pricePerL: 380, label: 'Standard' },
+  premium:  { coverage: 12, pricePerL: 620, label: 'Premium' },
+  artisan:  { coverage: 14, pricePerL: 980, label: 'Artisan Mix' }
+};
+const TINS = [
+  { size: 10,  label: '10 L' },
+  { size: 4,   label: '4 L' },
+  { size: 1,   label: '1 L' },
+  { size: 0.5, label: '500 ml' }
+];
+const calcWallAreaInput = document.getElementById('calcWallArea');
+const calcRoomL = document.getElementById('calcRoomL');
+const calcRoomW = document.getElementById('calcRoomW');
+const calcRoomH = document.getElementById('calcRoomH');
+const calcWallFields = document.getElementById('calcWallFields');
+const calcRoomFields = document.getElementById('calcRoomFields');
+const resultLitres = document.getElementById('resultLitres');
+const resultTins = document.getElementById('resultTins');
+const resultSwatch = document.getElementById('resultSwatch');
+const resultColourName = document.getElementById('resultColourName');
+const resultColourHex = document.getElementById('resultColourHex');
+const resultColourPicker = document.getElementById('resultColourPicker');
+const resultPrice = document.getElementById('resultPrice');
+const resultCta = document.getElementById('resultCta');
+
+function wireSeg(id, onPick){
+  const el = document.getElementById(id);
+  el.addEventListener('click', e => {
+    const b = e.target.closest('button[data-value]');
+    if(!b) return;
+    el.querySelectorAll('button').forEach(x => x.classList.toggle('is-active', x === b));
+    onPick(b.dataset.value);
+  });
+}
+wireSeg('calcMode', v => {
+  CALC.mode = v;
+  calcWallFields.style.display = v === 'wall' ? '' : 'none';
+  calcRoomFields.style.display = v === 'room' ? '' : 'none';
+  recalc();
+});
+wireSeg('calcCoats', v => { CALC.coats = parseInt(v, 10); recalc(); });
+wireSeg('calcSurface', v => { CALC.surface = v; recalc(); });
+wireSeg('calcQuality', v => { CALC.quality = v; recalc(); });
+calcWallAreaInput.addEventListener('input', () => { CALC.wallArea = Math.max(1, parseFloat(calcWallAreaInput.value) || 0); recalc(); });
+calcRoomL.addEventListener('input', () => { CALC.roomL = Math.max(0.5, parseFloat(calcRoomL.value) || 0); recalc(); });
+calcRoomW.addEventListener('input', () => { CALC.roomW = Math.max(0.5, parseFloat(calcRoomW.value) || 0); recalc(); });
+calcRoomH.addEventListener('input', () => { CALC.roomH = Math.max(1.5, parseFloat(calcRoomH.value) || 0); recalc(); });
+
+function buildCalcPicker(){
+  resultColourPicker.innerHTML = '';
+  FEATURED.forEach(c => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'cpip';
+    b.style.setProperty('--c', c.hex);
+    b.dataset.hex = c.hex; b.dataset.name = c.name;
+    b.setAttribute('aria-label', `${c.name}, ${c.hex}`);
+    b.setAttribute('data-cursor', 'hover');
+    b.addEventListener('click', () => {
+      CALC.colour = { hex: c.hex, name: c.name };
+      updateCalcColourDisplay(); recalc();
+    });
+    resultColourPicker.appendChild(b);
+  });
+}
+function updateCalcColourDisplay(){
+  resultSwatch.style.background = CALC.colour.hex;
+  resultColourName.textContent = CALC.colour.name;
+  resultColourHex.textContent = CALC.colour.hex.toUpperCase();
+  resultColourPicker.querySelectorAll('.cpip').forEach(el => {
+    el.classList.toggle('is-active', el.dataset.hex.toUpperCase() === CALC.colour.hex.toUpperCase());
+  });
+  updateCalcCta();
+}
+function updateCalcCta(){
+  const line = `${CALC.colour.name} · ${CALC.litres} L · ${CALC.tinsSummary || '—'} · est. ${resultPrice.textContent}`;
+  resultCta.setAttribute('aria-label', `Reserve ${line} from M.A Karim & Sons`);
+  resultCta.setAttribute('title', `Reserve: ${line}`);
+}
+function recalc(){
+  let area;
+  if(CALC.mode === 'wall'){ area = CALC.wallArea; }
+  else { area = 2 * (CALC.roomL + CALC.roomW) * CALC.roomH * 0.85; }
+  const factor = SURFACE_FACTORS[CALC.surface] || 1;
+  const q = QUALITY[CALC.quality] || QUALITY.premium;
+  const effective = area * CALC.coats * factor;
+  const litresRaw = effective / q.coverage;
+  const litres = Math.max(0.5, Math.ceil(litresRaw * 2) / 2);
+  let remaining = litres;
+  const tins = [];
+  TINS.forEach(t => {
+    const count = Math.floor(remaining / t.size + 0.0001);
+    if(count > 0){ tins.push({ count, label: t.label }); remaining -= count * t.size; }
+  });
+  if(tins.length === 0){ tins.push({ count: 1, label: '500 ml' }); }
+  const price = Math.round(litres * q.pricePerL);
+  CALC.litres = litres % 1 === 0 ? litres.toFixed(0) : litres.toFixed(1);
+  CALC.tinsSummary = tins.map(t => `${t.count}×${t.label}`).join(' · ');
+  resultLitres.textContent = CALC.litres;
+  resultTins.innerHTML = tins.map(t => `<strong>${t.count} ×</strong> ${t.label}`).join(' · ');
+  resultPrice.textContent = '₹' + price.toLocaleString('en-IN');
+  updateCalcCta();
+}
+buildCalcPicker();
+updateCalcColourDisplay();
+recalc();
+
+/* ============================================================
+   12 · HANDOFFS
+   ============================================================ */
+document.getElementById('tryOnVilla').addEventListener('click', () => {
+  const info = COLOUR_BY_HEX.get(activeFeatureHex);
+  if(info){ applyColour('walls', info.hex, info.name); setGroup('goan'); }
+  document.getElementById('studio').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'start' });
+});
+document.getElementById('calcThis').addEventListener('click', () => {
+  const info = COLOUR_BY_HEX.get(activeFeatureHex);
+  if(info){ CALC.colour = { hex: info.hex, name: info.name }; updateCalcColourDisplay(); recalc(); }
+  document.getElementById('calculator').scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'start' });
+});
+
+/* ============================================================
+   13 · BOOT
+   ============================================================ */
+if(HAS_WEBGL){
+  initHero();
+  initVilla();
+} else {
+  document.body.classList.add('no-webgl');
+}
+</script>
+</body>
+</html>
