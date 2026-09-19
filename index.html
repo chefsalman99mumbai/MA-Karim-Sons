@@ -1,3 +1,54 @@
+Screenshot 2026-09-19 110738.png
+look at the very end bottom strip of this site you'll see something like this 'MA_Karim_And_Sons_FINAL_CONTACT_ADDRESS_UPDATED.htmlHTML' remove this please.     
+
+Generated image: M.A. Karim & Sons Blue Footer
+Edit
+
+Generated image: M.A. Karim & Sons Goa Paints
+Add to Favorites
+Edit
+
+Done. I regenerated the full HTML with both existing logos slightly larger:
+
+    Nav Bar logo: slightly enlarged while preserving the thin/glass proportions.
+
+    Footer Note logo: slightly enlarged with the same visual treatment.
+
+    Crimson translucent glass effect remains unchanged.
+
+    Pure-black typography remains unchanged.
+
+    No changes to the Villa, 3D interactions, colour system, or other sections.
+
+Download the regenerated full HTML
+MA_Karim_And_Sons_GLASS_NAV_FOOTER_LARGER_LOGOS.htmlHTML
+
+great now just do this one thing, the '&' in our logo is black, make it brigt crimson red and keep everything same as it is.
+
+Stopped creating image
+
+great now just do this one thing, the '&' in our logo is black, make it brigt crimson red and keep everything same as it is, and regenerate again this html file.
+
+Done. I changed only the & in the M.A. Karim & Sons logo to a bright crimson red.
+
+Everything else remains exactly as it was:
+
+    Nav transparency
+
+    Footer transparency
+
+    Bar heights
+
+    Larger logos
+
+    Pure-black typography
+
+    Villa / 3D functionality
+
+    All other colours and sections
+
+Download the regenerated full HTML
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +63,43 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
+/* Pencil-black diamond glass navigation finish */
+.header{
+  background:
+    linear-gradient(110deg,rgba(10,11,13,.78) 0%,rgba(28,29,32,.58) 38%,rgba(4,5,7,.76) 72%,rgba(34,35,39,.50) 100%),
+    linear-gradient(145deg,rgba(255,255,255,.10),transparent 38%,rgba(255,255,255,.035) 66%,rgba(0,0,0,.16));
+  -webkit-backdrop-filter:saturate(1.35) blur(7px);
+  backdrop-filter:saturate(1.35) blur(7px);
+  border-bottom:1px solid rgba(255,255,255,.13);
+  box-shadow:0 8px 28px -22px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.10);
+}
+.header.is-stuck{
+  background:
+    linear-gradient(110deg,rgba(7,8,10,.86),rgba(22,23,26,.67) 40%,rgba(3,4,6,.84) 72%,rgba(30,31,35,.58)),
+    linear-gradient(145deg,rgba(255,255,255,.08),transparent 42%,rgba(255,255,255,.025));
+  -webkit-backdrop-filter:saturate(1.45) blur(6px);
+  backdrop-filter:saturate(1.45) blur(6px);
+  border-bottom-color:rgba(255,255,255,.15);
+}
+.header::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.10) 28%,transparent 48%,rgba(255,255,255,.045) 72%,transparent 100%);
+  opacity:.65;mix-blend-mode:screen;
+}
+.header .brand,.header .nav{position:relative;z-index:1}
+.header .brand{color:rgba(255,255,255,.92)}
+.header .brand__location{color:rgba(255,255,255,.58)}
+.nav a{color:rgba(255,255,255,.72)}
+.nav a:hover{color:#fff}
+.nav .nav__cta{border-color:rgba(255,255,255,.20);color:rgba(255,255,255,.90);background:rgba(255,255,255,.035)}
+.nav .nav__cta:hover{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.34)}
+.header .progress__bar{background:linear-gradient(90deg,#C7CBD2,#FFFFFF,#8F949D)}
+@media(max-width:720px){
+  .header{
+    -webkit-backdrop-filter:saturate(1.3) blur(5px);
+    backdrop-filter:saturate(1.3) blur(5px);
+  }
+}
 :root{
   --ink:#221812; --ink-soft:#584737; --ink-mute:#8A7A69;
   --paper:#F7F1E5; --paper-2:#EFE6D5; --paper-3:#E6DAC5;
@@ -62,18 +150,26 @@ p{margin:0}
    Layer 1 = M.A cable bridge, 2 = KARIM, 3 = AND, 4 = SONS
    ============================================================ */
 .header{position:fixed;top:0;left:0;right:0;z-index:90;padding:0 var(--gutter);
+  background:rgba(247,241,229,.28);
+  -webkit-backdrop-filter:saturate(1.18) blur(9px);backdrop-filter:saturate(1.18) blur(9px);
   transition:background var(--t-med) var(--ease-ui),backdrop-filter var(--t-med) var(--ease-ui),border-color var(--t-med) var(--ease-ui);
-  border-bottom:1px solid transparent}
-.header.is-stuck{background:rgba(247,241,229,.85);
-  -webkit-backdrop-filter:saturate(1.4) blur(18px);backdrop-filter:saturate(1.4) blur(18px);
-  border-bottom-color:var(--line-soft)}
-.header__inner{max-width:var(--maxw);margin:0 auto;min-height:104px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-@media(max-width:720px){.header__inner{min-height:84px}}
+  border-bottom:1px solid rgba(34,24,18,.08)}
+.header.is-stuck{background:rgba(247,241,229,.20);
+  -webkit-backdrop-filter:saturate(1.08) blur(7px);backdrop-filter:saturate(1.08) blur(7px);
+  border-bottom-color:rgba(34,24,18,.07)}
+.header__inner{max-width:var(--maxw);margin:0 auto;min-height:46px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.header .brand{transform:scale(.66);transform-origin:left center}
+.header .brand:hover{transform:scale(.66) translateY(-1px)}
+@media(max-width:720px){
+  .header__inner{min-height:42px}
+  .header .brand{transform:scale(.60);transform-origin:left center}
+  .header .brand:hover{transform:scale(.60) translateY(-1px)}
+}
 
 /* --- The stacked wordmark --- */
 .brand{
   display:inline-flex;flex-direction:column;align-items:center;
-  padding:10px 0;line-height:1;
+  padding:4px 0;line-height:1;
   text-decoration:none;color:var(--ink);
   transition:transform 400ms var(--ease-out);
 }
@@ -82,9 +178,9 @@ p{margin:0}
 
 /* Layer 1 — the M.A cable bridge */
 .brand__bridge{
-  width:122px;height:43px;display:block;
+  width:94px;height:34px;display:block;
   color:var(--ink);
-  margin-bottom:8px;
+  margin-bottom:4px;
   transition:color var(--t-med) var(--ease-ui);
 }
 .brand:hover .brand__bridge{color:var(--terracotta)}
@@ -109,7 +205,7 @@ p{margin:0}
 .brand__sons{
   font-family:'Cormorant Garamond',Georgia,serif;
   font-weight:500;
-  font-size:25px;
+  font-size:19px;
   letter-spacing:.115em;
   text-transform:uppercase;
   color:var(--ink);
@@ -119,7 +215,7 @@ p{margin:0}
 .brand__amp{
   font-family:'Cormorant Garamond',Georgia,serif;
   font-weight:300;
-  font-size:21px;
+  font-size:16px;
   line-height:1;
   letter-spacing:0;
   color:var(--terracotta);
@@ -129,7 +225,7 @@ p{margin:0}
 /* Small location signature */
 .brand__location{
   font-family:'Inter',system-ui,sans-serif;
-  font-size:7.5px;
+  font-size:6px;
   font-weight:500;
   letter-spacing:.31em;
   text-transform:uppercase;
@@ -213,10 +309,10 @@ p{margin:0}
 .scrollhint span{width:1px;height:52px;background:linear-gradient(180deg,var(--ink-mute),transparent);display:block}
 @media(max-width:900px){.scrollhint{display:none}}
 
-.marquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper-2)}
+.marquee{overflow:hidden;border-top:1px solid rgba(220,28,52,.24);border-bottom:1px solid rgba(220,28,52,.24);padding:15px 0;background:rgba(174,18,40,.82)}
 .marquee__track{display:flex;width:max-content;animation:marquee 46s linear infinite}
-.marquee__track span{padding:0 26px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.8vw,21px);letter-spacing:.03em;color:var(--ink-soft);white-space:nowrap;display:flex;align-items:center;gap:26px}
-.marquee__track span::after{content:"";width:4px;height:4px;border-radius:50%;background:var(--terracotta);opacity:.55}
+.marquee__track span{padding:0 26px;font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.8vw,21px);letter-spacing:.03em;color:rgba(255,244,244,.92);white-space:nowrap;display:flex;align-items:center;gap:26px}
+.marquee__track span::after{content:"";width:4px;height:4px;border-radius:50%;background:#FFD9DE;opacity:.72}
 @keyframes marquee{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.marquee__track{animation:none}}
 
@@ -240,7 +336,7 @@ p{margin:0}
 .feature-card__name em{font-style:italic;opacity:.72}
 .feature-card__meta{position:relative;z-index:1;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .feature-card__hex{font-size:11px;letter-spacing:.16em;font-weight:500;padding:5px 10px;border-radius:100px;border:1px solid var(--feature-ink-soft);color:var(--feature-ink);font-variant-numeric:tabular-nums;}
-.feature-card__right{padding:clamp(24px,3vw,44px);background:rgba(250,244,232,.96);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);display:flex;flex-direction:column;gap:22px;border-left:1px solid rgba(34,24,18,.06);}
+.feature-card__right{padding:clamp(24px,3vw,44px);background:rgba(250,244,232,.96);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);display:flex;flex-direction:column;gap:22px;border-left:1px solid rgba(34,24,18,.06);}
 @media(max-width:720px){.feature-card__right{border-left:0;border-top:1px solid rgba(34,24,18,.06)}}
 .feature-card__story{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.35vw,20px);line-height:1.45;color:var(--ink);font-weight:400;}
 .feature-block{display:flex;flex-direction:column;gap:11px}
@@ -320,7 +416,7 @@ p{margin:0}
 #villa-canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
 
 .hud{position:absolute;left:14px;top:14px;z-index:5;display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:100px;
-  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);
   box-shadow:0 12px 28px -20px rgba(34,24,18,.7), 0 0 0 1px rgba(34,24,18,.07);font-size:11px;letter-spacing:.05em;max-width:calc(100% - 28px);pointer-events:none}
 .hud__zone{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:10px}
 .hud__sep{width:1px;height:14px;background:var(--line);flex:none}
@@ -330,17 +426,17 @@ p{margin:0}
 @media(max-width:520px){.hud__hex{display:none}}
 
 .studio__hint{position:absolute;left:14px;bottom:14px;z-index:5;font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-soft);
-  background:rgba(247,241,229,.78);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  background:rgba(247,241,229,.78);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
   padding:8px 13px;border-radius:100px;box-shadow:0 0 0 1px rgba(34,24,18,.06);transition:opacity var(--t-med) var(--ease-out);pointer-events:none}
 .studio__hint.is-hidden{opacity:0}
 .studio__badge{position:absolute;right:14px;top:14px;z-index:5;font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);
-  background:rgba(247,241,229,.7);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  background:rgba(247,241,229,.7);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
   padding:7px 12px;border-radius:100px;box-shadow:0 0 0 1px rgba(34,24,18,.06);pointer-events:none}
 @media(max-width:520px){.studio__badge{display:none}}
 .studio__stage.is-paintable #villa-canvas{cursor:crosshair}
 
 .lighting{position:absolute;right:14px;bottom:14px;z-index:5;display:flex;align-items:center;gap:9px;padding:7px 10px 7px 13px;border-radius:100px;
-  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(14px) saturate(1.3);backdrop-filter:blur(14px) saturate(1.3);
+  background:rgba(247,241,229,.86);-webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);
   box-shadow:0 12px 28px -20px rgba(34,24,18,.75), 0 0 0 1px rgba(34,24,18,.07);max-width:calc(100% - 28px);}
 .lighting__label{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-mute);flex:none;font-weight:500;display:flex;align-items:center;gap:7px;}
 .lighting__label::before{content:"";display:block;width:8px;height:8px;border-radius:50%;background:#FFE0B0;box-shadow:0 0 8px #FFE0B0;transition:background var(--t-slow) var(--ease-out),box-shadow var(--t-slow) var(--ease-out);}
@@ -354,7 +450,7 @@ p{margin:0}
 .paint-ping{position:absolute;border-radius:50%;pointer-events:none;z-index:9;transform:translate(-50%,-50%);animation:pingAnim 800ms cubic-bezier(.16,1,.3,1) forwards}
 @keyframes pingAnim{0%{opacity:.95;transform:translate(-50%,-50%) scale(.35)}55%{opacity:.6;transform:translate(-50%,-50%) scale(2.6)}100%{opacity:0;transform:translate(-50%,-50%) scale(5)}}
 
-.studio__bar{position:relative;z-index:4;display:flex;flex-direction:column;gap:12px;padding:16px clamp(14px,2vw,24px) 18px;background:rgba(247,241,229,.94);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line-soft);}
+.studio__bar{position:relative;z-index:4;display:flex;flex-direction:column;gap:12px;padding:16px clamp(14px,2vw,24px) 18px;background:rgba(247,241,229,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line-soft);}
 .bar-row{display:flex;align-items:center;gap:12px 22px;flex-wrap:wrap}
 .bar-row--top{justify-content:space-between}
 .bar-row--colour{align-items:center}
@@ -425,7 +521,8 @@ p{margin:0}
 .voice--3{grid-column:3 / span 6;margin-top:clamp(0px,4vw,44px)}
 @media(max-width:900px){.voices{grid-template-columns:1fr;gap:44px}.voice--1,.voice--2,.voice--3{grid-column:1 / -1;margin-top:0}}
 
-.footer{background:var(--ink);color:var(--paper);padding:clamp(64px,9vw,120px) 0 30px;position:relative;overflow:hidden}
+.footer{background:rgba(29,62,143,.96);color:var(--paper);padding:clamp(64px,9vw,120px) 0 30px;position:relative;overflow:hidden}
+.footer::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),rgba(255,255,255,.045) 42%,rgba(255,255,255,.12));mix-blend-mode:screen;opacity:.72}
 .footer::before{content:"";position:absolute;right:-140px;top:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(233,169,58,.20),transparent 68%);pointer-events:none}
 .footer .eyebrow{color:rgba(247,241,229,.5)}
 .footer .eyebrow::after{background:rgba(247,241,229,.18)}
@@ -445,6 +542,43 @@ p{margin:0}
 .btn--light:hover{background:var(--mango);color:var(--ink)}
 .btn--outline-light{border:1px solid rgba(247,241,229,.28);color:var(--paper)}
 .btn--outline-light:hover{border-color:var(--paper);background:rgba(247,241,229,.08)}
+
+.footer__bottom--editorial{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+  padding-top:22px;
+  font-size:9.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:rgba(247,241,229,.62);
+}
+.footer__signature,.footer__legacy{display:flex;align-items:center;gap:11px;min-width:0}
+.footer__copyright{color:rgba(247,241,229,.88);font-weight:500}
+.footer__place{color:rgba(247,241,229,.46)}
+.footer__legacy{justify-content:flex-end;white-space:nowrap}
+.footer__legacy-rule{width:34px;height:1px;background:rgba(247,241,229,.24);display:block}
+.footer__mini-brand{display:inline-flex;align-items:center;gap:9px;color:var(--paper);text-decoration:none;line-height:1;transition:opacity var(--t-fast) var(--ease-ui)}
+.footer__mini-brand:hover{opacity:.78;color:var(--paper)}
+.footer__mini-bridge{width:47px;height:20px;display:block;flex:none;color:var(--paper);overflow:hidden}
+.footer__mini-bridge .brand__bridge{width:47px;height:auto;margin:0;display:block;color:currentColor}
+.footer__mini-type{display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:0}
+.footer__mini-type .brand__name{display:inline-flex;align-items:baseline;gap:2px;line-height:.86}
+.footer__mini-type .brand__karim,.footer__mini-type .brand__sons{font-size:15px}
+.footer__mini-type .brand__amp{font-size:8px}
+.footer__mini-type .brand__location{font-size:6.5px;letter-spacing:.17em;line-height:1;text-transform:uppercase;color:rgba(247,241,229,.48);margin-top:1px}
+.footer__copyright{white-space:nowrap}
+@media(max-width:640px){.footer__mini-brand{gap:8px}.footer__mini-bridge{width:43px}.footer__mini-bridge .brand__bridge{width:43px}.footer__mini-type .brand__karim,.footer__mini-type .brand__sons{font-size:14px}}
+
+.footer__dot{opacity:.38}
+@media(max-width:640px){
+  .footer__bottom--editorial{align-items:flex-start;flex-direction:column;gap:13px;padding-top:18px}
+  .footer__signature,.footer__legacy{flex-wrap:wrap;justify-content:flex-start}
+  .footer__legacy-rule{display:none}
+}
+
 .footer__bottom{display:flex;flex-wrap:wrap;gap:14px 26px;justify-content:space-between;align-items:center;padding-top:26px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(247,241,229,.42)}
 .footer__bottom a:hover{color:var(--paper)}
 
@@ -474,7 +608,411 @@ body.has-cursor .cursor{display:block}
   transform:translateX(.02em);
 }
 
+
+@media (max-width: 720px){
+  .header.is-stuck{background:rgba(247,241,229,.16);-webkit-backdrop-filter:saturate(1.06) blur(5px);backdrop-filter:saturate(1.06) blur(5px);}
+  .feature-card__right{-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);}
+  .hud{-webkit-backdrop-filter:blur(8px) saturate(1.2);backdrop-filter:blur(8px) saturate(1.2);}
+  .studio__hint{-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);}
+}
 </style>
+
+<style id="crimson-transparent-nav">
+/* Crimson transparent glass nav — preserves the existing ultra-thin profile */
+.header{
+  background:linear-gradient(105deg,rgba(112,8,24,.42),rgba(150,12,32,.30) 38%,rgba(92,5,18,.40) 72%,rgba(180,22,45,.28));
+  -webkit-backdrop-filter:blur(6px) saturate(118%) contrast(106%);
+  backdrop-filter:blur(6px) saturate(118%) contrast(106%);
+  border-bottom:1px solid rgba(255,218,224,.12);
+  box-shadow:0 8px 24px -18px rgba(80,0,12,.55),inset 0 1px 0 rgba(255,245,247,.10);
+  color:rgba(255,246,247,.94);
+}
+.header::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(112deg,rgba(255,255,255,.11),transparent 27%,rgba(255,90,112,.045) 55%,rgba(0,0,0,.10) 82%,rgba(255,255,255,.055));
+  mix-blend-mode:screen;opacity:.72;
+}
+.header__inner{position:relative;z-index:1}
+.brand,.nav a{color:rgba(255,246,247,.86)}
+.brand__location{color:rgba(255,220,225,.64)}
+.nav a:hover{color:#fff}
+.nav a::after{background:#FFD4DA}
+.nav .nav__cta{color:#fff;border-color:rgba(255,220,226,.24);background:rgba(255,255,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 4px 14px -10px rgba(80,0,12,.65)}
+.nav .nav__cta:hover{background:rgba(255,255,255,.13);color:#fff;border-color:rgba(255,230,234,.42)}
+.progress__bar{background:linear-gradient(90deg,#FFB4BF,#C81435 52%,#FF6A7D)}
+@media(max-width:720px){
+  .header{-webkit-backdrop-filter:blur(5px) saturate(116%) contrast(105%);backdrop-filter:blur(5px) saturate(116%) contrast(105%)}
+}
+</style>
+
+<style id="ultra-thin-crimson-glass-nav">
+/* Ultra-thin crimson glass — preserve colour, reveal the scene underneath */
+.header{
+  height:40px !important;
+  min-height:40px !important;
+  background:rgba(128,8,28,.18) !important;
+  border-bottom:1px solid rgba(255,235,238,.075) !important;
+  -webkit-backdrop-filter:blur(4px) saturate(118%) !important;
+  backdrop-filter:blur(4px) saturate(118%) !important;
+}
+.header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(112deg,
+      rgba(255,255,255,.075) 0%,
+      rgba(255,255,255,.018) 25%,
+      rgba(92,0,18,.025) 58%,
+      rgba(255,190,198,.045) 100%);
+  opacity:.62;
+}
+.header::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,225,230,.16),transparent);
+}
+.header__inner{
+  min-height:40px !important;
+  height:40px !important;
+  padding-top:0 !important;
+  padding-bottom:0 !important;
+}
+.header .brand{
+  transform:scale(.82);
+  transform-origin:left center;
+  color:rgba(255,247,248,.88) !important;
+}
+.header .brand__location{color:rgba(255,235,238,.54) !important}
+.header .nav{gap:clamp(12px,1.8vw,24px)}
+.header .nav a{
+  color:rgba(255,244,246,.70) !important;
+  padding:4px 0 !important;
+}
+.header .nav a:hover{color:rgba(255,255,255,.96) !important}
+.header .nav a::after{background:#F5A0AA !important;opacity:.72}
+.header .nav .nav__cta{
+  padding:5px 12px !important;
+  color:rgba(255,248,249,.88) !important;
+  border-color:rgba(255,220,225,.18) !important;
+  background:rgba(112,5,24,.12) !important;
+}
+.header .nav .nav__cta:hover{
+  background:rgba(150,10,34,.28) !important;
+  border-color:rgba(255,225,230,.30) !important;
+  color:#fff !important;
+}
+.progress{height:1px !important;bottom:-1px !important}
+.progress__bar{
+  background:linear-gradient(90deg,rgba(255,145,157,.72),rgba(205,20,48,.82)) !important;
+}
+@media(max-width:720px){
+  .header{height:36px !important;min-height:36px !important}
+  .header__inner{height:36px !important;min-height:36px !important}
+  .header .brand{transform:scale(.72);transform-origin:left center}
+  .header .nav{gap:8px}
+  .header .nav .nav__cta{padding:4px 10px !important}
+}
+@media(max-width:420px){
+  .header{height:34px !important;min-height:34px !important}
+  .header__inner{height:34px !important;min-height:34px !important}
+  .header .brand{transform:scale(.64);transform-origin:left center}
+}
+</style>
+
+
+<style id="final-crimson-glass-nav">
+/* Final Nav: restore the original strip height; keep crimson as transparent glass. */
+.header{
+  height:auto !important;
+  min-height:46px !important;
+  background:
+    linear-gradient(110deg,
+      rgba(128,8,28,.14) 0%,
+      rgba(164,18,42,.09) 38%,
+      rgba(98,4,20,.13) 72%,
+      rgba(190,28,52,.07) 100%) !important;
+  -webkit-backdrop-filter:saturate(1.22) blur(7px) !important;
+  backdrop-filter:saturate(1.22) blur(7px) !important;
+  border-bottom:1px solid rgba(0,0,0,.12) !important;
+  box-shadow:0 8px 28px -24px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.12) !important;
+}
+.header.is-stuck{
+  background:
+    linear-gradient(110deg,
+      rgba(128,8,28,.17) 0%,
+      rgba(164,18,42,.11) 40%,
+      rgba(98,4,20,.15) 72%,
+      rgba(190,28,52,.08) 100%) !important;
+  -webkit-backdrop-filter:saturate(1.26) blur(7px) !important;
+  backdrop-filter:saturate(1.26) blur(7px) !important;
+  border-bottom-color:rgba(0,0,0,.15) !important;
+}
+.header::before{
+  background:
+    linear-gradient(112deg,
+      rgba(255,255,255,.11) 0%,
+      rgba(255,255,255,.025) 28%,
+      rgba(80,0,14,.018) 58%,
+      rgba(255,180,190,.055) 100%) !important;
+  opacity:.72 !important;
+}
+.header::after{
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.16),transparent) !important;
+}
+
+/* Pure-black wordmark and navigation text */
+.header .brand,
+.header .brand__bridge,
+.header .brand__karim,
+.header .brand__amp,
+.header .brand__sons,
+.header .brand__location,
+.header .nav a,
+.header .nav .nav__cta{
+  color:#000000 !important;
+}
+.header .brand__location{opacity:.72}
+.header .nav a:hover{color:#000000 !important}
+.header .nav a::after{
+  background:#000000 !important;
+  opacity:.72 !important;
+}
+.header .nav .nav__cta{
+  border-color:rgba(0,0,0,.28) !important;
+  background:rgba(255,255,255,.08) !important;
+}
+.header .nav .nav__cta:hover{
+  background:rgba(255,255,255,.18) !important;
+  border-color:rgba(0,0,0,.42) !important;
+  color:#000000 !important;
+}
+
+/* Restore the normal original Nav proportions — no shrinking. */
+.header__inner{
+  min-height:46px !important;
+  height:auto !important;
+}
+.header .brand{
+  transform:scale(.66) !important;
+  transform-origin:left center !important;
+}
+.header .brand:hover{
+  transform:scale(.66) translateY(-1px) !important;
+}
+.header .nav{gap:clamp(14px,2vw,30px) !important}
+.header .nav a{padding:6px 0 !important}
+.header .nav .nav__cta{padding:8px 16px !important}
+
+@media(max-width:720px){
+  .header{
+    min-height:42px !important;
+    height:auto !important;
+    -webkit-backdrop-filter:saturate(1.18) blur(6px) !important;
+    backdrop-filter:saturate(1.18) blur(6px) !important;
+  }
+  .header__inner{
+    min-height:42px !important;
+    height:auto !important;
+  }
+  .header .brand{
+    transform:scale(.60) !important;
+    transform-origin:left center !important;
+  }
+  .header .brand:hover{
+    transform:scale(.60) translateY(-1px) !important;
+  }
+  .header .nav .nav__cta{padding:8px 16px !important}
+}
+</style>
+
+
+<style id="matched-crimson-glass-footer-strip">
+/* Final footer signature strip — visually matched to the main crimson glass Nav */
+.footer__bottom--editorial{
+  position:relative;
+  min-height:46px !important;
+  margin-left:calc(-1 * var(--gutter));
+  margin-right:calc(-1 * var(--gutter));
+  padding:10px var(--gutter) !important;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+  overflow:hidden;
+  background:
+    linear-gradient(110deg,
+      rgba(128,8,28,.14) 0%,
+      rgba(164,18,42,.09) 38%,
+      rgba(98,4,20,.13) 72%,
+      rgba(190,28,52,.07) 100%) !important;
+  -webkit-backdrop-filter:saturate(1.22) blur(7px) !important;
+  backdrop-filter:saturate(1.22) blur(7px) !important;
+  border-top:1px solid rgba(0,0,0,.12) !important;
+  border-bottom:1px solid rgba(0,0,0,.12) !important;
+  box-shadow:0 -8px 28px -24px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  color:#000000 !important;
+  z-index:2;
+}
+.footer__bottom--editorial::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(112deg,
+      rgba(255,255,255,.11) 0%,
+      rgba(255,255,255,.025) 28%,
+      rgba(80,0,14,.018) 58%,
+      rgba(255,180,190,.055) 100%);
+  opacity:.72;
+}
+.footer__bottom--editorial::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;
+  height:1px;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(0,0,0,.16),transparent);
+}
+.footer__bottom--editorial > *{position:relative;z-index:1}
+.footer__bottom--editorial,
+.footer__bottom--editorial a,
+.footer__bottom--editorial span,
+.footer__bottom--editorial .footer__mini-brand,
+.footer__bottom--editorial .footer__copyright,
+.footer__bottom--editorial .footer__legacy,
+.footer__bottom--editorial .footer__place,
+.footer__bottom--editorial .brand__location{
+  color:#000000 !important;
+}
+.footer__bottom--editorial .footer__mini-brand:hover{color:#000000 !important;opacity:.72}
+.footer__bottom--editorial .footer__legacy-rule{background:rgba(0,0,0,.30) !important}
+.footer__bottom--editorial .footer__dot{opacity:.42}
+.footer__bottom--editorial .footer__mini-bridge{color:#000000 !important}
+.footer__bottom--editorial .footer__mini-type .brand__location{opacity:.72}
+
+@media(max-width:640px){
+  .footer__bottom--editorial{
+    min-height:42px !important;
+    padding:8px var(--gutter) !important;
+    gap:10px;
+  }
+}
+</style>
+
+
+<style id="more-transparent-crimson-glass">
+/* More transparent crimson glass — Nav + final footer signature strip */
+.header{
+  background:rgba(128,8,28,.10) !important;
+  -webkit-backdrop-filter:blur(5px) saturate(112%) !important;
+  backdrop-filter:blur(5px) saturate(112%) !important;
+}
+.header::before{
+  background:linear-gradient(112deg,
+    rgba(255,255,255,.045) 0%,
+    rgba(255,255,255,.008) 28%,
+    rgba(92,0,18,.012) 58%,
+    rgba(255,190,198,.025) 100%) !important;
+  opacity:.52 !important;
+}
+.header::after{
+  background:linear-gradient(90deg,transparent,rgba(255,225,230,.10),transparent) !important;
+}
+
+/* Last footer note/signature bar */
+.footer-bottom,
+.footer__bottom,
+.footer-bottom-bar,
+.site-footer-bottom{
+  background:rgba(128,8,28,.10) !important;
+  -webkit-backdrop-filter:blur(5px) saturate(112%) !important;
+  backdrop-filter:blur(5px) saturate(112%) !important;
+  border-top:1px solid rgba(255,235,238,.055) !important;
+  border-bottom:1px solid rgba(255,235,238,.035) !important;
+  position:relative;
+}
+.footer-bottom::before,
+.footer__bottom::before,
+.footer-bottom-bar::before,
+.site-footer-bottom::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(112deg,
+    rgba(255,255,255,.045) 0%,
+    rgba(255,255,255,.008) 28%,
+    rgba(92,0,18,.012) 58%,
+    rgba(255,190,198,.025) 100%);
+  opacity:.52;
+}
+.footer-bottom > *,
+.footer__bottom > *,
+.footer-bottom-bar > *,
+.site-footer-bottom > *{
+  position:relative;
+  z-index:1;
+}
+</style>
+
+
+<style id="slightly-larger-nav-footer-logos">
+/* Slightly enlarge the existing brand marks without changing the bars */
+.header .brand{
+  transform:scale(.92) !important;
+  transform-origin:left center;
+}
+
+/* Keep the responsive brand mark proportionate */
+@media(max-width:720px){
+  .header .brand{transform:scale(.82) !important;transform-origin:left center}
+}
+@media(max-width:420px){
+  .header .brand{transform:scale(.75) !important;transform-origin:left center}
+}
+
+/* Footer-note logo: enlarge only the existing logo/brand block */
+.footer-bottom .brand,
+.footer__bottom .brand,
+.footer-bottom-bar .brand,
+.site-footer-bottom .brand,
+.footer-bottom .footer-logo,
+.footer__bottom .footer-logo,
+.footer-bottom-bar .footer-logo,
+.site-footer-bottom .footer-logo{
+  transform:scale(1.10);
+  transform-origin:left center;
+}
+
+/* If the footer uses the source brand naming rather than .brand */
+.footer-bottom .brand__bridge,
+.footer__bottom .brand__bridge,
+.footer-bottom-bar .brand__bridge,
+.site-footer-bottom .brand__bridge{
+  transform:scale(1.08);
+  transform-origin:left center;
+}
+</style>
+
+
+<style id="crimson-logo-ampersand">
+/* Brand ampersand only — bright crimson, everything else unchanged */
+.header .brand__amp,
+.footer-bottom .brand__amp,
+.footer__bottom .brand__amp,
+.footer-bottom-bar .brand__amp,
+.site-footer-bottom .brand__amp{
+  color:#E11D3F !important;
+  -webkit-text-fill-color:#E11D3F !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -934,9 +1472,56 @@ body.has-cursor .cursor{display:block}
         </div>
       </div>
     </div>
-    <div class="footer__bottom">
-      <span>© <span id="year">2026</span> M.A Karim &amp; Sons · Ponda, Goa</span>
-      <span>Est. 1976 · Three generations · One counter</span>
+    <div class="footer__bottom footer__bottom--editorial">
+      <span class="footer__signature">
+        <a class="footer__mini-brand" href="#top" aria-label="M.A Karim and Sons, home">
+          <span class="footer__mini-bridge"><svg class="brand__bridge" viewBox="0 0 108 26" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <line class="b-deck" x1="0" y1="23.2" x2="108" y2="23.2" stroke-width="0.7" opacity="0.32"/>
+
+          <line class="b-cable" x1="10" y1="2" x2="1" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="10" y1="2" x2="4" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="10" y1="2" x2="7" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-cable" x1="34" y1="2" x2="37" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="34" y1="2" x2="40" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="34" y1="2" x2="43" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-cable" x1="78" y1="2" x2="54" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="58" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="98" y2="22" stroke-width="0.8" opacity="0.72"/>
+          <line class="b-cable" x1="78" y1="2" x2="102" y2="22" stroke-width="0.8" opacity="0.72"/>
+
+          <line class="b-struct" x1="10" y1="2" x2="10" y2="22" stroke-width="2"/>
+          <line class="b-struct" x1="34" y1="2" x2="34" y2="22" stroke-width="2"/>
+          <path class="b-struct" d="M 10 9 L 22 20 L 34 9" stroke-width="2"/>
+
+          <circle class="b-dot" cx="52" cy="20.1" r="1.9" fill="currentColor" stroke="none"/>
+
+          <path class="b-struct" d="M 78 2 L 62 22" stroke-width="2"/>
+          <path class="b-struct" d="M 78 2 L 94 22" stroke-width="2"/>
+          <line class="b-struct" x1="66" y1="16.6" x2="90" y2="16.6" stroke-width="1.5"/>
+        </g>
+      </svg></span>
+          <span class="footer__mini-type">
+            <span class="brand__name" aria-label="Karim and Sons">
+              <span class="brand__karim">Karim</span>
+              <span class="brand__amp" aria-hidden="true">&amp;</span>
+              <span class="brand__sons">Sons</span>
+            </span>
+            <span class="brand__location">Ponda · Goa</span>
+          </span>
+        </a>
+        <span class="footer__copyright">© <span id="year">2026</span></span>
+      </span>
+      <span class="footer__legacy">
+        <span class="footer__legacy-rule"></span>
+        <span>Est. 1976</span>
+        <span class="footer__dot">·</span>
+        <span>Three generations</span>
+        <span class="footer__dot">·</span>
+        <span>One counter</span>
+      </span>
     </div>
   </div>
 </footer>
@@ -961,7 +1546,9 @@ import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.j
    ============================================================ */
 const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const FINE   = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const DPR_CAP = 2;
+const MOBILE_DEVICE = window.matchMedia('(max-width: 768px)').matches;
+const TABLET_DEVICE = window.matchMedia('(max-width: 1024px)').matches;
+const DPR_CAP = MOBILE_DEVICE ? 1.25 : (TABLET_DEVICE ? 1.5 : 2);
 
 function webglAvailable(){
   try{
@@ -1302,9 +1889,16 @@ function initHero(){
   }
   new ResizeObserver(resize).observe(host);
   resize();
+  let lastHeroFrame = 0;
+  const HERO_FRAME_MS = MOBILE_DEVICE ? (1000 / 45) : (1000 / 60);
   function loop(now){
     heroRAF = null;
     if(!heroVisible || document.hidden) return;
+    if(now - lastHeroFrame < HERO_FRAME_MS){
+      heroRAF = requestAnimationFrame(loop);
+      return;
+    }
+    lastHeroFrame = now;
     const t = now * 0.001;
     pointer.x += (pointer.tx - pointer.x) * 0.05;
     pointer.y += (pointer.ty - pointer.y) * 0.05;
@@ -1624,7 +2218,7 @@ setLighting('noon');
 refreshHUD();
 
 /* ============================================================
-   10 · VILLA — 3D exterior (with 280 SL + palms)
+   10 · VILLA — 3D exterior (with palm)
    ============================================================ */
 function initVilla(){
   if(!HAS_WEBGL) return;
@@ -1653,7 +2247,8 @@ function initVilla(){
   const sun = new THREE.DirectionalLight(0xFFE0B0, 3.1);
   sun.position.set(18, 26, 16);
   sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
+  const SHADOW_SIZE = MOBILE_DEVICE ? 1024 : 2048;
+  sun.shadow.mapSize.set(SHADOW_SIZE, SHADOW_SIZE);
   sun.shadow.camera.left = -30; sun.shadow.camera.right = 30;
   sun.shadow.camera.top = 30;  sun.shadow.camera.bottom = -30;
   sun.shadow.camera.near = 1;  sun.shadow.camera.far = 120;
@@ -1891,182 +2486,7 @@ function initVilla(){
     return g;
   }
 
-  function makeMercedesSL(){
-    const car = new THREE.Group();
-    const PAINT = new THREE.MeshPhysicalMaterial({ color: 0xEDE6CE, roughness: 0.28, metalness: 0.08, clearcoat: 1.0, clearcoatRoughness: 0.05, envMapIntensity: 2.0 });
-    const CHROME = new THREE.MeshStandardMaterial({ color: 0xEDEDF0, roughness: 0.06, metalness: 1.0, envMapIntensity: 2.4 });
-    const CHROME_DARK = new THREE.MeshStandardMaterial({ color: 0x8A8A92, roughness: 0.28, metalness: 0.92, envMapIntensity: 1.6 });
-    const GLASS = new THREE.MeshPhysicalMaterial({ color: 0x1C2530, roughness: 0.03, metalness: 0.0, transparent: true, opacity: 0.72, clearcoat: 1.0, clearcoatRoughness: 0.02, envMapIntensity: 2.6 });
-    const RUBBER = new THREE.MeshStandardMaterial({ color: 0x141414, roughness: 0.94, metalness: 0.0 });
-    const LEATHER = new THREE.MeshStandardMaterial({ color: 0x8B6039, roughness: 0.72, metalness: 0.0, envMapIntensity: 0.6 });
-    const DASH = new THREE.MeshStandardMaterial({ color: 0x1F1510, roughness: 0.85, metalness: 0.0 });
-    const LENS = new THREE.MeshPhysicalMaterial({ color: 0xF8F4E6, roughness: 0.05, metalness: 0.05, transparent: true, opacity: 0.85, clearcoat: 1.0, envMapIntensity: 2.0 });
-    const REFLECTOR = new THREE.MeshStandardMaterial({ color: 0xD8D4C8, roughness: 0.15, metalness: 0.95, envMapIntensity: 1.9 });
-    const TAILLIGHT = new THREE.MeshPhysicalMaterial({ color: 0x9E1010, roughness: 0.15, metalness: 0.1, clearcoat: 1.0, emissive: 0x3A0505, emissiveIntensity: 0.3 });
-    const AMBER = new THREE.MeshStandardMaterial({ color: 0xE0A040, roughness: 0.2, metalness: 0.1, emissive: 0x2A1808, emissiveIntensity: 0.3 });
-    const GRILLE_DARK = new THREE.MeshStandardMaterial({ color: 0x181818, roughness: 0.7, metalness: 0.2 });
 
-    const BODY_BOTTOM_Y = 0.42, COCKPIT_FLOOR_Y = 0.70, BELT_Y = 0.98;
-    const FRONT_X = 2.15, REAR_X = -2.15;
-    const WHEEL_FX = 1.23, WHEEL_RX = -1.23;
-    const ARCH_R = 0.40, WHEEL_R = 0.35, WHEEL_Y = 0.35, WHEEL_W = 0.22, WHEEL_Z = 0.78;
-    const BODY_DEPTH = 1.62, BEVEL_T = 0.09, BEVEL_S = 0.05;
-
-    function bx(w, h, d, mat, x, y, z, parent){
-      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
-      m.position.set(x, y, z); m.castShadow = true; m.receiveShadow = true;
-      (parent || car).add(m); return m;
-    }
-    function cyl(rt, rb, h, seg, mat, x, y, z, rot, parent){
-      const m = new THREE.Mesh(new THREE.CylinderGeometry(rt, rb, h, seg), mat);
-      m.position.set(x, y, z);
-      if(rot) m.rotation.set(rot.x || 0, rot.y || 0, rot.z || 0);
-      m.castShadow = true; m.receiveShadow = true;
-      (parent || car).add(m); return m;
-    }
-
-    const bodyShape = new THREE.Shape();
-    bodyShape.moveTo(FRONT_X, BODY_BOTTOM_Y);
-    bodyShape.lineTo(FRONT_X, 0.58); bodyShape.lineTo(FRONT_X - 0.05, 0.78); bodyShape.lineTo(1.10, 0.90);
-    bodyShape.lineTo(0.72, 0.96); bodyShape.lineTo(0.58, 0.96); bodyShape.lineTo(0.50, COCKPIT_FLOOR_Y);
-    bodyShape.lineTo(-0.85, COCKPIT_FLOOR_Y); bodyShape.lineTo(-0.92, 0.94); bodyShape.lineTo(-1.05, 0.98);
-    bodyShape.lineTo(-1.20, 0.90); bodyShape.lineTo(-1.90, 0.86); bodyShape.lineTo(-2.08, 0.74);
-    bodyShape.lineTo(REAR_X, 0.58); bodyShape.lineTo(REAR_X, BODY_BOTTOM_Y);
-    bodyShape.lineTo(WHEEL_RX - ARCH_R, BODY_BOTTOM_Y);
-    bodyShape.absarc(WHEEL_RX, BODY_BOTTOM_Y, ARCH_R, Math.PI, 0, true);
-    bodyShape.lineTo(WHEEL_FX - ARCH_R, BODY_BOTTOM_Y);
-    bodyShape.absarc(WHEEL_FX, BODY_BOTTOM_Y, ARCH_R, Math.PI, 0, true);
-    bodyShape.lineTo(FRONT_X, BODY_BOTTOM_Y);
-    const bodyGeo = new THREE.ExtrudeGeometry(bodyShape, { depth: BODY_DEPTH, bevelEnabled: true, bevelThickness: BEVEL_T, bevelSize: BEVEL_S, bevelSegments: 3, curveSegments: 20 });
-    bodyGeo.translate(0, 0, -BODY_DEPTH / 2);
-    const bodyMesh = new THREE.Mesh(bodyGeo, PAINT);
-    bodyMesh.castShadow = true; bodyMesh.receiveShadow = true;
-    car.add(bodyMesh);
-    const BODY_HALF_W = (BODY_DEPTH + 2 * BEVEL_T) / 2;
-
-    [-1, 1].forEach(side => bx(1.36, 0.30, 0.09, PAINT, -0.175, (COCKPIT_FLOOR_Y + BELT_Y) / 2, side * (BODY_HALF_W - 0.06)));
-    [WHEEL_FX, WHEEL_RX].forEach(wx => {
-      const well = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.40, 1.52),
-        new THREE.MeshStandardMaterial({ color: 0x0A0A0A, roughness: 0.95 }));
-      well.position.set(wx, 0.62, 0); car.add(well);
-    });
-
-    bx(1.35, 0.02, 1.36, DASH, -0.175, COCKPIT_FLOOR_Y + 0.01, 0);
-    [-0.36, 0.36].forEach(z => {
-      bx(0.44, 0.10, 0.42, LEATHER, -0.15, COCKPIT_FLOOR_Y + 0.07, z);
-      const back = bx(0.12, 0.50, 0.42, LEATHER, -0.35, COCKPIT_FLOOR_Y + 0.37, z);
-      back.rotation.z = -0.10;
-      bx(0.11, 0.16, 0.24, LEATHER, -0.40, COCKPIT_FLOOR_Y + 0.72, z);
-    });
-    bx(0.28, 0.22, 1.40, DASH, 0.42, COCKPIT_FLOOR_Y + 0.22, 0);
-    bx(0.24, 0.04, 1.38, DASH, 0.42, COCKPIT_FLOOR_Y + 0.34, 0);
-
-    const sw = new THREE.Group();
-    sw.position.set(0.24, COCKPIT_FLOOR_Y + 0.36, 0.36);
-    sw.rotation.z = 0.35; sw.rotation.y = 0.05;
-    const swRim = new THREE.Mesh(new THREE.TorusGeometry(0.135, 0.014, 10, 28), DASH);
-    swRim.castShadow = true; sw.add(swRim);
-    for(let i = 0; i < 3; i++){
-      const sp = new THREE.Mesh(new THREE.BoxGeometry(0.135, 0.012, 0.012), CHROME_DARK);
-      sp.position.x = 0.0675;
-      const piv = new THREE.Group(); piv.rotation.z = (i / 3) * Math.PI * 2;
-      piv.add(sp); sw.add(piv);
-    }
-    car.add(sw);
-    cyl(0.02, 0.02, 0.20, 10, DASH, 0.32, COCKPIT_FLOOR_Y + 0.32, 0.36, { z: Math.PI / 2 - 0.35 });
-
-    const wsBaseX = 0.62, wsBaseY = 0.96, wsTopX = 0.18, wsTopY = 1.34;
-    const wsMidX = (wsBaseX + wsTopX) / 2;
-    const wsMidY = (wsBaseY + wsTopY) / 2;
-    const wsLen = Math.hypot(wsTopX - wsBaseX, wsTopY - wsBaseY);
-    const wsAng = Math.atan2(wsTopX - wsBaseX, wsTopY - wsBaseY);
-    const wsW = BODY_HALF_W * 2 - 0.32;
-    const wsGlass = bx(0.025, wsLen, wsW, GLASS, wsMidX, wsMidY, 0);
-    wsGlass.rotation.z = wsAng; wsGlass.castShadow = false;
-    bx(0.05, 0.05, wsW + 0.06, CHROME, wsTopX, wsTopY, 0);
-    bx(0.09, 0.05, wsW + 0.10, CHROME, wsBaseX, wsBaseY, 0);
-    [-1, 1].forEach(s => {
-      const side = bx(0.045, wsLen + 0.03, 0.05, CHROME, wsMidX, wsMidY, s * (wsW / 2 + 0.035));
-      side.rotation.z = wsAng;
-    });
-
-    bx(0.10, 0.24, 1.20, CHROME, 2.10, 0.82, 0);
-    bx(0.06, 0.20, 1.14, GRILLE_DARK, 2.13, 0.82, 0);
-    for(let i = 0; i < 24; i++){
-      const z = -0.55 + i * (1.10 / 23);
-      bx(0.045, 0.18, 0.008, CHROME_DARK, 2.16, 0.82, z);
-    }
-    bx(0.075, 0.045, 1.16, CHROME, 2.18, 0.82, 0);
-    cyl(0.028, 0.028, 0.02, 16, CHROME, 2.21, 0.82, 0, { z: Math.PI / 2 });
-    for(let i = 0; i < 3; i++){
-      const a = (i / 3) * Math.PI * 2 + Math.PI / 2;
-      const arm = new THREE.Mesh(new THREE.BoxGeometry(0.014, 0.115, 0.012), CHROME);
-      arm.position.set(2.21, 0.82 + Math.cos(a) * 0.0575, Math.sin(a) * 0.0575);
-      arm.rotation.x = -a; arm.castShadow = true; car.add(arm);
-    }
-    [-0.72, 0.72].forEach(z => {
-      const bez = new THREE.Mesh(new THREE.TorusGeometry(0.125, 0.018, 10, 26), CHROME);
-      bez.position.set(2.10, 0.78, z); bez.rotation.y = Math.PI / 2; car.add(bez);
-      cyl(0.115, 0.095, 0.06, 24, REFLECTOR, 2.09, 0.78, z, { z: Math.PI / 2 });
-      const lens = new THREE.Mesh(new THREE.SphereGeometry(0.125, 22, 14, 0, Math.PI * 2, 0, Math.PI * 0.42), LENS);
-      lens.position.set(2.13, 0.78, z); lens.rotation.z = -Math.PI / 2; lens.castShadow = false;
-      car.add(lens);
-    });
-    [-0.86, 0.86].forEach(z => bx(0.04, 0.05, 0.14, AMBER, 2.12, 0.55, z));
-    bx(0.18, 0.17, BODY_HALF_W * 2 + 0.06, CHROME, 2.16, 0.53, 0);
-    bx(0.20, 0.04, BODY_HALF_W * 2 + 0.08, RUBBER, 2.16, 0.53, 0);
-    [-0.56, 0.56].forEach(z => bx(0.10, 0.24, 0.09, CHROME, 2.20, 0.58, z));
-    [-0.72, 0.72].forEach(z => {
-      bx(0.05, 0.22, 0.15, TAILLIGHT, -2.12, 0.82, z);
-      bx(0.03, 0.25, 0.18, CHROME_DARK, -2.14, 0.82, z);
-      for(let i = 0; i < 3; i++) bx(0.02, 0.008, 0.13, CHROME, -2.155, 0.76 + i * 0.055, z);
-    });
-    bx(0.18, 0.17, BODY_HALF_W * 2 + 0.06, CHROME, -2.16, 0.53, 0);
-    bx(0.20, 0.04, BODY_HALF_W * 2 + 0.08, RUBBER, -2.16, 0.53, 0);
-    [-0.56, 0.56].forEach(z => bx(0.10, 0.24, 0.09, CHROME, -2.20, 0.58, z));
-    cyl(0.025, 0.025, 0.015, 16, CHROME, -2.13, 0.90, 0, { z: Math.PI / 2 });
-    cyl(0.038, 0.038, 0.10, 12, CHROME_DARK, -2.20, 0.32, 0.62, { z: Math.PI / 2 });
-    [-1, 1].forEach(s => bx(3.60, 0.018, 0.016, CHROME, 0.05, 0.94, s * (BODY_HALF_W - 0.02)));
-    [[0.55, 1], [0.55, -1]].forEach(([x, s]) => bx(0.12, 0.025, 0.018, CHROME, x, 0.86, s * (BODY_HALF_W - 0.005)));
-    cyl(0.018, 0.018, 0.10, 8, CHROME, 0.72, 1.06, 0.88, { z: -Math.PI / 6 });
-    const mirrorHead = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.09, 0.11), CHROME);
-    mirrorHead.position.set(0.76, 1.12, 0.92); mirrorHead.castShadow = true; car.add(mirrorHead);
-
-    const tireProfile = [
-      new THREE.Vector2(0.215, -0.11), new THREE.Vector2(0.290, -0.11),
-      new THREE.Vector2(0.320, -0.095), new THREE.Vector2(0.350, -0.050),
-      new THREE.Vector2(0.350,  0.050), new THREE.Vector2(0.320,  0.095),
-      new THREE.Vector2(0.290,  0.11), new THREE.Vector2(0.215,  0.11)
-    ];
-    const tireGeo = new THREE.LatheGeometry(tireProfile, 32); tireGeo.rotateX(Math.PI / 2);
-    const rimProfile = [
-      new THREE.Vector2(0.000, -0.055), new THREE.Vector2(0.190, -0.055),
-      new THREE.Vector2(0.215, -0.040), new THREE.Vector2(0.215,  0.040),
-      new THREE.Vector2(0.190,  0.055), new THREE.Vector2(0.000,  0.055)
-    ];
-    const rimGeo = new THREE.LatheGeometry(rimProfile, 28); rimGeo.rotateX(Math.PI / 2);
-    const hubGeo = new THREE.CylinderGeometry(0.19, 0.19, 0.02, 28); hubGeo.rotateX(Math.PI / 2);
-    function makeWheel(){
-      const g = new THREE.Group();
-      const t = new THREE.Mesh(tireGeo, RUBBER); t.castShadow = true; t.receiveShadow = true; g.add(t);
-      g.add(new THREE.Mesh(rimGeo, CHROME_DARK));
-      const h = new THREE.Mesh(hubGeo, CHROME); h.position.z = 0.058; g.add(h);
-      const star = new THREE.Group(); star.position.z = 0.070;
-      for(let i = 0; i < 3; i++){
-        const arm = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.115, 0.006), CHROME_DARK);
-        arm.position.y = 0.0575;
-        const piv = new THREE.Group(); piv.rotation.z = (i / 3) * Math.PI * 2 + Math.PI / 2;
-        piv.add(arm); star.add(piv);
-      }
-      g.add(star);
-      return g;
-    }
-    const wFL = makeWheel(); wFL.position.set(WHEEL_FX, WHEEL_Y,  WHEEL_Z); car.add(wFL);
-    const wFR = makeWheel(); wFR.position.set(WHEEL_FX, WHEEL_Y, -WHEEL_Z); wFR.rotation.y = Math.PI; car.add(wFR);
-    const wRL = makeWheel(); wRL.position.set(WHEEL_RX, WHEEL_Y,  WHEEL_Z); car.add(wRL);
-    const wRR = makeWheel(); wRR.position.set(WHEEL_RX, WHEEL_Y, -WHEEL_Z); wRR.rotation.y = Math.PI; car.add(wRR);
-    return car;
-  }
 
   const PLINTH_TOP = 0.5, GROUND_TOP = 4.0, STRING_TOP = 4.2, FIRST_TOP = 7.4, CORNICE_TOP = 7.6;
   const CEN_W = 10, CEN_D = 6.5, WING_W = 5, WING_D = 6.0, WING_TOP = 4.5;
@@ -2281,31 +2701,7 @@ function initVilla(){
       new THREE.MeshStandardMaterial({ color:'#B8A98C', roughness:0.95 }), 0, 0.03, pz);
     p.receiveShadow = true;
   }
-  scene.add(makeCoconutPalm(-12.5, 5.5, 7.4, 0.7));
-  scene.add(makeCoconutPalm( 13.5, 7.8, 6.6, 2.1));
   scene.add(makeCoconutPalm(-14.2, -2.0, 6.0, 3.4));
-
-  const CAR_X = 6.5, CAR_Z = 10.5, CAR_ROT = 0.2, CAR_Y = 0.02;
-  const pad = new THREE.Mesh(rb(5.4, 0.06, 2.6, 0.03),
-    new THREE.MeshStandardMaterial({ color: 0x7A7365, roughness: 0.96, metalness: 0.0 }));
-  pad.position.set(CAR_X, 0.03, CAR_Z); pad.rotation.y = CAR_ROT; pad.receiveShadow = true;
-  scene.add(pad);
-  const apron = new THREE.Mesh(rb(5.7, 0.055, 0.20, 0.02),
-    new THREE.MeshStandardMaterial({ color: 0xA39C8E, roughness: 0.98, metalness: 0.0 }));
-  apron.position.set(CAR_X, 0.03, CAR_Z + 1.42); apron.rotation.y = CAR_ROT; apron.receiveShadow = true;
-  scene.add(apron);
-  const mercedes = makeMercedesSL();
-  mercedes.position.set(CAR_X, CAR_Y, CAR_Z); mercedes.rotation.y = CAR_ROT;
-  scene.add(mercedes);
-
-  const shrubGeo = new THREE.IcosahedronGeometry(0.55, 1);
-  [[-8.2, 7.3, 1.05], [-4.9, 7.4, 0.85], [4.9, 7.4, 0.90],
-   [-11.5, 6.8, 0.80], [-13.0, 6.2, 0.70], [11.5, 6.8, 0.82]
-  ].forEach(([x, z, s]) => {
-    const m = prop(shrubGeo, FOLIAGE_MAT, x, s * 0.48, z);
-    m.scale.set(s * 1.15, s * 0.85, s * 1.15);
-    m.rotation.y = x * 1.3;
-  });
 
   studio.lights = { sun, hemi, fill };
   studio.renderer = renderer;
@@ -2423,14 +2819,37 @@ function initVilla(){
   new ResizeObserver(resize).observe(stage);
   resize();
 
-  function loop(){
-    requestAnimationFrame(loop);
-    if(document.hidden) return;
+  // Mobile performance: the Villa only renders while its stage is on-screen.
+  // When visible, mobile is capped at 30fps; desktop retains a 60fps ceiling.
+  // This preserves OrbitControls, colour painting and auto-orbit without
+  // continuously spending GPU time on an off-screen section.
+  let villaVisible = false;
+  let villaRAF = null;
+  let lastVillaFrame = 0;
+  const VILLA_FRAME_MS = MOBILE_DEVICE ? (1000 / 30) : (1000 / 60);
+
+  function loop(now){
+    villaRAF = null;
+    if(!villaVisible || document.hidden) return;
+    if(now - lastVillaFrame < VILLA_FRAME_MS){
+      villaRAF = requestAnimationFrame(loop);
+      return;
+    }
+    lastVillaFrame = now;
     controls.autoRotate = studio.autoOrbit && !REDUCE;
     controls.update();
     renderer.render(scene, camera);
+    villaRAF = requestAnimationFrame(loop);
   }
-  requestAnimationFrame(loop);
+
+  const villaVisibility = new IntersectionObserver(([entry]) => {
+    villaVisible = entry.isIntersecting;
+    if(villaVisible && !villaRAF){
+      lastVillaFrame = 0;
+      villaRAF = requestAnimationFrame(loop);
+    }
+  }, { threshold: 0.01 });
+  villaVisibility.observe(stage);
 
   studio.ready = true;
 }
@@ -2599,6 +3018,6 @@ if(HAS_WEBGL){
 </body>
 </html>
 
-MA_Karim_And_Sons_FINAL_CONTACT_ADDRESS_UPDATED.htmlHTML
+MA_Karim_And_Sons_GLASS_NAV_FOOTER_CRIMSON_AMPERSAND.htmlHTML
 
 
