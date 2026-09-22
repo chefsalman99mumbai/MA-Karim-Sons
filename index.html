@@ -50,7 +50,7 @@
   }
 }
 :root{
-  --ink:#000000; --ink-soft:#584737; --ink-mute:#8A7A69;
+  --ink:#221812; --ink-soft:#584737; --ink-mute:#8A7A69;
   --paper:#F7F1E5; --paper-2:#EFE6D5; --paper-3:#E6DAC5;
   --line:rgba(34,24,18,.14); --line-soft:rgba(34,24,18,.08);
   --terracotta:#B5462C; --cobalt:#1D3E8F; --cream:#EFE3CE;
@@ -1448,6 +1448,65 @@ body.has-cursor .cursor{display:block}
 .hero__eyebrow i{display:inline-block;}
 @media (max-width:768px){.hero__eyebrow{width:100%;font-size:clamp(11px,2.9vw,14px);line-height:1.35;white-space:normal;}}
 </style>
+
+<style id="hero-heading-below-nav">
+/* Main hero heading: move it directly below the fixed navigation while
+   leaving the eyebrow, supporting copy, CTAs and statistics in their existing position. */
+.hero h1{
+  position:absolute;
+  top:54px;
+  left:var(--gutter);
+  right:var(--gutter);
+  z-index:4;
+  margin:0;
+  max-width:11ch;
+}
+@media(max-width:720px){
+  .hero h1{
+    top:50px;
+    left:20px;
+    right:20px;
+    max-width:8.5ch;
+    font-size:clamp(42px,11vw,64px);
+    line-height:.9;
+    margin:0;
+  }
+}
+@media(max-width:420px){
+  .hero h1{
+    top:80px;
+    left:20px;
+    right:20px;
+    max-width:none;
+    width:calc(100% - 40px);
+    font-size:clamp(39px,10.2vw,54px);
+  }
+}
+</style>
+
+<style id="hero-heading-directly-under-nav-final">
+/* Final positioning: the main heading sits immediately below the fixed navigation. */
+.hero h1{
+  top:54px !important;
+  left:var(--gutter) !important;
+  right:var(--gutter) !important;
+}
+@media(max-width:720px){
+  .hero h1{
+    top:42px !important;
+    left:20px !important;
+    right:20px !important;
+  }
+}
+@media(max-width:420px){
+  .hero h1{
+    top:40px !important;
+    left:20px !important;
+    right:20px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
