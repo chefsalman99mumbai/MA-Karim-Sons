@@ -1550,6 +1550,153 @@ body.has-cursor .cursor{display:block}
   }
 }
 </style>
+
+<style id="mobile-hero-complete-no-crop">
+/* Mobile: show the complete hero.png without edge cropping. */
+@media(max-width:720px){
+  .hero-image{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:translateX(-22px) scale(.88) !important;
+    transform-origin:center center !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:translateX(-20px) scale(.84) !important;
+    transform-origin:center center !important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-true-no-crop">
+/* TRUE MOBILE NO-CROP:
+   Render the entire hero.png inside the hero area.
+   No cover crop, no scale crop, no horizontal translation. */
+@media(max-width:720px){
+  .hero-image{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+    transform-origin:center center !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+    transform-origin:center center !important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-previous-length-no-crop">
+/* Restore the previous mobile hero length/scale,
+   while keeping the complete image uncropped. */
+@media(max-width:720px){
+  .hero-image{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:scale(.88) !important;
+    transform-origin:center center !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    width:100% !important;
+    height:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:scale(.84) !important;
+    transform-origin:center center !important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-eyebrow-height">
+/* Mobile: keep the full hero image uncropped, but reduce its visible height
+   so it stays within the eyebrow/subheading composition. */
+@media(max-width:720px){
+  .hero-image{
+    width:100% !important;
+    height:72% !important;
+    object-fit:contain !important;
+    object-position:center top !important;
+    transform:none !important;
+    transform-origin:center top !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    width:100% !important;
+    height:70% !important;
+    object-fit:contain !important;
+    object-position:center top !important;
+    transform:none !important;
+    transform-origin:center top !important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-lower-only">
+/* Mobile: keep the exact current size and no-crop behavior.
+   Only move the hero artwork slightly downward. */
+@media(max-width:720px){
+  .hero-image{
+    transform:translateY(18px) !important;
+    transform-origin:center top !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    transform:translateY(16px) !important;
+    transform-origin:center top !important;
+  }
+}
+</style>
+
+
+<style id="mobile-hero-same-length-full-right-edge">
+/* Keep the current image length/position exactly as-is.
+   Only remove the horizontal edge crop by fitting the complete PNG
+   into the same mobile image box. */
+@media(max-width:720px){
+  .hero-image{
+    width:100% !important;
+    height:72% !important;
+    object-fit:fill !important;
+    object-position:center top !important;
+    transform:translateY(18px) !important;
+    transform-origin:center top !important;
+  }
+}
+@media(max-width:420px){
+  .hero-image{
+    width:100% !important;
+    height:70% !important;
+    object-fit:fill !important;
+    object-position:center top !important;
+    transform:translateY(16px) !important;
+    transform-origin:center top !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -3430,6 +3577,121 @@ if(HAS_WEBGL){
 
 
 
+
+
+<style id="hero-nav-clear-separation">
+/* Keep hero.png completely clear of the fixed navigation.
+   The image keeps its current size; only its top edge starts below the nav. */
+@media (min-width:901px){
+  .hero-image{
+    top:96px !important;
+    bottom:auto !important;
+    height:72% !important;
+  }
+}
+
+@media (max-width:900px) and (min-width:721px){
+  .hero-image{
+    top:90px !important;
+    bottom:auto !important;
+    height:72% !important;
+  }
+}
+
+@media (max-width:720px){
+  .hero-image{
+    top:78px !important;
+    bottom:auto !important;
+    height:72% !important;
+    transform:translateY(18px) !important;
+  }
+}
+
+@media (max-width:420px){
+  .hero-image{
+    top:72px !important;
+    bottom:auto !important;
+    height:70% !important;
+    transform:translateY(16px) !important;
+  }
+}
+</style>
+
+
+<style id="hero-image-between-heading-eyebrow">
+/* FINAL MOBILE COMPOSITION:
+   hero.png occupies ONLY the open visual zone between the main heading
+   and the eyebrow. It cannot sit behind either piece of typography. */
+@media (max-width:720px){
+  .hero-image{
+    top:var(--hero-art-top, 260px) !important;
+    bottom:auto !important;
+    height:var(--hero-art-height, 220px) !important;
+    width:100% !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+    transform-origin:center center !important;
+  }
+}
+</style>
+
+<script id="hero-image-heading-eyebrow-layout">
+(function(){
+  function positionHeroArtwork(){
+    if (window.innerWidth > 720) return;
+
+    const hero = document.querySelector('.hero');
+    const image = document.querySelector('.hero-image');
+    const heading = document.querySelector('.hero h1');
+    const eyebrow = document.querySelector('.hero__eyebrow');
+    if (!hero || !image || !heading || !eyebrow) return;
+
+    const heroRect = hero.getBoundingClientRect();
+    const headingRect = heading.getBoundingClientRect();
+    const eyebrowRect = eyebrow.getBoundingClientRect();
+
+    /* Small breathing gaps: artwork starts below heading and finishes above eyebrow. */
+    const gapTop = window.innerWidth <= 420 ? 12 : 14;
+    const gapBottom = window.innerWidth <= 420 ? 10 : 12;
+
+    const top = Math.max(0, headingRect.bottom - heroRect.top + gapTop);
+    const bottom = Math.max(top + 40, eyebrowRect.top - heroRect.top - gapBottom);
+    const height = Math.max(40, bottom - top);
+
+    hero.style.setProperty('--hero-art-top', top + 'px');
+    hero.style.setProperty('--hero-art-height', height + 'px');
+  }
+
+  function schedule(){
+    requestAnimationFrame(function(){
+      requestAnimationFrame(positionHeroArtwork);
+    });
+  }
+
+  window.addEventListener('load', schedule, {passive:true});
+  window.addEventListener('resize', schedule, {passive:true});
+  window.addEventListener('orientationchange', schedule, {passive:true});
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(schedule);
+  }
+})();
+</script>
+
+
+<style id="main-heading-slightly-bigger">
+@media (max-width:720px){
+  .hero h1{
+    font-size:clamp(3.25rem, 13.5vw, 5.2rem) !important;
+  }
+}
+@media (max-width:420px){
+  .hero h1{
+    font-size:clamp(3rem, 14vw, 4.5rem) !important;
+  }
+}
+</style>
 
 </body>
 </html>
