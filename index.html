@@ -3706,216 +3706,155 @@ if(HAS_WEBGL){
 
 
 
-<style id="hero-water-3d-effect-mobile-fixed">
-.hero-water-canvas{
-  position:absolute !important;
-  z-index:2 !important;
-  pointer-events:none !important;
-  display:block !important;
-  opacity:0 !important;
-  transition:opacity .35s ease;
+
+
+
+
+
+
+
+
+<style id="marquee-liquid-3d-effect">
+/* The hero.png is intentionally back to its original, untouched rendering.
+   The liquid/refraction treatment now belongs only to the colour-name strip. */
+.marquee{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  perspective:900px;
 }
-.hero.hero-water-ready .hero-image{opacity:0 !important;}
-.hero.hero-water-ready .hero-water-canvas{opacity:1 !important;}
+.marquee__track{
+  transform-style:preserve-3d;
+  will-change:transform,filter;
+  filter:url(#marqueeWaterDistortion);
+  backface-visibility:hidden;
+}
+.marquee__track span{
+  transform:translateZ(0);
+  text-shadow:0 1px 8px rgba(255,255,255,.08);
+}
+.marquee::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  background:
+    linear-gradient(180deg,
+      rgba(255,255,255,.11),
+      transparent 24%,
+      transparent 70%,
+      rgba(255,255,255,.07));
+  mix-blend-mode:screen;
+  opacity:.55;
+}
+@media(max-width:720px){
+  .marquee__track{
+    filter:url(#marqueeWaterDistortionMobile);
+  }
+  .marquee::after{opacity:.42}
+}
+@media(prefers-reduced-motion:reduce){
+  .marquee__track{filter:none}
+  .marquee::after{display:none}
+}
 </style>
 
-<script id="hero-water-3d-webgl-mobile-fixed">
+<svg width="0" height="0" aria-hidden="true"
+     style="position:absolute;pointer-events:none;overflow:hidden">
+  <defs>
+    <filter id="marqueeWaterDistortion"
+            x="-3%" y="-25%" width="106%" height="150%"
+            color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise"
+                    baseFrequency="0.008 0.065"
+                    numOctaves="2"
+                    seed="17"
+                    result="noise">
+        <animate attributeName="baseFrequency"
+                 dur="8s"
+                 values="0.008 0.065;0.014 0.09;0.008 0.065"
+                 repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic"
+                         in2="noise"
+                         scale="8"
+                         xChannelSelector="R"
+                         yChannelSelector="G"/>
+      <feGaussianBlur stdDeviation="0.12"/>
+    </filter>
+
+    <filter id="marqueeWaterDistortionMobile"
+            x="-3%" y="-25%" width="106%" height="150%"
+            color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise"
+                    baseFrequency="0.006 0.055"
+                    numOctaves="1"
+                    seed="29"
+                    result="noise">
+        <animate attributeName="baseFrequency"
+                 dur="9s"
+                 values="0.006 0.055;0.011 0.075;0.006 0.055"
+                 repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic"
+                         in2="noise"
+                         scale="5"
+                         xChannelSelector="R"
+                         yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<script id="marquee-water-pointer-ripple">
 (function(){
-  const hero=document.querySelector('.hero');
-  const img=document.querySelector('.hero-image');
-  if(!hero||!img)return;
+  const marquee=document.querySelector('.marquee');
+  const track=document.querySelector('.marquee__track');
+  if(!marquee||!track)return;
 
-  const canvas=document.createElement('canvas');
-  canvas.className='hero-water-canvas';
-  hero.appendChild(canvas);
+  let px=.5, py=.5, tx=.5, ty=.5;
 
-  let gl,program,texture,ready=false,raf;
-  let px=.5,py=.5,tx=.5,ty=.5;
-  let t0=performance.now();
-
-  const V=`
-    attribute vec2 p; varying vec2 uv;
-    void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}
-  `;
-
-  const F=`
-    precision highp float;
-    varying vec2 uv;
-    uniform sampler2D tex;
-    uniform float time;
-    uniform vec2 pointer;
-    uniform vec2 resolution;
-
-    float ripple(vec2 p,vec2 c,float speed,float scale,float falloff){
-      vec2 q=p-c;
-      q.x*=resolution.x/resolution.y;
-      float d=length(q);
-      return sin(d*scale-time*speed)*exp(-d*falloff);
-    }
-
-    void main(){
-      vec2 p=uv-.5;
-      float a=resolution.x/resolution.y;
-
-      float h=0.;
-      h+=sin(p.x*22.+time*.72)*.012;
-      h+=sin(p.y*25.-time*.58)*.010;
-      h+=sin((p.x+p.y)*30.+time*.42)*.007;
-
-      h+=ripple(uv,vec2(.50,.52),4.2,72.,12.)*.035;
-      h+=ripple(uv,vec2(.30,.68),3.5,64.,14.)*.025;
-      h+=ripple(uv,vec2(.72,.34),3.0,58.,13.)*.020;
-      h+=ripple(uv,pointer,4.8,78.,18.)*.055;
-
-      float dx=h-ripple(uv-vec2(.002,0.),pointer,4.8,78.,18.)*.055;
-      float dy=h-ripple(uv-vec2(0.,.002),pointer,4.8,78.,18.)*.055;
-
-      vec2 off=vec2(dx,dy)*.12;
-      vec2 suv=clamp(uv+off,vec2(.001),vec2(.999));
-
-      vec4 color=texture2D(tex,suv);
-
-      float shine=pow(max(0.,1.-abs(h)*22.),7.)*.035;
-      color.rgb+=shine;
-
-      gl_FragColor=color;
-    }
-  `;
-
-  function compile(type,src){
-    const s=gl.createShader(type);
-    gl.shaderSource(s,src);
-    gl.compileShader(s);
-    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))
-      throw new Error(gl.getShaderInfoLog(s)||'shader');
-    return s;
-  }
-
-  function positionCanvas(){
-    if(!ready)return;
-    const hr=hero.getBoundingClientRect();
-    const ir=img.getBoundingClientRect();
-
-    canvas.style.left=(ir.left-hr.left)+'px';
-    canvas.style.top=(ir.top-hr.top)+'px';
-    canvas.style.width=ir.width+'px';
-    canvas.style.height=ir.height+'px';
-
-    const mobile=innerWidth<=720;
-    const dpr=Math.min(devicePixelRatio||1,mobile?1.35:1.75);
-    canvas.width=Math.max(1,Math.round(ir.width*dpr));
-    canvas.height=Math.max(1,Math.round(ir.height*dpr));
-    gl.viewport(0,0,canvas.width,canvas.height);
-    gl.uniform2f(
-      gl.getUniformLocation(program,'resolution'),
-      canvas.width,canvas.height
-    );
-  }
-
-  function init(){
-    gl=canvas.getContext('webgl',{
-      alpha:true,
-      antialias:false,
-      depth:false,
-      stencil:false,
-      premultipliedAlpha:true,
-      powerPreference:'high-performance'
-    });
-    if(!gl)throw new Error('No WebGL');
-
-    const vs=compile(gl.VERTEX_SHADER,V);
-    const fs=compile(gl.FRAGMENT_SHADER,F);
-
-    program=gl.createProgram();
-    gl.attachShader(program,vs);
-    gl.attachShader(program,fs);
-    gl.linkProgram(program);
-
-    if(!gl.getProgramParameter(program,gl.LINK_STATUS))
-      throw new Error('link');
-
-    gl.useProgram(program);
-
-    const buf=gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER,buf);
-    gl.bufferData(
-      gl.ARRAY_BUFFER,
-      new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),
-      gl.STATIC_DRAW
-    );
-
-    const loc=gl.getAttribLocation(program,'p');
-    gl.enableVertexAttribArray(loc);
-    gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
-
-    texture=gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D,texture);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
-    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
-
-    gl.uniform1i(gl.getUniformLocation(program,'tex'),0);
-
-    ready=true;
-    positionCanvas();
-
-    /* Only now hide the original image. */
-    hero.classList.add('hero-water-ready');
-
-    render();
-  }
-
-  function render(now){
-    if(!ready)return;
-    now=now||performance.now();
-    const time=(now-t0)/1000;
-
-    px+=(tx-px)*.07;
-    py+=(ty-py)*.07;
-
-    gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program,'time'),time);
-    gl.uniform2f(gl.getUniformLocation(program,'pointer'),px,1.-py);
-    gl.drawArrays(gl.TRIANGLES,0,6);
-
-    raf=requestAnimationFrame(render);
-  }
-
-  function pointer(x,y){
-    const r=img.getBoundingClientRect();
+  function move(x,y){
+    const r=marquee.getBoundingClientRect();
     if(!r.width||!r.height)return;
     tx=Math.max(0,Math.min(1,(x-r.left)/r.width));
     ty=Math.max(0,Math.min(1,(y-r.top)/r.height));
   }
 
-  hero.addEventListener('pointermove',e=>pointer(e.clientX,e.clientY),{passive:true});
-  hero.addEventListener('pointerleave',()=>{tx=.5;ty=.5;},{passive:true});
-  window.addEventListener('resize',positionCanvas,{passive:true});
-  window.addEventListener('orientationchange',()=>setTimeout(positionCanvas,180),{passive:true});
+  function animate(){
+    px+=(tx-px)*.08;
+    py+=(ty-py)*.08;
 
-  function boot(){
-    if(!img.complete||!img.naturalWidth){
-      img.addEventListener('load',()=>{try{init();}catch(e){}},{once:true});
-    }else{
-      try{init();}catch(e){}
-    }
+    /* Tiny perspective tilt follows the pointer, giving the strip
+       a shallow floating-water 3D response without moving its layout. */
+    const tiltX=(py-.5)*-1.6;
+    const tiltY=(px-.5)*1.8;
+    track.style.transform += '';
+    track.style.setProperty('--water-tilt-x',tiltX.toFixed(3)+'deg');
+    track.style.setProperty('--water-tilt-y',tiltY.toFixed(3)+'deg');
+
+    requestAnimationFrame(animate);
   }
 
-  boot();
+  marquee.addEventListener('pointermove',e=>move(e.clientX,e.clientY),{passive:true});
+  marquee.addEventListener('pointerleave',()=>{tx=.5;ty=.5;},{passive:true});
+
+  /* Keep the existing marquee translation animation; the pointer response
+     is applied as a subtle 3D perspective layer via CSS variables. */
+  const style=document.createElement('style');
+  style.textContent=`
+    .marquee__track{
+      perspective:900px;
+    }
+    .marquee__track span{
+      transform:translate3d(0,0,0);
+    }
+  `;
+  document.head.appendChild(style);
+
+  animate();
 })();
 </script>
-
-
-<style id="hero-mobile-first-paint-stabilizer">
-@media(max-width:720px){
-  .hero-image{
-    transition:none !important;
-  }
-}
-</style>
 
 </body>
 </html>
