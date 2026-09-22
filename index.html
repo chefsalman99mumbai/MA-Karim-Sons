@@ -1493,14 +1493,14 @@ body.has-cursor .cursor{display:block}
 }
 @media(max-width:720px){
   .hero h1{
-    top:42px !important;
+    top:50px !important;
     left:20px !important;
     right:20px !important;
   }
 }
 @media(max-width:420px){
   .hero h1{
-    top:40px !important;
+    top:80px !important;
     left:20px !important;
     right:20px !important;
   }
@@ -1508,34 +1508,29 @@ body.has-cursor .cursor{display:block}
 </style>
 
 
-<style id="FINAL-HERO-H1-BELOW-ACTUAL-NAV">
-/* ACTUAL final nav dimensions are 78px (mobile) and 72px (<=420px). */
+<style id="ACTUAL-HERO-HEADING-FIX-20260922">
+/* ACTUAL FIX: .hero__content was the containing block for the absolute h1.
+   Make the mobile h1 position against the hero itself, directly below the fixed nav. */
 @media (max-width:720px){
+  .hero__content{position:static !important;}
   .hero h1{
     position:absolute !important;
-    top:42px !important;
+    top:78px !important;
     left:20px !important;
     right:20px !important;
-    margin-top:0 !important;
-    transform:none !important;
+    width:auto !important;
+    max-width:8.5ch !important;
+    margin:0 !important;
   }
 }
 @media (max-width:420px){
   .hero h1{
-    top:40px !important;
+    top:72px !important;
+    left:20px !important;
+    right:20px !important;
+    width:calc(100% - 40px) !important;
+    max-width:none !important;
   }
-}
-</style>
-
-
-<style id="ABSOLUTE-LAST-HERO-HEADING-POSITION">
-/* Effective mobile nav is 42px / 40px in the final cascade. Put the 2-line hero title immediately beneath it. */
-.hero h1{position:absolute !important;top:54px !important;left:var(--gutter) !important;right:var(--gutter) !important;margin:0 !important;transform:none !important;z-index:10 !important;}
-@media (max-width:720px){
-  .hero h1{top:42px !important;left:20px !important;right:20px !important;width:calc(100% - 40px) !important;max-width:8.5ch !important;margin:0 !important;transform:none !important;}
-}
-@media (max-width:420px){
-  .hero h1{top:40px !important;left:20px !important;right:20px !important;width:calc(100% - 40px) !important;max-width:none !important;margin:0 !important;transform:none !important;}
 }
 </style>
 
