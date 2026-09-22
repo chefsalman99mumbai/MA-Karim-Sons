@@ -3694,232 +3694,204 @@ if(HAS_WEBGL){
 </style>
 
 
-<style id="hero-water-3d-effect">
-/* WebGL liquid layer follows the exact hero.png box.
-   The original image remains the fallback underneath. */
+
+
+
+<style id="hero-water-3d-effect-mobile-fixed">
 .hero-water-canvas{
   position:absolute !important;
   z-index:2 !important;
-  pointer-events:none;
-  display:block;
-  opacity:0;
-  transition:opacity .45s ease;
-  image-rendering:auto;
-}
-.hero.hero-water-ready .hero-image{
+  pointer-events:none !important;
+  display:block !important;
   opacity:0 !important;
+  transition:opacity .35s ease;
 }
-.hero.hero-water-ready .hero-water-canvas{
-  opacity:1;
-}
+.hero.hero-water-ready .hero-image{opacity:0 !important;}
+.hero.hero-water-ready .hero-water-canvas{opacity:1 !important;}
 </style>
 
-<script id="hero-water-3d-webgl">
+<script id="hero-water-3d-webgl-mobile-fixed">
 (function(){
-  const hero = document.querySelector('.hero');
-  const img = document.querySelector('.hero-image');
-  if (!hero || !img) return;
+  const hero=document.querySelector('.hero');
+  const img=document.querySelector('.hero-image');
+  if(!hero||!img)return;
 
-  const canvas = document.createElement('canvas');
-  canvas.className = 'hero-water-canvas';
+  const canvas=document.createElement('canvas');
+  canvas.className='hero-water-canvas';
   hero.appendChild(canvas);
 
-  let gl, program, texture, raf = 0, ready = false;
-  let pointerX = .5, pointerY = .5, targetX = .5, targetY = .5;
-  let start = performance.now();
+  let gl,program,texture,ready=false,raf;
+  let px=.5,py=.5,tx=.5,ty=.5;
+  let t0=performance.now();
 
-  const vertexSource = `
-    attribute vec2 a_position;
-    varying vec2 v_uv;
-    void main(){
-      v_uv = a_position * .5 + .5;
-      gl_Position = vec4(a_position, 0.0, 1.0);
-    }
+  const V=`
+    attribute vec2 p; varying vec2 uv;
+    void main(){uv=p*.5+.5;gl_Position=vec4(p,0.,1.);}
   `;
 
-  const fragmentSource = `
+  const F=`
     precision highp float;
-    varying vec2 v_uv;
-    uniform sampler2D u_image;
-    uniform float u_time;
-    uniform vec2 u_pointer;
-    uniform float u_aspect;
+    varying vec2 uv;
+    uniform sampler2D tex;
+    uniform float time;
+    uniform vec2 pointer;
+    uniform vec2 resolution;
 
-    float wave(vec2 p, float t){
-      float w = 0.0;
-      w += sin(p.x * 15.0 + t * 0.85) * 0.030;
-      w += sin(p.y * 19.0 - t * 0.70) * 0.024;
-      w += sin((p.x + p.y) * 24.0 + t * 0.52) * 0.014;
-      w += sin((p.x * 1.7 - p.y * 1.2) * 31.0 - t * 0.42) * 0.009;
-      return w;
-    }
-
-    float ripple(vec2 p, vec2 center, float t){
-      vec2 q = p - center;
-      q.x *= u_aspect;
-      float d = length(q);
-      float ring = sin(d * 70.0 - t * 5.5);
-      float envelope = exp(-d * 10.0);
-      return ring * envelope * 0.030;
+    float ripple(vec2 p,vec2 c,float speed,float scale,float falloff){
+      vec2 q=p-c;
+      q.x*=resolution.x/resolution.y;
+      float d=length(q);
+      return sin(d*scale-time*speed)*exp(-d*falloff);
     }
 
     void main(){
-      vec2 uv = v_uv;
-      vec2 p = uv - 0.5;
-      p.x *= u_aspect;
+      vec2 p=uv-.5;
+      float a=resolution.x/resolution.y;
 
-      float t = u_time;
-      float h = wave(p, t);
+      float h=0.;
+      h+=sin(p.x*22.+time*.72)*.012;
+      h+=sin(p.y*25.-time*.58)*.010;
+      h+=sin((p.x+p.y)*30.+time*.42)*.007;
 
-      /* Two soft, continuously moving ripple fields make the image
-         behave like a shallow pond rather than a flat filter. */
-      vec2 c1 = vec2(
-        0.5 + sin(t * 0.20) * 0.25,
-        0.5 + cos(t * 0.17) * 0.22
-      );
-      vec2 c2 = vec2(
-        0.35 + cos(t * 0.13) * 0.28,
-        0.62 + sin(t * 0.16) * 0.20
-      );
+      h+=ripple(uv,vec2(.50,.52),4.2,72.,12.)*.035;
+      h+=ripple(uv,vec2(.30,.68),3.5,64.,14.)*.025;
+      h+=ripple(uv,vec2(.72,.34),3.0,58.,13.)*.020;
+      h+=ripple(uv,pointer,4.8,78.,18.)*.055;
 
-      h += ripple(uv, c1, t);
-      h += ripple(uv, c2, t + 2.0);
-      h += ripple(uv, u_pointer, t * 0.9);
+      float dx=h-ripple(uv-vec2(.002,0.),pointer,4.8,78.,18.)*.055;
+      float dy=h-ripple(uv-vec2(0.,.002),pointer,4.8,78.,18.)*.055;
 
-      float hx = wave(p + vec2(0.002,0.0), t) - wave(p - vec2(0.002,0.0), t);
-      float hy = wave(p + vec2(0.0,0.002), t) - wave(p - vec2(0.0,0.002), t);
+      vec2 off=vec2(dx,dy)*.12;
+      vec2 suv=clamp(uv+off,vec2(.001),vec2(.999));
 
-      float px = ripple(uv + vec2(0.002,0.0), c1, t)
-               - ripple(uv - vec2(0.002,0.0), c1, t);
-      float py = ripple(uv + vec2(0.0,0.002), c1, t)
-               - ripple(uv - vec2(0.0,0.002), c1, t);
+      vec4 color=texture2D(tex,suv);
 
-      vec2 normalOffset = vec2(hx + px, hy + py) * 3.2;
+      float shine=pow(max(0.,1.-abs(h)*22.),7.)*.035;
+      color.rgb+=shine;
 
-      /* Refraction/displacement */
-      vec2 sampleUV = uv + normalOffset * 0.035;
-      sampleUV = clamp(sampleUV, 0.001, 0.999);
-
-      vec4 col = texture2D(u_image, sampleUV);
-
-      /* Subtle wet-surface specular highlight */
-      vec3 n = normalize(vec3(-(hx+px)*7.0, -(hy+py)*7.0, 1.0));
-      vec3 light = normalize(vec3(-0.35, -0.45, 1.0));
-      float spec = pow(max(dot(n, light), 0.0), 24.0);
-      float sheen = spec * 0.10;
-
-      col.rgb += sheen;
-      col.rgb *= 0.985 + 0.015 * sin(t * 0.6);
-
-      gl_FragColor = col;
+      gl_FragColor=color;
     }
   `;
 
-  function shader(type, source){
-    const s = gl.createShader(type);
-    gl.shaderSource(s, source);
+  function compile(type,src){
+    const s=gl.createShader(type);
+    gl.shaderSource(s,src);
     gl.compileShader(s);
-    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s));
+    if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))
+      throw new Error(gl.getShaderInfoLog(s)||'shader');
     return s;
   }
 
+  function positionCanvas(){
+    if(!ready)return;
+    const hr=hero.getBoundingClientRect();
+    const ir=img.getBoundingClientRect();
+
+    canvas.style.left=(ir.left-hr.left)+'px';
+    canvas.style.top=(ir.top-hr.top)+'px';
+    canvas.style.width=ir.width+'px';
+    canvas.style.height=ir.height+'px';
+
+    const mobile=innerWidth<=720;
+    const dpr=Math.min(devicePixelRatio||1,mobile?1.35:1.75);
+    canvas.width=Math.max(1,Math.round(ir.width*dpr));
+    canvas.height=Math.max(1,Math.round(ir.height*dpr));
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.uniform2f(
+      gl.getUniformLocation(program,'resolution'),
+      canvas.width,canvas.height
+    );
+  }
+
   function init(){
-    gl = canvas.getContext('webgl', {
+    gl=canvas.getContext('webgl',{
       alpha:true,
-      antialias:true,
+      antialias:false,
+      depth:false,
+      stencil:false,
       premultipliedAlpha:true,
       powerPreference:'high-performance'
     });
-    if (!gl) throw new Error('WebGL unavailable');
+    if(!gl)throw new Error('No WebGL');
 
-    const vs = shader(gl.VERTEX_SHADER, vertexSource);
-    const fs = shader(gl.FRAGMENT_SHADER, fragmentSource);
-    program = gl.createProgram();
-    gl.attachShader(program, vs);
-    gl.attachShader(program, fs);
+    const vs=compile(gl.VERTEX_SHADER,V);
+    const fs=compile(gl.FRAGMENT_SHADER,F);
+
+    program=gl.createProgram();
+    gl.attachShader(program,vs);
+    gl.attachShader(program,fs);
     gl.linkProgram(program);
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('Program link failed');
+
+    if(!gl.getProgramParameter(program,gl.LINK_STATUS))
+      throw new Error('link');
+
     gl.useProgram(program);
 
-    const buffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([
-      -1,-1, 1,-1, -1,1,
-      -1,1, 1,-1, 1,1
-    ]), gl.STATIC_DRAW);
+    const buf=gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,buf);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1,-1,1,-1,-1,1,-1,1,1,-1,1,1]),
+      gl.STATIC_DRAW
+    );
 
-    const pos = gl.getAttribLocation(program, 'a_position');
-    gl.enableVertexAttribArray(pos);
-    gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+    const loc=gl.getAttribLocation(program,'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
 
-    texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+    texture=gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D,texture);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);
+    gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,img);
 
-    gl.uniform1i(gl.getUniformLocation(program,'u_image'), 0);
-    ready = true;
+    gl.uniform1i(gl.getUniformLocation(program,'tex'),0);
+
+    ready=true;
+    positionCanvas();
+
+    /* Only now hide the original image. */
     hero.classList.add('hero-water-ready');
-    resize();
+
     render();
   }
 
-  function resize(){
-    if (!ready) return;
-    const r = img.getBoundingClientRect();
-    const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth <= 720 ? 1.5 : 2);
-    canvas.style.left = (r.left - hero.getBoundingClientRect().left) + 'px';
-    canvas.style.top = (r.top - hero.getBoundingClientRect().top) + 'px';
-    canvas.style.width = r.width + 'px';
-    canvas.style.height = r.height + 'px';
-    canvas.width = Math.max(1, Math.round(r.width * dpr));
-    canvas.height = Math.max(1, Math.round(r.height * dpr));
-    gl.viewport(0,0,canvas.width,canvas.height);
-    gl.uniform1f(gl.getUniformLocation(program,'u_aspect'), r.width / Math.max(r.height,1));
-  }
-
   function render(now){
-    if (!ready) return;
-    now = now || performance.now();
-    const t = (now - start) * 0.001;
+    if(!ready)return;
+    now=now||performance.now();
+    const time=(now-t0)/1000;
 
-    pointerX += (targetX - pointerX) * 0.055;
-    pointerY += (targetY - pointerY) * 0.055;
+    px+=(tx-px)*.07;
+    py+=(ty-py)*.07;
 
     gl.useProgram(program);
-    gl.uniform1f(gl.getUniformLocation(program,'u_time'), t);
-    gl.uniform2f(gl.getUniformLocation(program,'u_pointer'), pointerX, 1.0-pointerY);
+    gl.uniform1f(gl.getUniformLocation(program,'time'),time);
+    gl.uniform2f(gl.getUniformLocation(program,'pointer'),px,1.-py);
     gl.drawArrays(gl.TRIANGLES,0,6);
-    raf = requestAnimationFrame(render);
+
+    raf=requestAnimationFrame(render);
   }
 
-  function move(clientX, clientY){
-    const r = img.getBoundingClientRect();
-    if (!r.width || !r.height) return;
-    targetX = Math.max(0, Math.min(1, (clientX-r.left)/r.width));
-    targetY = Math.max(0, Math.min(1, (clientY-r.top)/r.height));
+  function pointer(x,y){
+    const r=img.getBoundingClientRect();
+    if(!r.width||!r.height)return;
+    tx=Math.max(0,Math.min(1,(x-r.left)/r.width));
+    ty=Math.max(0,Math.min(1,(y-r.top)/r.height));
   }
 
-  hero.addEventListener('pointermove', e => move(e.clientX,e.clientY), {passive:true});
-  hero.addEventListener('pointerleave', () => { targetX=.5; targetY=.5; }, {passive:true});
-  window.addEventListener('resize', resize, {passive:true});
-  window.addEventListener('orientationchange', () => setTimeout(resize,120), {passive:true});
+  hero.addEventListener('pointermove',e=>pointer(e.clientX,e.clientY),{passive:true});
+  hero.addEventListener('pointerleave',()=>{tx=.5;ty=.5;},{passive:true});
+  window.addEventListener('resize',positionCanvas,{passive:true});
+  window.addEventListener('orientationchange',()=>setTimeout(positionCanvas,180),{passive:true});
 
   function boot(){
-    try{
-      if (!img.complete || !img.naturalWidth) {
-        img.addEventListener('load', () => { try{ init(); }catch(e){} }, {once:true});
-      } else {
-        init();
-      }
-    }catch(e){
-      /* Original hero.png remains visible as a safe fallback. */
-      hero.classList.remove('hero-water-ready');
-      canvas.remove();
+    if(!img.complete||!img.naturalWidth){
+      img.addEventListener('load',()=>{try{init();}catch(e){}},{once:true});
+    }else{
+      try{init();}catch(e){}
     }
   }
 
